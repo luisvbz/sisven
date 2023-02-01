@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Tables\Users;
+use App\Models\Module;
 use Illuminate\Http\Request;
 
 class TestController extends Controller
 {
     public function index(Request $request)
     {
-
-        return view('dashboard', ['users' => Users::class]);
+        $modules = Module::all();
+        return view('dashboard', ['modules' => $modules]);
     }
 }
