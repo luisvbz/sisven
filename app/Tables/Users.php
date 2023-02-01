@@ -55,6 +55,7 @@ class Users extends AbstractTable
                 sortable: true
                 )
             ->column('email', 'Correo Electrónico')
+            ->column('Rol')
             ->column('Actions')
             ->selectFilter(key:'name',
             noFilterOptionLabel: 'Seleccione',

@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Spatie\Permission\Models\Permission;
 
 class RolesAndPermissionSeeder extends Seeder
 {
@@ -25,7 +26,24 @@ class RolesAndPermissionSeeder extends Seeder
 
          //Here to create permissions
 
+         //Permissions
+         $permissions_users = [
+            //Modulo de usuarios
+            'us:access',
+            'us:create',
+            'us:edit',
+            'us:delete',
+            'us:activate',
+            'us:desactivate',
+         ];
 
-         //Here to asign permissions to
+         foreach($permissions_users as $pu) {
+
+             Permission::create(['name' => $pu]);
+         }
+
+
+         //Asing permission to users admin
+         $admin->syncPermissions(Permission::where('name', 'like', "us:%")->get()->pluck('name'));
     }
 }
