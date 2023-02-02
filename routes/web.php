@@ -34,6 +34,8 @@ Route::middleware('splade')->group(function () {
         Route::get('/dashboard',[TestController::class, 'index'])->middleware(['verified'])->name('dashboard');
         Route::get('/usuarios',[UsersController::class, 'index'])
         ->middleware(['verified', 'permission:us:access'])->name('us.index');
+        Route::get('/usuarios/agregar',[UsersController::class, 'add'])
+        ->middleware(['verified', 'permission:us:create'])->name('us.add');
 
         Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
         Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

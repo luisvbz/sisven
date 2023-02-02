@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Models\Role;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -46,5 +47,10 @@ class User extends Authenticatable
     public function getRoleNameAttribute()
     {
         return $this->roles[0]->display_name ?? 'N/T';
+    }
+
+    public static function getRolesAllowed()
+    {
+        return auth()->user()->hasRole('super-admin') ? Role::all() : Role::where('name', '<>', 'super-admin')->get();
     }
 }

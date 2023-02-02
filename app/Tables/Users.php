@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use ProtoneMedia\Splade\AbstractTable;
 use ProtoneMedia\Splade\SpladeTable;
+use Spatie\Permission\Models\Role;
 
 class Users extends AbstractTable
 {
@@ -14,9 +15,11 @@ class Users extends AbstractTable
      *
      * @return void
      */
+
+   private $roles;
     public function __construct()
     {
-        //
+        $this->roles = User::getRolesAllowed();
     }
 
     /**
@@ -36,7 +39,8 @@ class Users extends AbstractTable
      */
     public function for()
     {
-        return User::query();
+        $users = User::query();
+        return $users->whereHas('roles', fn($q) => $q->whereIn('name', $this->roles->pluck('name')->toArray()))->where('id', '<>', auth()->user()->id);
     }
 
     /**
@@ -57,13 +61,10 @@ class Users extends AbstractTable
             ->column('email', 'Correo Electrónico')
             ->column('Rol')
             ->column('Actions')
-            ->selectFilter(key:'name',
+            ->selectFilter(key:'roles.name',
             noFilterOptionLabel: 'Seleccione',
-            label:'Estado' ,
-            options: [
-                '0' => 'Inactivo',
-                '1' => 'Activo',
-            ])
+            label:'Rol' ,
+            options: $this->getOptionsRoles())
             ->paginate(15);
 
             // ->searchInput()
@@ -72,5 +73,17 @@ class Users extends AbstractTable
 
             // ->bulkAction()
             // ->export()
+    }
+
+    private function getOptionsRoles()
+    {
+        $options = [];
+
+        foreach($this->roles as $rol) {
+            $options[$rol->name] = $rol->display_name;
+        }
+
+        return $options;
+
     }
 }

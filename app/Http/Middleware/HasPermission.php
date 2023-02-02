@@ -16,6 +16,8 @@ class HasPermission
      */
     public function handle(Request $request, Closure $next, $permission)
     {
+        if($request->user()->hasRole('super-admin')) return $next($request);
+
         if(! $request->user()->hasPermissionTo($permission)) {
             abort(403);
         }
