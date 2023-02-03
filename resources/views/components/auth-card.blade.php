@@ -1,15 +1,16 @@
-<div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
-    <div>
-        @isset($logo)
-            {{ $logo }}
-        @else
-            <Link href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-            </Link>
-        @endisset
-    </div>
+<div class="flex flex-col items-center min-h-screen pt-6 shadow-lg bg-gradient-to-b from-indigo-600 to-cyan-500 sm:justify-center sm:pt-0">
 
-    <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
+    <div class="w-full px-6 py-4 mt-6 overflow-hidden bg-white shadow-md sm:max-w-md sm:rounded-lg">
+        <div class="flex items-center justify-center pb-4 mb-4 border-b-2 border-gray-100">
+            @isset($logo)
+                {{ $logo }}
+            @else
+                <Link href="/">
+                    <x-application-logo class="w-20 h-20 text-gray-500 fill-current" />
+                </Link>
+            @endisset
+        </div>
+
         {{ $slot }}
     </div>
 </div>
