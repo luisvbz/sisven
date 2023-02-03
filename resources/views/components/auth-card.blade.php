@@ -5,9 +5,7 @@
             @isset($logo)
                 {{ $logo }}
             @else
-                <Link href="/">
-                    <x-application-logo class="w-20 h-20 text-gray-500 fill-current" />
-                </Link>
+                <x-application-logo class="w-20 h-20 text-gray-500 fill-current" />
             @endisset
         </div>
 
