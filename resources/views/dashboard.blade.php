@@ -6,15 +6,13 @@
     </x-slot>
 
     <div class="py-12">
-        <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
-            <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
-                <div class="p-6 bg-white border-b border-gray-200">
-                    @foreach ($modules as $module )
-                        @can($module->permission_to_access)
-                        <Link href="{{ $module->route }}">{{ $module->name }}</Link>
-                        @endcan
-                    @endforeach
-                </div>
+        <div class="px-4 mx-auto max-w-7xl">
+            <div class="grid gap-2 lg:grid-cols-4 sm:grid-cols-1 sm:gap-4">
+                @foreach ($modules as $module )
+                    @can($module->permission_to_access)
+                        <x-item-module :module="$module"/>
+                    @endcan
+                @endforeach
             </div>
         </div>
     </div>
