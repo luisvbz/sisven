@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Permission;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class UsersDefaultSeeder extends Seeder
@@ -16,6 +17,8 @@ class UsersDefaultSeeder extends Seeder
     public function run()
     {
         $super_admin = User::create([
+            'dni' => '002683688',
+            'username' => 'superadmin',
             'name' => 'Super Administrador',
             'email' => 'superadmin@local.com',
             'password' => bcrypt('laravel')
@@ -23,23 +26,33 @@ class UsersDefaultSeeder extends Seeder
 
         $super_admin->assignRole('super-admin');
 
+        $super_admin->givePermissionTo(Permission::all()->pluck('name'));
+
 
         $admin = User::create([
+            'dni' => '19098518',
+            'username' => 'admin',
             'name' => 'Administrador',
-            'email' => 'administrador@local.com',
+            'email' => 'admin@local.com',
             'password' => bcrypt('laravel')
         ]);
 
         $admin->assignRole('admin');
 
+        $admin->givePermissionTo(Permission::where('module_id', 'US')->get()->pluck('name'));
+
 
         $operator = User::create([
-            'name' => 'operator',
+            'dni' => '19098517',
+            'username' => 'operador',
+            'name' => 'Operador',
             'email' => 'operator@local.com',
             'password' => bcrypt('laravel')
         ]);
 
         $operator->assignRole('operator');
+
+
 
     }
 }

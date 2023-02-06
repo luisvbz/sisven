@@ -7,6 +7,7 @@ use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -20,9 +21,13 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'status',
+        'dni',
         'name',
+        'username',
         'email',
         'password',
+        'created_by'
     ];
 
     /**
@@ -42,6 +47,7 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'status' => 'boolean'
     ];
 
     public function getRoleNameAttribute()
@@ -52,5 +58,12 @@ class User extends Authenticatable
     public static function getRolesAllowed()
     {
         return auth()->user()->hasRole('super-admin') ? Role::all() : Role::where('name', '<>', 'super-admin')->get();
+    }
+
+    protected function password(): Attribute
+    {
+        return Attribute::make(
+            set: fn ($value) => bcrypt($value),
+        );
     }
 }

@@ -27,23 +27,19 @@ class RolesAndPermissionSeeder extends Seeder
          //Here to create permissions
 
          //Permissions
-         $permissions_users = [
+         $permissions = [
             //Modulo de usuarios
-            'us:access',
-            'us:create',
-            'us:edit',
-            'us:delete',
-            'us:activate',
-            'us:desactivate',
+            ['name' => 'us:access', 'guard_name' => 'web', 'display_name' => 'Acceder al modulo de usuarios', 'module_id' => 'US'],
+            ['name' => 'us:create', 'guard_name' => 'web', 'display_name' => 'Crear un nuevo usuarios', 'module_id' => 'US'],
+            ['name' => 'us:edit', 'guard_name' => 'web', 'display_name' => 'Editar un nuevo usuario', 'module_id' => 'US'],
+            ['name' => 'us:delete', 'guard_name' => 'web', 'display_name' => 'Eliminar un usuario', 'module_id' => 'US'],
+            ['name' => 'us:activate', 'guard_name' => 'web', 'display_name' => 'Activar un usuarios', 'module_id' => 'US'],
+            ['name' => 'us:desactivate', 'guard_name' => 'web', 'display_name' => 'Desactivar un usuarios', 'module_id' => 'US'],
          ];
 
-         foreach($permissions_users as $pu) {
-
-             Permission::create(['name' => $pu]);
-         }
-
+         Permission::insert($permissions);
 
          //Asing permission to users admin
-         $admin->syncPermissions(Permission::where('name', 'like', "us:%")->get()->pluck('name'));
+         //$admin->syncPermissions(Permission::where('name', 'like', "us:%")->get()->pluck('name'));
     }
 }

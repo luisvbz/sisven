@@ -28,10 +28,12 @@ Route::middleware('splade')->group(function () {
 
     Route::middleware('auth')->group(function () {
         Route::get('/',[TestController::class, 'index'])->middleware(['verified'])->name('dashboard');
-        Route::get('/usuarios',[UsersController::class, 'index'])
-        ->middleware(['verified', 'permission:us:access'])->name('us.index');
-        Route::get('/usuarios/agregar',[UsersController::class, 'add'])
-        ->middleware(['verified', 'permission:us:create'])->name('us.add');
+        Route::group(['prefix' => 'usuarios'], function(){
+
+            Route::get('/',[UsersController::class, 'index'])->name('us.index')->middleware('permission:us:access');
+            Route::get('/agregar',[UsersController::class, 'add'])->name('us.add')->middleware('permission:us:create');
+            Route::post('/agregar',[UsersController::class, 'store'])->name('us.store')->middleware('permission:us:create');
+        });
 
         Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
         Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

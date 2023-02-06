@@ -52,7 +52,12 @@ class Users extends AbstractTable
     public function configure(SpladeTable $table)
     {
         $table
-            ->withGlobalSearch('Buscar por toda la data...', ['name', 'email'])
+            ->withGlobalSearch('Buscar por toda la data...', ['name', 'email', 'username'])
+            ->column('Estado')
+            ->column(
+                key: 'username',
+                label: 'Usuario'
+            )
             ->column(
                 key: 'name',
                 label: 'Nombre',
