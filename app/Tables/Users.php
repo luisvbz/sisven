@@ -4,9 +4,10 @@ namespace App\Tables;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use ProtoneMedia\Splade\AbstractTable;
-use ProtoneMedia\Splade\SpladeTable;
+use Maatwebsite\Excel\Excel;
 use Spatie\Permission\Models\Role;
+use ProtoneMedia\Splade\SpladeTable;
+use ProtoneMedia\Splade\AbstractTable;
 
 class Users extends AbstractTable
 {
@@ -54,6 +55,16 @@ class Users extends AbstractTable
     {
         $table
             ->defaultSort('-created_at')
+            ->export(
+                label: 'Descargar Excel',
+                filename: 'users.xlsx',
+                type: Excel::XLSX
+            )
+            ->export(
+                label: 'Descargar Pdf',
+                filename: 'users.pdf',
+                type: Excel::DOMPDF
+            )
             ->withGlobalSearch('Buscar por toda la data...', ['name', 'email', 'username', 'dni'])
             ->column('Estado')
             ->column('Usuario')

@@ -6,11 +6,13 @@
     "license": "MIT",
     "require": {
         "php": "^8.0.2",
+        "barryvdh/laravel-dompdf": "^2.0",
         "guzzlehttp/guzzle": "^7.2",
         "kirschbaum-development/eloquent-power-joins": "^2.7",
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
+        "maatwebsite/excel": "^3.1",
         "opcodesio/log-viewer": "^1.9",
         "protonemedia/laravel-splade-breeze": "^2.2",
         "spatie/laravel-permission": "^5.8"

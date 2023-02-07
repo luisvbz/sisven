@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 
+
 .button-gradient {
     @apply flex items-center justify-between ml-3 transition duration-150 bg-gradient-to-b from-alternative-600 to-alternative-500 hover:from-alternative-500 hover:to-alternative-600 shadow-alternative-500/50 shadow-md
 }
@@ -11,6 +12,10 @@
 .button-primary {
   @apply flex justify-center px-3 py-2 font-semibold text-white align-middle bg-primary-600 rounded-md lg:w-1/6 sm:w-full hover:bg-primary-500  shadow-primary-500/50 shadow-md
 }
+
+.button-success {
+    @apply flex justify-center px-3 py-2 font-semibold text-white align-middle bg-success-500 rounded-md lg:w-1/6 sm:w-full hover:bg-success-400  shadow-success-500/50 shadow-md
+  }
 
 .button-orange {
     @apply flex justify-center px-3 py-2 font-semibold text-white align-middle bg-alternative-600 rounded-md lg:w-1/6 sm:w-full hover:bg-alternative-500  shadow-alternative-500/50 shadow-md

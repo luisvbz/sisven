@@ -6,8 +6,9 @@
     <div class="py-12">
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
             @can('us:create')
-                <div class="p-3 mb-3 bg-white shadow-sm sm:rounded-lg">
+                <div class="flex p-3 mb-3 bg-white shadow-sm sm:rounded-lg">
                     <Link href="{{ route('us.add') }}" class="button-primary"><span>Agregar</span> <i class="ml-2 fi fi-br-user-add"></i></Link>
+                    <a href="{{ route('us.export-pdf') }}?{{http_build_query(request()->all())}}" class="ml-2 button-success"><span>PDF</span> <i class="ml-2 fi fi-br-user-add"></i></a>
                 </div>
             @endcan
             <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
@@ -41,7 +42,7 @@
                                     cancel-button="Cancelar"
                                     require-password
                                     method="DELETE"
-                                    href="{{ route('us.delete', [$user])}}" class="text-xl text-danger-400 hover:text-danger-600 mr-1"><i class="fi fi-br-trash"></i></Link>
+                                    href="{{ route('us.delete', [$user])}}" class="mr-1 text-xl text-danger-400 hover:text-danger-600"><i class="fi fi-br-trash"></i></Link>
                                 @endcan
                                 @can('us:activate')
                                     <Link confirm="Desea {{ $user->status ? 'desactivar' : 'Activar'}} este usuarios?"

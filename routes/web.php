@@ -34,6 +34,7 @@ Route::middleware('splade')->group(function () {
             Route::get('/',[UsersController::class, 'index'])->name('us.index')->middleware('permission:us:access');
             Route::get('/agregar',[UsersController::class, 'add'])->name('us.add')->middleware('permission:us:create');
             Route::post('/agregar',[UsersController::class, 'store'])->name('us.store')->middleware('permission:us:create');
+            Route::get('/exportar-pdf',[UsersController::class, 'exportPdf'])->name('us.export-pdf')->middleware('permission:us:create');
             Route::get('/{user}/editar',[UsersController::class, 'edit'])->name('us.edit')->middleware('permission:us:edit');
             Route::put('/{user}/editar',[UsersController::class, 'update'])->name('us.update')->middleware('permission:us:edit');
             Route::get('/{user}/detalles',[UsersController::class, 'getDetails'])->name('us.details')->middleware('permission:us:access');
