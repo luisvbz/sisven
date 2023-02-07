@@ -17,7 +17,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             ModulesSeeder::class,
             RolesAndPermissionSeeder::class,
-            UsersDefaultSeeder::class
+            UsersDefaultSeeder::class,
+            UbigeoSeeders::class,
         ]);
     }
 }

@@ -20,6 +20,7 @@ class Users extends AbstractTable
     public function __construct()
     {
         $this->roles = User::getRolesAllowed();
+        SpladeTable::hidePaginationWhenResourceContainsOnePage();
     }
 
     /**
@@ -52,6 +53,7 @@ class Users extends AbstractTable
     public function configure(SpladeTable $table)
     {
         $table
+            ->defaultSort('-created_at')
             ->withGlobalSearch('Buscar por toda la data...', ['name', 'email', 'username', 'dni'])
             ->column('Estado')
             ->column('Usuario')

@@ -1,5 +1,5 @@
-<tbody class="divide-y divide-gray-200 bg-white">
-    @foreach($table->resource as $itemKey => $item)
+<tbody class="bg-white divide-y divide-gray-200">
+    @forelse($table->resource as $itemKey => $item)
         @php $itemPrimaryKey = $table->findPrimaryKey($item) @endphp
 
         <tr
@@ -14,12 +14,12 @@
             }"
         >
             @if($hasBulkActions = $table->hasBulkActions())
-                <td width="64" class="text-xs px-6 py-4">
+                <td width="64" class="px-6 py-4 text-xs">
                     <input
                         @change="(e) => table.setSelectedItem(@js($itemPrimaryKey), e.target.checked)"
                         :checked="table.itemIsSelected(@js($itemPrimaryKey))"
                         :disabled="table.allItemsFromAllPagesAreSelected"
-                        class="rounded border-gray-300 text-primary-600 shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 disabled:opacity-50"
+                        class="border-gray-300 rounded shadow-sm text-primary-600 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 disabled:opacity-50"
                         name="table-row-bulk-action"
                         type="checkbox"
                         value="{{ $itemPrimaryKey }}"
@@ -40,5 +40,11 @@
                 </td>
             @endforeach
         </tr>
-    @endforeach
+    @empty
+        <tr>
+            <td class="py-6 text-center" colspan="{{ count($table->columns()) }}">
+                <div class="text-sm font-medium tracking-wide text-gray-600"> NO HAY DATOS PARA MOSTRAR <i class="fi fi-br-box-open"></i></div>
+            </td>
+        </tr>
+    @endforelse
 </tbody>

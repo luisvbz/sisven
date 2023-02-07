@@ -2,8 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TestController;
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UsersController;
+use App\Http\Controllers\StoresController;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,6 +39,12 @@ Route::middleware('splade')->group(function () {
             Route::get('/{user}/detalles',[UsersController::class, 'getDetails'])->name('us.details')->middleware('permission:us:access');
             Route::post('/{user}/toggle',[UsersController::class, 'toggleStatus'])->name('us.toogle-status')->middleware('permission:us:activate');
             Route::delete('/{user}/delete',[UsersController::class, 'delete'])->name('us.delete')->middleware('permission:us:delete');
+        });
+
+
+        Route::group(['prefix' => 'tiendas'], function(){
+
+            Route::get('/',[StoresController::class, 'index'])->name('ti.index')->middleware('permission:ti:access');
         });
 
         Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
