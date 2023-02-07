@@ -38,7 +38,7 @@
                                                 name="password"
                                                 placeholder="Password"
                                                 v-on:change="confirm.setPassword($event.target.value)"
-                                                class="block w-full border-0 rounded-md focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 disabled:opacity-50 disabled:bg-gray-50 disabled:cursor-not-allowed"
+                                                class="block w-full border-0 rounded-md focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 disabled:opacity-50 disabled:bg-gray-50 disabled:cursor-not-allowed"
                                                 @keyup.enter="confirm.confirm"
                                                 :disabled="confirm.submitting"
                                             />
@@ -52,7 +52,7 @@
                                     <button
                                         dusk="splade-confirm-confirm"
                                         type="button"
-                                        class="inline-flex justify-center w-full px-4 py-2 text-base font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:w-auto sm:text-sm"
+                                        class="inline-flex justify-center w-full px-4 py-2 text-base font-medium text-white bg-primary-600 border border-transparent rounded-md shadow-sm hover:bg-primary-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 sm:w-auto sm:text-sm"
                                         @click.prevent="confirm.confirm"
                                         :disabled="confirm.submitting"
                                         v-text="confirm.confirmButton"
@@ -60,7 +60,7 @@
                                     <button
                                         dusk="splade-confirm-cancel"
                                         type="button"
-                                        class="inline-flex justify-center w-full px-4 py-2 mt-3 text-base font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+                                        class="inline-flex justify-center w-full px-4 py-2 mt-3 text-base font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
                                         @click.prevent="confirm.cancel"
                                         :disabled="confirm.submitting"
                                         v-text="confirm.cancelButton"

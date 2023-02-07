@@ -52,12 +52,9 @@ class Users extends AbstractTable
     public function configure(SpladeTable $table)
     {
         $table
-            ->withGlobalSearch('Buscar por toda la data...', ['name', 'email', 'username'])
+            ->withGlobalSearch('Buscar por toda la data...', ['name', 'email', 'username', 'dni'])
             ->column('Estado')
-            ->column(
-                key: 'username',
-                label: 'Usuario'
-            )
+            ->column('Usuario')
             ->column(
                 key: 'name',
                 label: 'Nombre',
@@ -66,11 +63,20 @@ class Users extends AbstractTable
             ->column('email', 'Correo Electrónico')
             ->column('Rol')
             ->column('Actions')
+            ->selectFilter(
+                key:'status',
+                noFilterOptionLabel: 'Todos',
+                label: 'Estado',
+                options: [
+                    '1' => 'Activo',
+                    '0' => 'Inactivo',
+                ]
+            )
             ->selectFilter(key:'roles.name',
-            noFilterOptionLabel: 'Seleccione',
+            noFilterOptionLabel: 'Todos',
             label:'Rol' ,
             options: $this->getOptionsRoles())
-            ->paginate(15);
+            ->paginate(20);
 
             // ->searchInput()
             // ->selectFilter()

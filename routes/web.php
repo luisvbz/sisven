@@ -33,6 +33,11 @@ Route::middleware('splade')->group(function () {
             Route::get('/',[UsersController::class, 'index'])->name('us.index')->middleware('permission:us:access');
             Route::get('/agregar',[UsersController::class, 'add'])->name('us.add')->middleware('permission:us:create');
             Route::post('/agregar',[UsersController::class, 'store'])->name('us.store')->middleware('permission:us:create');
+            Route::get('/{user}/editar',[UsersController::class, 'edit'])->name('us.edit')->middleware('permission:us:edit');
+            Route::put('/{user}/editar',[UsersController::class, 'update'])->name('us.update')->middleware('permission:us:edit');
+            Route::get('/{user}/detalles',[UsersController::class, 'getDetails'])->name('us.details')->middleware('permission:us:access');
+            Route::post('/{user}/toggle',[UsersController::class, 'toggleStatus'])->name('us.toogle-status')->middleware('permission:us:activate');
+            Route::delete('/{user}/delete',[UsersController::class, 'delete'])->name('us.delete')->middleware('permission:us:delete');
         });
 
         Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

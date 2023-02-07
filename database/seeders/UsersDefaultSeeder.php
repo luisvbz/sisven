@@ -21,7 +21,7 @@ class UsersDefaultSeeder extends Seeder
             'username' => 'superadmin',
             'name' => 'Super Administrador',
             'email' => 'superadmin@local.com',
-            'password' => bcrypt('laravel')
+            'password' => 'laravel'
         ]);
 
         $super_admin->assignRole('super-admin');
@@ -34,7 +34,7 @@ class UsersDefaultSeeder extends Seeder
             'username' => 'admin',
             'name' => 'Administrador',
             'email' => 'admin@local.com',
-            'password' => bcrypt('laravel')
+            'password' =>'laravel'
         ]);
 
         $admin->assignRole('admin');
@@ -47,7 +47,7 @@ class UsersDefaultSeeder extends Seeder
             'username' => 'operador',
             'name' => 'Operador',
             'email' => 'operator@local.com',
-            'password' => bcrypt('laravel')
+            'password' => 'laravel'
         ]);
 
         $operator->assignRole('operator');

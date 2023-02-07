@@ -2,13 +2,12 @@
 
 namespace App\Notifications;
 
-use App\Models\User;
 use Illuminate\Bus\Queueable;
-use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Notifications\Notification;
 
-class UserCreated extends Notification
+class UserUpdated extends Notification
 {
     use Queueable;
 
@@ -17,12 +16,9 @@ class UserCreated extends Notification
      *
      * @return void
      */
-    private $user;
-    private $password;
-    public function __construct(User $user, $password)
+    public function __construct()
     {
-        $this->user = $user;
-        $this->password = $password;
+        //
     }
 
     /**
@@ -45,9 +41,9 @@ class UserCreated extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->subject('Usuario Creado')
-                    ->greeting("Hola, {$this->user->name}.")
-                    ->line("Se te ha creado un usuario para el sistema <b>[SISTEMA]</b>, con el usuario: **{$this->user->username}** y y la contraseña: **{$this->password}**")
+                    ->subject('Usuario Modificado')
+                    ->greeting("Hola, {$notifiable->name}.")
+                    ->line("Se han editado los datos de usuario,  nombre de usuario: **{$notifiable->username}**")
                     ->action('Para ingresa dirigete haz click aqui', url('/login'))
                     ->line('No compartas esta información con nadie!');
     }
