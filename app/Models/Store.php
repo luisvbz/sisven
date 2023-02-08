@@ -45,6 +45,12 @@ class Store extends Model
         return $this->belongsTo(District::class);
     }
 
+    public function products()
+    {
+        $this->belongsToMany(Product::class, 'products_stock', 'store_id', 'product_id')
+        ->withPivot(['package_qunatity','sunat_qunatity', 'quantity']);
+    }
+
     protected function code(): Attribute
     {
         return Attribute::make(

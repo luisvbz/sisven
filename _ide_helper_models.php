@@ -69,6 +69,77 @@ namespace App\Models{
 
 namespace App\Models{
 /**
+ * App\Models\Product
+ *
+ * @property int $id
+ * @property int $status 0: Inactivo, 1: Activo
+ * @property int $type_id
+ * @property string $code
+ * @property string $description
+ * @property int $minimun_stock
+ * @property int $measure_id
+ * @property string $price_per_dozen
+ * @property string $price_per_unit
+ * @property string $cost
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\ProductMeasure $measure
+ * @property-read \App\Models\ProductType $type
+ * @method static \Illuminate\Database\Eloquent\Builder|Product newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Product newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Product query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereCost($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereMeasureId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereMinimunStock($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product wherePricePerDozen($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product wherePricePerUnit($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereTypeId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereUpdatedAt($value)
+ */
+	class Product extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\ProductMeasure
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductMeasure newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductMeasure newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductMeasure query()
+ */
+	class ProductMeasure extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\ProductPackage
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductPackage newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductPackage newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductPackage query()
+ */
+	class ProductPackage extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\ProductType
+ *
+ * @property-read \App\Models\ProductPackage|null $packages
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductType newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductType newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductType query()
+ */
+	class ProductType extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\Province
  *
  * @property string $id
