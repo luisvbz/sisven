@@ -7,7 +7,7 @@
             <!-- Email Address -->
             <x-splade-input id="username" type="text" name="username" label="Usuario" icon="user" required autofocus />
             <x-splade-input id="password" type="password" name="password" label="Contraseña" icon="key" required autocomplete="current-password" />
-            <x-splade-checkbox id="remember_me" name="remember" :label="__('Remember me')" />
+            <x-splade-checkbox id="remember_me" name="remember" label="Recordar datos" />
 
             <x-splade-errors>
                 <div class="p-1 px-2 text-xs font-bold text-white bg-red-500 border rounded-lg text-centered" v-if="errors.has('credentials')" v-text="errors.first('credentials')" />
@@ -16,7 +16,7 @@
             <div class="flex items-center justify-end">
                 @if (Route::has('password.request'))
                     <Link class="text-sm text-gray-600 underline hover:text-gray-900" href="{{ route('password.request') }}">
-                        {{ __('Forgot your password?') }}
+                        Olvide mi contraseña
                     </Link>
                 @endif
 

@@ -6,7 +6,6 @@ use App\Models\User;
 use App\Tables\Users;
 use App\Models\Module;
 use Illuminate\Http\Request;
-use Barryvdh\DomPDF\Facade\Pdf;
 use App\Notifications\UserCreated;
 use App\Notifications\UserUpdated;
 use Illuminate\Support\Facades\DB;
@@ -129,12 +128,6 @@ class UsersController extends Controller
         ->autoDismiss(15);
 
         return redirect()->route('us.index');
-    }
-
-    public function exportPdf(Request $request)
-    {
-        $pdf = Pdf::loadView('modules.users.reports.general');
-        return $pdf->download('invoice.pdf');
     }
 }
 

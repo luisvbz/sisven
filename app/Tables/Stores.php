@@ -56,6 +56,7 @@ class Stores extends AbstractTable
             ->column(key: 'province.name',label: 'Provincia')
             ->column(key: 'district.name',label: 'Distrito')
             ->column(key: 'address',label: 'Dirección')
+            ->column('actions')
             ->paginate(15);
     }
 }

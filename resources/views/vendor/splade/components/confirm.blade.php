@@ -1,7 +1,7 @@
 <SpladeConfirm
     default-title="{{ __('Are you sure you want to continue?') }}"
     default-text=""
-    default-password-text="{{ __('Please confirm your password before continuing') }}"
+    default-password-text="Ingrese su contraseña para continuar"
     default-confirm-button="{{ __('Confirm') }}"
     default-cancel-button="{{ __('Cancel') }}"
     confirm-password-route="{{ $confirmPasswordRoute ?? "" }}"
@@ -36,7 +36,7 @@
                                             <input
                                                 type="password"
                                                 name="password"
-                                                placeholder="Password"
+                                                placeholder="Ingrese la contraseña"
                                                 v-on:change="confirm.setPassword($event.target.value)"
                                                 class="block w-full border-0 rounded-md focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 disabled:opacity-50 disabled:bg-gray-50 disabled:cursor-not-allowed"
                                                 @keyup.enter="confirm.confirm"

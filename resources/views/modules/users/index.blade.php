@@ -5,12 +5,11 @@
 
     <div class="py-12">
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
-            @can('us:create')
-                <div class="flex p-3 mb-3 bg-white shadow-sm sm:rounded-lg">
-                    <Link href="{{ route('us.add') }}" class="button-primary"><span>Agregar</span> <i class="ml-2 fi fi-br-user-add"></i></Link>
-                    <a href="{{ route('us.export-pdf') }}?{{http_build_query(request()->all())}}" class="ml-2 button-success"><span>PDF</span> <i class="ml-2 fi fi-br-user-add"></i></a>
-                </div>
-            @endcan
+                @can('us:create')
+                    <div class="flex p-3 mb-3 bg-white shadow-sm sm:rounded-lg">
+                        <Link href="{{ route('us.add') }}" class="button-primary"><span>Agregar</span> <i class="ml-2 fi fi-br-user-add"></i></Link>
+                    </div>
+                @endcan
                 <div class="p-6 bg-white border-b border-gray-200 shadow-sm sm:rounded-lg">
                         <x-splade-table :for="$users" striped>
                             @cell('Estado', $user)

@@ -39,4 +39,11 @@ class Store extends Model
     {
         return $this->belongsTo(District::class);
     }
+
+    protected function code(): Attribute
+    {
+        return Attribute::make(
+            set: fn ($value) => strtoupper($value),
+        );
+    }
 }

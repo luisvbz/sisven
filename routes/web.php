@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\UsersController;
+use App\Http\Controllers\CommonController;
 use App\Http\Controllers\StoresController;
 use App\Http\Controllers\ProfileController;
 
@@ -34,7 +35,6 @@ Route::middleware('splade')->group(function () {
             Route::get('/',[UsersController::class, 'index'])->name('us.index')->middleware('permission:us:access');
             Route::get('/agregar',[UsersController::class, 'add'])->name('us.add')->middleware('permission:us:create');
             Route::post('/agregar',[UsersController::class, 'store'])->name('us.store')->middleware('permission:us:create');
-            Route::get('/exportar-pdf',[UsersController::class, 'exportPdf'])->name('us.export-pdf')->middleware('permission:us:create');
             Route::get('/{user}/editar',[UsersController::class, 'edit'])->name('us.edit')->middleware('permission:us:edit');
             Route::put('/{user}/editar',[UsersController::class, 'update'])->name('us.update')->middleware('permission:us:edit');
             Route::get('/{user}/detalles',[UsersController::class, 'getDetails'])->name('us.details')->middleware('permission:us:access');
@@ -46,6 +46,11 @@ Route::middleware('splade')->group(function () {
         Route::group(['prefix' => 'tiendas'], function(){
 
             Route::get('/',[StoresController::class, 'index'])->name('ti.index')->middleware('permission:ti:access');
+            Route::get('/agregar',[StoresController::class, 'add'])->name('ti.add')->middleware('permission:ti:create');
+            Route::post('/agregar',[StoresController::class, 'store'])->name('ti.store')->middleware('permission:ti:create');
+            Route::get('/{store}/edit',[StoresController::class, 'edit'])->name('ti.edit')->middleware('permission:ti:edit');
+            Route::patch('/{store}/edit',[StoresController::class, 'update'])->name('ti.update')->middleware('permission:ti:edit');
+            Route::delete('/{store}/delete',[StoresController::class, 'delete'])->name('ti.delete')->middleware('permission:ti:delete');
         });
 
         Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -54,4 +59,9 @@ Route::middleware('splade')->group(function () {
     });
 
     require __DIR__.'/auth.php';
+});
+
+Route::middleware('auth')->group(function () {
+    Route::get('/commons/provinces/{departamentId}', [CommonController::class, 'getProvices'])->name('get-province');
+    Route::get('/commons/districts/{provinceId}', [CommonController::class, 'getDistricts'])->name('get-districts');
 });
