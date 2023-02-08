@@ -15,11 +15,16 @@ class Store extends Model
     protected $fillable = [
         'code',
         'name',
+        'is_principal',
         'departament_id',
         'province_id',
         'district_id',
         'address',
         'phone_number'
+    ];
+
+    protected $casts = [
+        'is_principal' => 'boolean'
     ];
 
 

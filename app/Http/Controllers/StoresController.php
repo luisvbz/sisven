@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use ProtoneMedia\Splade\Facades\Toast;
 use ProtoneMedia\Splade\Facades\Splade;
 use App\Http\Requests\Stores\StoreSaveRequest;
+use App\Http\Requests\Stores\StoreUpdateRequest;
 
 class StoresController extends Controller
 {
@@ -21,6 +22,14 @@ class StoresController extends Controller
     public function add(Request $request)
     {
         return view('modules.stores.add', [
+            'departaments' =>  Splade::onInit(fn () => Departament::all()),
+        ]);
+    }
+
+    public function edit(Store $store)
+    {
+        return view('modules.stores.edit', [
+            'store' => $store,
             'departaments' =>  Splade::onInit(fn () => Departament::all()),
         ]);
     }
@@ -52,6 +61,35 @@ class StoresController extends Controller
 
              return redirect()->route('ti.index');
          }
+    }
+
+    public function update(Store $store, StoreUpdateRequest $request)
+    {
+        try {
+
+            DB::beginTransaction();
+
+            $store->fill($request->all())->save();
+
+            DB::commit();
+
+            Toast::title('Exito!')
+            ->center('La tienda se ha actualizado satisfactoriamente')
+            ->success()
+            ->backdrop()
+            ->autoDismiss(15);
+
+            return redirect()->route('ti.index');
+
+
+        }catch(\Exception $e) {
+            Toast::center('Error!')
+            ->message($e->getMessage())
+            ->backdrop()
+            ->danger();
+
+            return redirect()->route('ti.index');
+        }
     }
 
 

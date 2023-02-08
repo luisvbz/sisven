@@ -1,8 +1,8 @@
-<x-splade-modal max-width="sm">
+<x-splade-modal>
     <div class="py-2 mt-3">
-        <p class="font-medium text-center">Complete los datos para agregar una nueva tienda</p>
+        <p class="font-medium text-center">Complete los datos para actualizar la tienda</p>
         <div class="px-2 py-1 mb-2 mb-5 border-b-2 border-gray-300"></div>
-        <x-splade-form action="{{ route('ti.store') }}">
+        <x-splade-form action="{{ route('ti.update', [$store]) }}" method="PATCH" :default="$store">
             <x-splade-input name="code" label="Código de la tienda" icon="ad" class="mb-2"/>
             <x-splade-input name="name" label="Nombre de la tienda" icon="city" class="mb-2"/>
             <x-splade-select name="departament_id" label="Departamento"

@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Stores;
 
+use App\Rules\UniquePrincipal;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreSaveRequest extends FormRequest
@@ -30,7 +31,8 @@ class StoreSaveRequest extends FormRequest
             'province_id' => 'required',
             'district_id' => 'required',
             'address' => 'required',
-            'phone_number' => 'required|numeric'
+            'phone_number' => 'required|numeric',
+            'is_principal' => [new UniquePrincipal]
         ];
     }
 
@@ -38,6 +40,7 @@ class StoreSaveRequest extends FormRequest
     {
         return [
             'code.required' => 'Debe escribir el código',
+            'code.unique' => 'El codigo esta siendo usado',
             'name.required' => 'Debe ingresar el nombre',
             'departament_id.required' => 'Seleccione el departamento',
             'province_id.required' => 'Seleccione la provincia',

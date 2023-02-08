@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Stores;
 
 use App\Models\Store;
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreUpdateRequest extends FormRequest
@@ -25,13 +26,23 @@ class StoreUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'code' => ['required',Rule::unique(Store::class)->ignore($this->id)],
+            'code' => ['required',Rule::unique(Store::class)->ignore($this->store->id)],
             'name' => 'required',
             'departament_id' => 'required',
             'province_id' => 'required',
             'district_id' => 'required',
             'address' => 'required',
-            'phone_number' => 'required|numeric'
+            'phone_number' => 'required|numeric',
+            'is_principal' => function ($attr, $value, $fail) {
+                if ($value != 0) {
+                    if(!Store::where('id', $this->store->id)->where('is_principal', true)->exists()) {
+                        if(Store::where('is_principal', true)->exists()) {
+
+                            $fail("Ya éxiste una tienda principal.");
+                        }
+                    }
+                }
+            }
         ];
     }
 
@@ -39,6 +50,7 @@ class StoreUpdateRequest extends FormRequest
     {
         return [
             'code.required' => 'Debe escribir el código',
+            'code.unique' => 'El codigo esta siendo usado',
             'name.required' => 'Debe ingresar el nombre',
             'departament_id.required' => 'Seleccione el departamento',
             'province_id.required' => 'Seleccione la provincia',

@@ -48,15 +48,25 @@ class Stores extends AbstractTable
     public function configure(SpladeTable $table)
     {
         $table
-            ->withGlobalSearch(columns: ['code','name'])
+            ->withGlobalSearch(columns: ['code','name','address'])
             ->defaultSort('-created_at')
             ->column(key: 'code',label: 'COD')
+            ->column(label: 'Principal')
             ->column(key: 'name',label: 'Nombre')
             ->column(key: 'departament.name',label: 'Departamento')
             ->column(key: 'province.name',label: 'Provincia')
             ->column(key: 'district.name',label: 'Distrito')
             ->column(key: 'address',label: 'Dirección')
             ->column('actions')
+            ->selectFilter(
+                key:'is_principal',
+                noFilterOptionLabel: 'Todas',
+                label: 'Tipo',
+                options: [
+                    '1' => 'Principal',
+                    '0' => 'Otra',
+                ]
+            )
             ->paginate(15);
     }
 }

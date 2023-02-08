@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('stores', function (Blueprint $table) {
             $table->id();
             $table->string('code')->unique();
+            $table->unsignedTinyInteger('is_principal')->default(0);
             $table->string('name');
             $table->char('departament_id', 2);
             $table->char('province_id', 4);
