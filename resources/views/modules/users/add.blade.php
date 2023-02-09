@@ -21,6 +21,11 @@
                             placeholder="Seleccion el rol del usuario"
                             :options="$roles"
                              option-label="display_name" option-value="name" />
+                             <x-splade-select name="stores[]" label="Tiendas"
+                             v-if="form.rol == 'vendedor'"
+                            placeholder="Seleccion el rol del usuario"
+                            :options="$stores" choices multiple
+                             option-label="name" option-value="id" />
                         </div>
                          <div class="px-2 py-2 mb-2 border-b-2 border-gray-300"></div>
                          <p class="text-sm font-medium text-gray-600"><i class="fi-br-form"></i> Seleccione los permisos para este usuario</p>

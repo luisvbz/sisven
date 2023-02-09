@@ -65,7 +65,7 @@ return new class extends Migration
         Schema::create('products_stock', function (Blueprint $table) {
             $table->unsignedBigInteger('product_id');
             $table->unsignedBigInteger('store_id');
-            $table->string('package_qunatity');
+            $table->string('package_quantity');
             $table->integer('quantity');
             $table->integer('quantity_sunat');
 

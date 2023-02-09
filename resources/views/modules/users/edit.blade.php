@@ -5,7 +5,7 @@
 
     <div class="py-12">
         <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
-            <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
+            <div class="overflow-hidden bg-white shadow-lg sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     <x-splade-form method="PUT" action="{{ route('us.update', [$user]) }}" :default="$user">
                         <p class="text-sm font-medium text-gray-600"><i class="fi-br-form"></i> Complete los datos del formulario para actualizar los datos del usuario</p>

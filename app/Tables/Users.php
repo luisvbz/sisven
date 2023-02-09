@@ -3,6 +3,7 @@
 namespace App\Tables;
 
 use App\Models\User;
+use App\Models\Store;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Excel;
 use Spatie\Permission\Models\Role;
@@ -85,6 +86,12 @@ class Users extends AbstractTable
                     '0' => 'Inactivo',
                 ]
             )
+            ->selectFilter(
+                key:'stores.id',
+                noFilterOptionLabel: 'Todas',
+                label: 'Tienda',
+                options: $this->getStores()
+            )
             ->selectFilter(key:'roles.name',
             noFilterOptionLabel: 'Todos',
             label:'Rol' ,
@@ -109,5 +116,16 @@ class Users extends AbstractTable
 
         return $options;
 
+    }
+
+    private function getStores()
+    {
+        $options = [];
+
+        foreach(Store::all() as $rol) {
+            $options[$rol->id] = $rol->name;
+        }
+
+        return $options;
     }
 }

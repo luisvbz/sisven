@@ -14,7 +14,7 @@ class Product extends Model
         'type_id',
         'code',
         'description',
-        'minimum_stock',
+        'minimun_stock',
         'measure_id',
         'price_per_dozen',
         'price_per_unit',
@@ -24,8 +24,8 @@ class Product extends Model
 
     public function stores()
     {
-        $this->belongsToMany(Store::class, 'products_stock', 'product_id', 'store_id')
-        ->withPivot(['package_qunatity','sunat_qunatity', 'quantity']);
+        return $this->belongsToMany(Store::class, 'products_stock', 'product_id', 'store_id')
+        ->withPivot(['package_quantity','quantity_sunat', 'quantity']);
     }
 
 
@@ -37,5 +37,10 @@ class Product extends Model
     public function measure()
     {
         return $this->belongsTo(ProductMeasure::class, 'measure_id');
+    }
+
+    public function getFullStockAttribute()
+    {
+        return $this->stores->sum('pivot.quantity');
     }
 }

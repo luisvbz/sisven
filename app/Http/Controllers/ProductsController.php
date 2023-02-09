@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Store;
+use App\Models\Product;
 use App\Models\ProductType;
 use Illuminate\Http\Request;
 use App\Models\ProductMeasure;
+use Illuminate\Support\Facades\DB;
+use ProtoneMedia\Splade\Facades\Toast;
 
 class ProductsController extends Controller
 {
@@ -37,5 +40,48 @@ class ProductsController extends Controller
             'measures' => $measures,
             'stores' => $stores
         ]);
+    }
+
+    public function store(Request $request)
+    {
+        $data = $request->all();
+
+        DB::beginTransaction();
+
+        //Create product
+
+        $product = Product::create([
+            'status' => 1,
+            'type_id' => $data['type_id'],
+            'code' => $data['code'],
+            'description' => $data['description'],
+            'minimun_stock' => $data['minimum_stock'],
+            'measure_id' => $data['measure_id'],
+            'price_per_dozen' => $data['price_per_dozen'],
+            'price_per_unit' => $data['price_per_unit'],
+            'cost' => $data['cost']
+        ]);
+
+
+        //verify anda attach stores with stock
+        if($data['add_stock'] == 1) {
+            foreach($data['stores'] as $s) {
+                $product->stores()->attach($s['id'], [
+                    'quantity' => $s['quantity'],
+                    'package_quantity' => $s['package_quantity'],
+                    'quantity_sunat' => 0
+                    ]);
+            }
+        }
+
+        DB::commit();
+
+        Toast::title('Exito!')
+        ->center('El producto se ha guardao con éxito')
+        ->success()
+        ->backdrop()
+        ->autoDismiss(15);
+
+        session()->flash('status', 'Producto guardado exitosamente');
     }
 }

@@ -47,8 +47,8 @@ class Store extends Model
 
     public function products()
     {
-        $this->belongsToMany(Product::class, 'products_stock', 'store_id', 'product_id')
-        ->withPivot(['package_qunatity','sunat_qunatity', 'quantity']);
+        return $this->belongsToMany(Product::class, 'products_stock', 'store_id', 'product_id')
+        ->withPivot(['package_quantity','quantity_sunat', 'quantity']);
     }
 
     protected function code(): Attribute

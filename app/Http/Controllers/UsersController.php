@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Store;
 use App\Tables\Users;
 use App\Models\Module;
 use Illuminate\Http\Request;
@@ -23,8 +24,11 @@ class UsersController extends Controller
 
     public function add(Request $request)
     {
+        $u = User::find(3);
+        $u->stores()->sync(['1','2']);
         return view('modules.users.add', [
             'roles' => User::getRolesAllowed(),
+            'stores' => Store::orderBy('is_principal', 'DESC')->get(['code', 'name', 'id', 'is_principal']),
             'modules' => Module::with('permissions:name,display_name,module_id')->orderby('name', 'ASC')->get(['id', 'name'])
         ]);
     }
@@ -35,10 +39,14 @@ class UsersController extends Controller
 
            DB::beginTransaction();
 
-            $user = User::create($request->except(['rol', 'permissions', 'password_confirmation']));
+            $user = User::create($request->except(['rol', 'permissions', 'password_confirmation', 'stores']));
 
             $user->assignRole($request->only(['rol']));
             $user->givePermissionTo($request->only(['permissions']));
+
+            if($request->rol == 'vendedor') {
+                $user->stores()->sync($request->stores);
+            }
 
             DB::commit();
 
@@ -65,10 +73,12 @@ class UsersController extends Controller
     {
         $user->rol = $user->roles[0]->name;
         $user->permissions = $user->permissions->pluck('name');
+        $user->stores = $user->stores->pluck('id');
 
         return view('modules.users.edit', [
             'user' => $user,
             'roles' => User::getRolesAllowed(),
+            'stores' => Store::orderBy('is_principal', 'DESC')->get(['code', 'name', 'id', 'is_principal']),
             'modules' => Module::with('permissions:name,display_name,module_id')->orderby('name', 'ASC')->get(['id', 'name'])
         ]);
     }

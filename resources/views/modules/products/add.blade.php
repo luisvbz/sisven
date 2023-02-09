@@ -6,7 +6,7 @@
     <div class="py-12">
         <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
             <div class="p-6 bg-white border-b border-gray-200 shadow-lg sm:rounded-lg">
-                <x-splade-form :default="['price_per_dozen' => 0, 'stores' => $stores ]">
+                <x-splade-form stay restore-on-success preserve-scroll action="{{ route('pr.store') }}" :default="['price_per_dozen' => 0, 'stores' => $stores ]">
                     <p class="text-sm font-medium text-gray-600"><i class="fi-br-form"></i> Complete los datos del formulario para agregar un nuevo producto</p>
                     <div class="px-2 py-2 mb-2 border-b-2 border-gray-300"></div>
                     <div class="grid gap-4 pb-2 lg:grid-cols-2">
@@ -40,6 +40,9 @@
                                     :options="{ currency: 'PEN' }"
                                 />
                     </x-splade-defer>
+
+                    {{-- <InputMask mask="#-#" v-model="form.mask" label="Test"/> --}}
+
                     <CurrencyInput
                        label="Costo"
                         v-model="form.cost"
@@ -73,7 +76,7 @@
                                     <label class="block">
                                         <span class="block mb-1 font-sans text-sm font-medium text-gray-700">Descripcion de cantidad</span>
                                         <div class="flex border border-gray-300 rounded-md shadow-sm">
-                                            <span class="inline-flex items-center px-3 text-gray-500 border border-t-0 border-b-0 border-l-0 border-gray-300 rounded-l-md bg-gray-50"><i class="fi fi-br-info"></i></span>
+                                            <span class="inline-flex items-center px-3 text-gray-500 border border-t-0 border-b-0 border-l-0 border-gray-300 rounded-l-md bg-gray-50"><i class="fi fi-br-box"></i></span>
                                              <input
                                                 v-model="form.stores[index].package_quantity"
                                                 type="text"
@@ -86,6 +89,9 @@
                         </div>
                     <div class="px-2 py-1 mb-2 mb-5 border-b-2 border-gray-300"></div>
                     </div>
+                    <x-splade-flash>
+                        <div v-if="flash.has('status')" v-text="flash.status"/>
+                    </x-splade-flash>
                     <div class="flex justify-end">
                         <x-splade-submit class="button-primary" v-if="!form.processing">
                            <span class="mr-2">Guardar</span> <i class="leading-7 fi fi-br-disk"></i>

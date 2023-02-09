@@ -3,6 +3,7 @@ import "../css/app.css";
 import "../css/uicons/css/uicons-bold-rounded.css"
 import "@protonemedia/laravel-splade/dist/style.css";
 import CurrencyInput from './components/CurrencyInput.vue';
+import InputMask from './components/InputMask.vue';
 
 import { createApp } from "vue/dist/vue.esm-bundler.js";
 import { renderSpladeApp, SpladePlugin } from "@protonemedia/laravel-splade";
@@ -17,7 +18,8 @@ createApp({
         "transform_anchors": false,
         "progress_bar": true,
         "components": {
-            CurrencyInput
+            CurrencyInput,
+            InputMask
         }
     })
     .mount(el);

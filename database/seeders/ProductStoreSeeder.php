@@ -22,7 +22,7 @@ class ProductStoreSeeder extends Seeder
 
         Store::insert([
             [
-                'code' => 'ti-001',
+                'code' => 'TI-001',
                 'name' => 'Tienda de Lince',
                 'is_principal' => true,
                 'departament_id' => '15',
@@ -32,9 +32,9 @@ class ProductStoreSeeder extends Seeder
                 'phone_number' => '912575368'
             ],
             [
-                'code' => 'ti-002',
+                'code' => 'TI-002',
                 'name' => 'Tienda de Jesus Maria',
-                'is_principal' => true,
+                'is_principal' => false,
                 'departament_id' => '15',
                 'province_id' => '1501',
                 'district_id' => '150144',

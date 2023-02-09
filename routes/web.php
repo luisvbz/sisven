@@ -58,6 +58,7 @@ Route::middleware('splade')->group(function () {
 
             Route::get('/',[ProductsController::class, 'index'])->name('pr.index')->middleware('permission:pr:access');
             Route::get('/agregar',[ProductsController::class, 'add'])->name('pr.add')->middleware('permission:pr:create');
+            Route::post('/agregar',[ProductsController::class, 'store'])->name('pr.store')->middleware('permission:pr:create');
         });
 
         Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
