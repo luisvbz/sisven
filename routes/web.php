@@ -71,4 +71,5 @@ Route::middleware('splade')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::get('/commons/provinces/{departamentId}', [CommonController::class, 'getProvices'])->name('get-province');
     Route::get('/commons/districts/{provinceId}', [CommonController::class, 'getDistricts'])->name('get-districts');
+    Route::get('/commons/get-type-category/{typeId}', [CommonController::class, 'getCategory'])->name('get-category');
 });

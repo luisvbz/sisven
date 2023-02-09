@@ -17,7 +17,7 @@ class ProductsController extends Controller
 
     public function add()
     {
-        $types = ProductType::with('package')->orderBy('name')->get();
+        $types = ProductType::orderBy('name')->get();
         $measures = ProductMeasure::orderBy('name')->get();
         $stores = Store::orderBy('is_principal', 'DESC')->get(['code', 'name', 'id']);
         return view('modules.products.add', [
