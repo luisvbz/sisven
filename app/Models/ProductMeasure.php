@@ -9,6 +9,8 @@ class ProductMeasure extends Model
 {
     use HasFactory;
 
+    protected $table = 'products_measures';
+
     protected $fillable = [
         'name',
         'alias',

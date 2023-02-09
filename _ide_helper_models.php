@@ -108,9 +108,19 @@ namespace App\Models{
 /**
  * App\Models\ProductMeasure
  *
+ * @property int $id
+ * @property string $name
+ * @property string $alias
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
  * @method static \Illuminate\Database\Eloquent\Builder|ProductMeasure newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ProductMeasure newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ProductMeasure query()
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductMeasure whereAlias($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductMeasure whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductMeasure whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductMeasure whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductMeasure whereUpdatedAt($value)
  */
 	class ProductMeasure extends \Eloquent {}
 }
@@ -119,9 +129,15 @@ namespace App\Models{
 /**
  * App\Models\ProductPackage
  *
+ * @property int $id
+ * @property string $name
+ * @property string $alias
  * @method static \Illuminate\Database\Eloquent\Builder|ProductPackage newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ProductPackage newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ProductPackage query()
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductPackage whereAlias($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductPackage whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductPackage whereName($value)
  */
 	class ProductPackage extends \Eloquent {}
 }
@@ -130,10 +146,25 @@ namespace App\Models{
 /**
  * App\Models\ProductType
  *
- * @property-read \App\Models\ProductPackage|null $packages
+ * @property int $id
+ * @property string $name
+ * @property string $alias
+ * @property string $category
+ * @property int $package_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read mixed $package_name
+ * @property-read \App\Models\ProductPackage $package
  * @method static \Illuminate\Database\Eloquent\Builder|ProductType newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ProductType newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ProductType query()
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductType whereAlias($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductType whereCategory($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductType whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductType whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductType whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductType wherePackageId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductType whereUpdatedAt($value)
  */
 	class ProductType extends \Eloquent {}
 }

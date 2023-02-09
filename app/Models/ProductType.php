@@ -9,6 +9,8 @@ class ProductType extends Model
 {
     use HasFactory;
 
+    protected $table = 'products_types';
+
     protected $fillable = [
         'name',
         'alias',
@@ -17,8 +19,13 @@ class ProductType extends Model
     ];
 
 
-    public function packages()
+    public function package()
     {
         return $this->belongsTo(ProductPackage::class, 'package_id');
+    }
+
+    public function getPackageNameAttribute()
+    {
+        return "{$this->name} - ({$this->package->name})";
     }
 }

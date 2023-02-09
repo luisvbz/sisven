@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             RolesAndPermissionSeeder::class,
             UsersDefaultSeeder::class,
             UbigeoSeeders::class,
+            ProductStoreSeeder::class,
         ]);
     }
 }

@@ -6,6 +6,7 @@ use App\Http\Controllers\UsersController;
 use App\Http\Controllers\CommonController;
 use App\Http\Controllers\StoresController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProductsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,6 +52,12 @@ Route::middleware('splade')->group(function () {
             Route::get('/{store}/edit',[StoresController::class, 'edit'])->name('ti.edit')->middleware('permission:ti:edit');
             Route::patch('/{store}/edit',[StoresController::class, 'update'])->name('ti.update')->middleware('permission:ti:edit');
             Route::delete('/{store}/delete',[StoresController::class, 'delete'])->name('ti.delete')->middleware('permission:ti:delete');
+        });
+
+        Route::group(['prefix' => 'productos'], function(){
+
+            Route::get('/',[ProductsController::class, 'index'])->name('pr.index')->middleware('permission:pr:access');
+            Route::get('/agregar',[ProductsController::class, 'add'])->name('pr.add')->middleware('permission:pr:create');
         });
 
         Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
