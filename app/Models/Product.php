@@ -20,12 +20,6 @@ class Product extends Model
         'cost',
     ];
 
-    public $casts = [
-        'price' => 'float',
-        'cost' => 'float'
-    ];
-
-
     public function stores()
     {
         return $this->belongsToMany(Store::class, 'products_stock', 'product_id', 'store_id')

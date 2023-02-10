@@ -78,8 +78,8 @@ namespace App\Models{
  * @property string $description
  * @property int $minimun_stock
  * @property int $measure_id
- * @property float $price
- * @property float $cost
+ * @property string $price
+ * @property string $cost
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read mixed $alert_stock

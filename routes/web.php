@@ -61,7 +61,7 @@ Route::middleware('splade')->group(function () {
             Route::post('/agregar',[ProductsController::class, 'store'])->name('pr.store')->middleware('permission:pr:create');
             Route::get('/{product}/stock-tiendas',[ProductsController::class, 'getStockTiendas'])->name('pr.stock-tiendas')->middleware('permission:pr:access');
             Route::get('/{product}/editar',[ProductsController::class, 'edit'])->name('pr.edit')->middleware('permission:pr:edit');
-            Route::patch('/{product}/update',[ProductsController::class, 'update'])->name('pr.updated')->middleware('permission:pr:edit');
+            Route::patch('/{product}/update',[ProductsController::class, 'update'])->name('pr.update')->middleware('permission:pr:edit');
         });
 
         Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

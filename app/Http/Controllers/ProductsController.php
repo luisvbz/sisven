@@ -11,6 +11,7 @@ use App\Models\ProductMeasure;
 use Illuminate\Support\Facades\DB;
 use ProtoneMedia\Splade\Facades\Toast;
 use App\Http\Requests\Products\ProductSaveRequest;
+use App\Http\Requests\Products\ProductUpdateRequest;
 
 class ProductsController extends Controller
 {
@@ -54,6 +55,24 @@ class ProductsController extends Controller
             'product' => $product,
 
         ]);
+    }
+
+    public function update(Product $product, ProductUpdateRequest $request)
+    {
+
+        $product->forceFill([
+            'cost' => $request->get('product')['cost'],
+            'price' => $request->get('product')['price'],
+            'minimun_stock' => $request->get('product')['minimun_stock'],
+        ])->save();
+
+        Toast::title('Exito!')
+        ->center('El producto se ha actualizado con éxito')
+        ->success()
+        ->backdrop()
+        ->autoDismiss(15);
+
+        return redirect()->route('pr.index');
     }
 
     public function store(ProductSaveRequest $request)

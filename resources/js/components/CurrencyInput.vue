@@ -20,12 +20,12 @@ import { useCurrencyInput } from 'vue-currency-input'
 export default {
   name: 'CurrencyInput',
   props: {
-    modelValue: Number,
+    modelValue:Number,
     options: Object,
     label: String
   },
   setup(props) {
-    const { inputRef } = useCurrencyInput(props.options)
+    const { inputRef, setOptions, setValue  } = useCurrencyInput(props.options)
 
     return { inputRef }
   }
