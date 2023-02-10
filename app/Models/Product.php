@@ -39,8 +39,28 @@ class Product extends Model
         return $this->belongsTo(ProductMeasure::class, 'measure_id');
     }
 
+    public function getFullNameAttribute()
+    {
+        return "{$this->type->name} {$this->code} {$this->description}";
+    }
+
     public function getFullStockAttribute()
     {
         return $this->stores->sum('pivot.quantity');
+    }
+
+    public function getAlertStockAttribute()
+    {
+        return $this->full_stock <= $this->minimun_stock;
+    }
+
+    public function getPriceFormatedAttribute()
+    {
+        return "S/ ".number_format($this->price_per_dozen, 2,".", ",");
+    }
+
+    public function getFullStockFormatedAttribute()
+    {
+        return number_format($this->full_stock, 0,"", ",");
     }
 }

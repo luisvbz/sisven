@@ -4,17 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Models\Store;
 use App\Models\Product;
+use App\Tables\Products;
 use App\Models\ProductType;
 use Illuminate\Http\Request;
 use App\Models\ProductMeasure;
 use Illuminate\Support\Facades\DB;
 use ProtoneMedia\Splade\Facades\Toast;
+use App\Http\Requests\Products\ProductSaveRequest;
 
 class ProductsController extends Controller
 {
     public function index()
     {
-        return view('modules.products.index');
+        return view('modules.products.index', ['products' => Products::class]);
     }
 
 
@@ -42,7 +44,7 @@ class ProductsController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(ProductSaveRequest $request)
     {
         $data = $request->all();
 
@@ -83,5 +85,22 @@ class ProductsController extends Controller
         ->autoDismiss(15);
 
         session()->flash('status', 'Producto guardado exitosamente');
+    }
+
+    public function getStockTiendas(Product $product)
+    {
+        $stores = $product->stores->transform(function($store){
+            $item = new \stdClass;
+            $item->id = $store->id;
+            $item->code = $store->code;
+            $item->name = $store->name;
+            $item->is_principal = $store->is_principal;
+            $item->stock = number_format($store->pivot->quantity, 0, "",",");
+            $item->stock_description = $store->pivot->package_quantity;
+
+            return $item;
+        });
+
+        return view('modules.products.modals.stock-tiendas', ['product' => $product, 'stores' => $stores]);
     }
 }

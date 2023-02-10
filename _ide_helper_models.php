@@ -83,7 +83,11 @@ namespace App\Models{
  * @property string $cost
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read mixed $alert_stock
+ * @property-read mixed $full_name
  * @property-read mixed $full_stock
+ * @property-read mixed $full_stock_formated
+ * @property-read mixed $price_formated
  * @property-read \App\Models\ProductMeasure $measure
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Store> $stores
  * @property-read int|null $stores_count
