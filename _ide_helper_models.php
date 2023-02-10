@@ -78,12 +78,12 @@ namespace App\Models{
  * @property string $description
  * @property int $minimun_stock
  * @property int $measure_id
- * @property string $price_per_dozen
- * @property string $price_per_unit
- * @property string $cost
+ * @property float $price
+ * @property float $cost
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read mixed $alert_stock
+ * @property-read mixed $cost_formated
  * @property-read mixed $full_name
  * @property-read mixed $full_stock
  * @property-read mixed $full_stock_formated
@@ -102,8 +102,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Product whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Product whereMeasureId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Product whereMinimunStock($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Product wherePricePerDozen($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Product wherePricePerUnit($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product wherePrice($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Product whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Product whereTypeId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Product whereUpdatedAt($value)

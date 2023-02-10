@@ -69,7 +69,7 @@ class ProductStoreSeeder extends Seeder
                 'alias' => 'shakiras',
                 'category' => 'docena',
                 'package_id' => 1,
-            ],
+            ]
 
         ]);
 
@@ -78,6 +78,8 @@ class ProductStoreSeeder extends Seeder
             ['name' => 'Galones', 'alias' => 'gl'],
             ['name' => 'Latas', 'alias' => 'latas'],
             ['name' => 'Metros', 'alias' => 'mts'],
+            ['name' => 'Listros', 'alias' => 'lts'],
+            ['name' => 'Rollo', 'alias' => 'rollo'],
         ]);
 
     }

@@ -24,8 +24,6 @@ class UsersController extends Controller
 
     public function add(Request $request)
     {
-        $u = User::find(3);
-        $u->stores()->sync(['1','2']);
         return view('modules.users.add', [
             'roles' => User::getRolesAllowed(),
             'stores' => Store::orderBy('is_principal', 'DESC')->get(['code', 'name', 'id', 'is_principal']),

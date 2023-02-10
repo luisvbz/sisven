@@ -16,9 +16,13 @@ class Product extends Model
         'description',
         'minimun_stock',
         'measure_id',
-        'price_per_dozen',
-        'price_per_unit',
+        'price',
         'cost',
+    ];
+
+    public $casts = [
+        'price' => 'float',
+        'cost' => 'float'
     ];
 
 
@@ -56,7 +60,12 @@ class Product extends Model
 
     public function getPriceFormatedAttribute()
     {
-        return "S/ ".number_format($this->price_per_dozen, 2,".", ",");
+        return "S/ ".number_format($this->price, 2,".", ",");
+    }
+
+    public function getCostFormatedAttribute()
+    {
+        return "S/ ".number_format($this->cost, 2,".", ",");
     }
 
     public function getFullStockFormatedAttribute()

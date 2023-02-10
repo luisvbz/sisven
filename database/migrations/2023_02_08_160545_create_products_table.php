@@ -47,9 +47,8 @@ return new class extends Migration
             $table->string('description');
             $table->integer('minimun_stock');
             $table->unsignedBigInteger('measure_id');
-            $table->decimal('price_per_dozen', 9, 6)->default(0);
-            $table->decimal('price_per_unit', 9, 6)->default(0);
-            $table->decimal('cost', 9,6)->default(0);
+            $table->decimal('price', 9, 6);
+            $table->decimal('cost', 9,6);
             $table->timestamps();
 
             $table->foreign('type_id')

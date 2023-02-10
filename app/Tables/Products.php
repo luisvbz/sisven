@@ -54,15 +54,17 @@ class Products extends AbstractTable
             ->column(key: 'code', label: 'Código', highlight: true, searchable: true)
             ->column(key: 'description', label: 'descripcion')
             ->column(key: 'price_formated', label: 'Precio', highlight: true)
+            ->column(key: 'cost_formated', label: 'Costo', highlight: true)
             ->column(key: 'measure.name', label: 'medida')
             ->column(label:'stock')
+            ->column(label:'acciones')
             ->selectFilter(
                 key:'type_id',
                 noFilterOptionLabel: 'Todos',
                 label: 'Tipo',
                 options: $this->getTypes()
             )
-            ->rowModal(fn (Product $product) => route('pr.stock-tiendas', ['product' => $product]))
+            //->rowModal(fn (Product $product) => route('pr.stock-tiendas', ['product' => $product]))
 
             ->paginate(30);
     }

@@ -26,21 +26,10 @@
                              option-value="id" />
                       <x-splade-input name="minimum_stock" label="Stock minimo del producto" icon="hastag"/>
                       <CurrencyInput
-                       label="Precio por unidad"
-                        v-model="form.price_per_unit"
+                       label="Precio"
+                        v-model="form.price"
                         :options="{ currency: 'PEN' }"
                       />
-                      <x-splade-defer v-if="form.type_id != ''"
-                            url="`/commons/get-type-category/${form.type_id}`"
-                            method="get"
-                            watch-value="form.type_id">
-                            <CurrencyInput v-if="response.category == 'docena'"
-                                label="Precio por docena"
-                                    v-model="form.price_per_dozen"
-                                    :options="{ currency: 'PEN' }"
-                                />
-                    </x-splade-defer>
-
                     {{-- <InputMask mask="#-#" v-model="form.mask" label="Test"/> --}}
 
                     <CurrencyInput
@@ -76,7 +65,7 @@
                                             </div>
                                         </label>
                                         <x-splade-errors>
-                                            <p class="p-1 px-2 text-xs font-bold text-white bg-danger-500 border rounded-lg text-centered mt-1" v-if="form.hasError(`stores.${index}.quantity`)" v-text="errors.first(`stores.${index}.quantity`)"/>
+                                            <p class="p-1 px-2 mt-1 text-xs font-bold text-white border rounded-lg bg-danger-500 text-centered" v-if="form.hasError(`stores.${index}.quantity`)" v-text="errors.first(`stores.${index}.quantity`)"/>
                                         </x-splade-errors>
                                     </div>
 
@@ -95,7 +84,7 @@
                                             </div>
                                         </label>
                                         <x-splade-errors>
-                                            <p class="p-1 px-2 text-xs font-bold text-white bg-danger-500 border rounded-lg text-centered mt-1" v-if="form.hasError(`stores.${index}.package_quantity`)" v-text="errors.first(`stores.${index}.package_quantity`)"/>
+                                            <p class="p-1 px-2 mt-1 text-xs font-bold text-white border rounded-lg bg-danger-500 text-centered" v-if="form.hasError(`stores.${index}.package_quantity`)" v-text="errors.first(`stores.${index}.package_quantity`)"/>
                                         </x-splade-errors>
                                     </div>
                                     {{--/Paquetes --}}

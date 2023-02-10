@@ -44,6 +44,18 @@ class ProductsController extends Controller
         ]);
     }
 
+    public function edit(Product $product)
+    {
+        $types = ProductType::orderBy('name')->get();
+        $measures = ProductMeasure::orderBy('name')->get();
+        return view('modules.products.edit', [
+            'types' => $types,
+            'measures' => $measures,
+            'product' => $product,
+
+        ]);
+    }
+
     public function store(ProductSaveRequest $request)
     {
         $data = $request->all();
@@ -59,8 +71,7 @@ class ProductsController extends Controller
             'description' => $data['description'],
             'minimun_stock' => $data['minimum_stock'],
             'measure_id' => $data['measure_id'],
-            'price_per_dozen' => $data['price_per_dozen'],
-            'price_per_unit' => $data['price_per_unit'],
+            'price' => $data['price'],
             'cost' => $data['cost']
         ]);
 
