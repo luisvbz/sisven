@@ -6,8 +6,10 @@ use App\Models\Store;
 use App\Models\Product;
 use App\Tables\Products;
 use App\Models\ProductType;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\ProductMeasure;
+use App\Models\ProductPackage;
 use Illuminate\Support\Facades\DB;
 use ProtoneMedia\Splade\SpladeTable;
 use ProtoneMedia\Splade\Facades\Toast;
@@ -150,10 +152,34 @@ class ProductsController extends Controller
         ]);
     }
 
+    public function addTypes()
+    {
+        return view('modules.products.types.add', [
+            'packages' => ProductPackage::all()
+        ]);
+    }
+
+    public function storeType(Request $request)
+    {
+        ProductType::create([
+            'name' => Str::upper($request->name),
+            'alias' => Str::slug($request->name),
+            'category' => 'docena',
+            'package_id' => $request->package_id
+        ]);
+
+        Toast::title('Exito!')
+        ->center('El producto se ha eliminado satisfactoriamente')
+        ->success()
+        ->backdrop()
+        ->autoDismiss(15);
+
+        return redirect()->route('pr.index-types');
+    }
+
     public function deleteType(ProductType $type)
     {
         try{
-            $type = $types['as'];
             $type->delete();
 
             Toast::title('Exito!')

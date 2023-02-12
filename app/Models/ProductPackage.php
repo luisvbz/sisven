@@ -11,6 +11,7 @@ class ProductPackage extends Model
 
     public $timestamps = false;
     protected $table = 'products_packages';
+    protected $orderColumn = "name";
 
     protected $fillable = [
         'name',
