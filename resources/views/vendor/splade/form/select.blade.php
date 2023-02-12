@@ -13,7 +13,19 @@
 >
     <template #default="{!! $scope !!}">
         <label class="block" v-bind:class="{ 'pointer-events-none': select.loading }">
-            @includeWhen($label, 'splade::form.label', ['label' => $label])
+            @if($label)
+                <div class="flex justify-between">
+                    @includeWhen($label, 'splade::form.label', ['label' => $label])
+                    @if($attributes->get('administrable'))
+                        <Link class="block mb-1 font-sans text-sm font-medium text-primary-700"
+                           @if($attributes->get('administrable-modal')) modal @endif
+                           href="{{ $attributes->get('administrable') }}">
+                            Administrar
+                        </Link>
+                    @endif
+                </div>
+            @endif
+
 
             <div class="relative">
                 <div v-bind:class="{ 'opacity-50': select.loading }">

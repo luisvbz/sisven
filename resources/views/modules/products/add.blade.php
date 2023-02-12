@@ -15,6 +15,7 @@
                              :options="$types"
                              option-label="package_name"
                              choices
+                             administrable="{{ route('pr.index-types') }}"
                              option-value="id" />
                        <x-splade-input name="code" label="Codigo" icon="ad"/>
                        <x-splade-input name="description" label="Descripción" icon="info"/>

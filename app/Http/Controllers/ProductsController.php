@@ -9,7 +9,9 @@ use App\Models\ProductType;
 use Illuminate\Http\Request;
 use App\Models\ProductMeasure;
 use Illuminate\Support\Facades\DB;
+use ProtoneMedia\Splade\SpladeTable;
 use ProtoneMedia\Splade\Facades\Toast;
+use Illuminate\Database\QueryException;
 use App\Http\Requests\Products\ProductSaveRequest;
 use App\Http\Requests\Products\ProductUpdateRequest;
 
@@ -132,5 +134,57 @@ class ProductsController extends Controller
         });
 
         return view('modules.products.modals.stock-tiendas', ['product' => $product, 'stores' => $stores]);
+    }
+
+
+    public function getTypes()
+    {
+        return view('modules.products.types.index',
+        [
+            'types' => SpladeTable::for(ProductType::class)
+                        ->withGlobalSearch(columns: ['name'])
+                        ->column(key: 'name', label: 'Nombre')
+                        ->column(key: 'package.name', label: 'Tipo de presentación')
+                        ->column('acciones')
+                        ->paginate(30)
+        ]);
+    }
+
+    public function deleteType(ProductType $type)
+    {
+        try{
+            $type = $types['as'];
+            $type->delete();
+
+            Toast::title('Exito!')
+            ->center('El producto se ha eliminado satisfactoriamente')
+            ->success()
+            ->backdrop()
+            ->autoDismiss(15);
+
+            return redirect()->route('pr.index-types');
+
+        }catch(QueryException $e) {
+            $message = $e->getCode() == 23000
+                        ? 'No se puede eliminar el tipo de producto porque ya está enlazado a uno o varios productos'
+                        : $e->getMessage();
+
+            Toast::title('Error!')
+            ->center($e->getCode())
+            ->danger()
+            ->backdrop()
+            ->autoDismiss(15);
+
+            return redirect()->route('pr.index-types');
+        }catch(\Exception $e) {
+            Toast::title('Error!')
+            ->center($e->getMessage())
+            ->danger()
+            ->backdrop()
+            ->autoDismiss(15);
+
+            return redirect()->route('pr.index-types');
+        }
+
     }
 }
