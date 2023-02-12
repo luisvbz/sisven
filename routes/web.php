@@ -65,7 +65,16 @@ Route::middleware('splade')->group(function () {
             Route::get('/administrar/tipos', [ProductsController::class, 'getTypes'])->name('pr.index-types');
             Route::get('/administrar/tipos/agregar', [ProductsController::class, 'addTypes'])->name('pr.add-types');
             Route::post('/administrar/tipos/agregar', [ProductsController::class, 'storeType'])->name('pr.store-type');
+            Route::get('/administrar/tipos/{type}/editar', [ProductsController::class, 'editType'])->name('pr.edit-type');
+            Route::patch('/administrar/tipos/{type}/actualizar', [ProductsController::class, 'updateType'])->name('pr.update-type');
             Route::delete('/administrar/tipos/{type}/delete', [ProductsController::class, 'deleteType'])->name('pr.delete-type');
+            Route::get('/administrar/medidas', [ProductsController::class, 'getMeasures'])->name('pr.index-measures');
+            Route::get('/administrar/medidas/agregar', [ProductsController::class, 'addMeasures'])->name('pr.add-measures');
+            Route::post('/administrar/medidas/agregar', [ProductsController::class, 'storeMeasure'])->name('pr.store-measure');
+            Route::get('/administrar/medidas/{measure}/editar', [ProductsController::class, 'editMeasure'])->name('pr.edit-measure');
+            Route::patch('/administrar/medidas/{measure}/actualizar', [ProductsController::class, 'updateMeasure'])->name('pr.update-measure');
+            Route::delete('/administrar/medidas/{measure}/delete', [ProductsController::class, 'deleteMeasure'])->name('pr.delete-measure');
+
         });
 
         Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

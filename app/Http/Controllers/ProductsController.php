@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\DB;
 use ProtoneMedia\Splade\SpladeTable;
 use ProtoneMedia\Splade\Facades\Toast;
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\Products\ProductSaveRequest;
 use App\Http\Requests\Products\ProductUpdateRequest;
 
@@ -148,7 +149,7 @@ class ProductsController extends Controller
                         ->column(key: 'name', label: 'Nombre')
                         ->column(key: 'package.name', label: 'Tipo de presentación')
                         ->column('acciones')
-                        ->paginate(30)
+                        ->paginate(10)
         ]);
     }
 
@@ -159,8 +160,73 @@ class ProductsController extends Controller
         ]);
     }
 
+    public function editType(ProductType $type)
+    {
+        return view('modules.products.types.edit', [
+            'packages' => ProductPackage::all(),
+            'type' => $type
+        ]);
+    }
+
+    public function updateType(ProductType $type, Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'package_id' => 'required',
+        ],[
+            'name.required' => 'Ingrese el nombre',
+            'package_id.required' => 'Seleccione la presentación',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->route('pr.edit-type', [$type])
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+
+        if(Product::where('type_id', $type->id)->exists())
+        {
+            Toast::title('Adevertencia!')
+            ->center('Existe productos con este tipo registrado, al actualizar el nombre cambiará en todos los registrsos. Para hacer necesitas un permiso especial')
+            ->warning()
+            ->backdrop()
+            ->autoDismiss(15);
+
+            return redirect()->route('pr.index-types');
+        }
+
+        $type->forceFill([
+            'name' => Str::upper($request->name),
+            'alias' => Str::slug($request->name),
+            'package_id' => $request->package_id,
+
+        ])->save();
+
+        Toast::title('Exito!')
+        ->center('El producto se ha actualizado satisfactoriamente')
+        ->success()
+        ->backdrop()
+        ->autoDismiss(15);
+
+        return redirect()->route('pr.index-types');
+    }
+
     public function storeType(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'package_id' => 'required',
+        ],[
+            'name.required' => 'Ingrese el nombre',
+            'package_id.required' => 'Seleccione la presentación',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->route('pr.add-types')
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+
         ProductType::create([
             'name' => Str::upper($request->name),
             'alias' => Str::slug($request->name),
@@ -191,12 +257,12 @@ class ProductsController extends Controller
             return redirect()->route('pr.index-types');
 
         }catch(QueryException $e) {
-            $message = $e->getCode() == 23000
+            $message = $e->getCode() == '23000'
                         ? 'No se puede eliminar el tipo de producto porque ya está enlazado a uno o varios productos'
                         : $e->getMessage();
 
             Toast::title('Error!')
-            ->center($e->getCode())
+            ->center($message)
             ->danger()
             ->backdrop()
             ->autoDismiss(15);
@@ -210,6 +276,140 @@ class ProductsController extends Controller
             ->autoDismiss(15);
 
             return redirect()->route('pr.index-types');
+        }
+
+    }
+
+    public function getMeasures()
+    {
+        return view('modules.products.measures.index',
+        [
+            'measures' => SpladeTable::for(ProductMeasure::class)
+                        ->withGlobalSearch(columns: ['name'])
+                        ->column(key: 'name', label: 'Nombre')
+                        ->column(key: 'alias', label: 'Alias')
+                        ->column('acciones')
+                        ->paginate(10)
+        ]);
+    }
+
+    public function addMeasures()
+    {
+        return view('modules.products.measures.add');
+    }
+
+    public function editMeasure(ProductMeasure $measure)
+    {
+        return view('modules.products.measures.edit', [
+            'measure' => $measure
+        ]);
+    }
+
+    public function updateMeasure(ProductMeasure $measure, Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'alias' => 'required',
+        ],[
+            'name.required' => 'Ingrese el nombre',
+            'alias.required' => 'El alias',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->route('pr.edit-measure', [$measure])
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+
+        if(Product::where('measure_id', $measure->id)->exists())
+        {
+            Toast::title('Adevertencia!')
+            ->center('Existe productos con este tipo de unidad de medida, al actualizar el nombre cambiará en todos los registrsos. Para hacer necesitas un permiso especial')
+            ->warning()
+            ->backdrop()
+            ->autoDismiss(15);
+
+            return redirect()->route('pr.index-types');
+        }
+
+        $measure->forceFill([
+            'name' => Str::upper($request->name),
+            'alias' => $request->alias,
+
+        ])->save();
+
+        Toast::title('Exito!')
+        ->center('La unidad de medida se ha actualizado satisfactoriamente')
+        ->success()
+        ->backdrop()
+        ->autoDismiss(15);
+
+        return redirect()->route('pr.index-types');
+    }
+
+    public function storeMeasure(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'alias' => 'required',
+        ],[
+            'name.required' => 'Ingrese el nombre',
+            'alias.required' => 'El alias',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->route('pr.add-measures')
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+
+        ProductMeasure::create([
+            'name' => Str::upper($request->name),
+            'alias' => $request->name,
+        ]);
+
+        Toast::title('Exito!')
+        ->center('¡La unidad de medida se ha guardado exitosamente!')
+        ->success()
+        ->backdrop()
+        ->autoDismiss(15);
+
+        return redirect()->route('pr.index-measures');
+    }
+
+    public function deleteMeasure(ProductMeasure $measure)
+    {
+        try{
+            $measure->delete();
+
+            Toast::title('Exito!')
+            ->center('La unidad de medida se ha eliminado satisfactoriamente')
+            ->success()
+            ->backdrop()
+            ->autoDismiss(15);
+
+            return redirect()->route('pr.index-measures');
+
+        }catch(QueryException $e) {
+            $message = $e->getCode() == '23000'
+                        ? 'No se puede eliminarla unidad de medida porque ya está enlazado a uno o varios productos'
+                        : $e->getMessage();
+
+            Toast::title('Error!')
+            ->center($message)
+            ->danger()
+            ->backdrop()
+            ->autoDismiss(15);
+
+            return redirect()->route('pr.index-measures');
+        }catch(\Exception $e) {
+            Toast::title('Error!')
+            ->center($e->getMessage())
+            ->danger()
+            ->backdrop()
+            ->autoDismiss(15);
+
+            return redirect()->route('pr.index-measures');
         }
 
     }

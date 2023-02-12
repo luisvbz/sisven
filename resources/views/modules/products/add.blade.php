@@ -24,6 +24,7 @@
                             :options="$measures"
                              option-label="name"
                              choices
+                             administrable="{{ route('pr.index-measures') }}"
                              option-value="id" />
                       <x-splade-input name="minimum_stock" label="Stock minimo del producto" icon="hastag"/>
                       <CurrencyInput

@@ -2,7 +2,10 @@
     <div class="py-3 mb-4 text-center border-b border-primary-300 font-semibold">
         Agreagar nuevo tipo de producto
     </div>
-    <x-splade-form method="POST" action="{{ route('pr.store-type') }}">
+    <x-splade-form
+    @success="$splade.emit('product-type-added-or-updated')"
+    stay
+    method="POST" action="{{ route('pr.store-type') }}">
          <x-splade-input name="name" label="Nombre" icon="info" class="mb-2"/>
         <x-splade-select name="package_id" label="Presentación"
             placeholder="Selecciona el tipo de paquete"

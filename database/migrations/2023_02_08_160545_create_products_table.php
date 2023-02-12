@@ -21,8 +21,8 @@ return new class extends Migration
 
         Schema::create('products_types', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('alias');
+            $table->string('name')->unique();
+            $table->string('alias')->unique();
             $table->enum('category', ['unidad', 'docena', 'full']);
             $table->unsignedBigInteger('package_id');
             $table->timestamps();

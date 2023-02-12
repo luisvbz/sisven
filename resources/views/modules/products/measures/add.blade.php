@@ -1,22 +1,13 @@
 <x-splade-modal max-width="md">
     <div class="py-3 mb-4 text-center border-b border-primary-300 font-semibold">
-        Editar tipo de producto
+        Agreagar nueva unidad de medida
     </div>
     <x-splade-form
+    @success="$splade.emit('product-measures-added-or-updated')"
     stay
-    @success="$splade.emit('product-type-added-or-updated')"
-    confirm="Actualizar tipo de producto"
-    confirm-text="Esta seguro(a) que desea actualizar este producto?.Esto puede afetar todo el sistema."
-    confirm-button="Si, actualizar!"
-    cancel-button="Cancelar!"
-     method="PATCH" action="{{ route('pr.update-type', [$type]) }}" :default="$type">
+    method="POST" action="{{ route('pr.store-measure') }}">
          <x-splade-input name="name" label="Nombre" icon="info" class="mb-2"/>
-        <x-splade-select name="package_id" label="Presentación"
-            placeholder="Selecciona el tipo de paquete"
-            :options="$packages"
-                option-label="name"
-                choices
-                option-value="id" />
+         <x-splade-input name="alias" label="Abreviatura" icon="info" class="mb-2"/>
     <div class="py-3 mb-4 text-center border-b border-primary-300 font-semibold">
     </div>
      <div class="w-full">

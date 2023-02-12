@@ -1,5 +1,5 @@
 {
-    "auth.password" : "Aqui el mensaje",
+    "auth.password" : "Error de contraseña",
     "passwords.sent": "Link enviado para recuperacíon",
     "passwords.user": "El correo electrónico no éxite",
     "passwords.reset": "La contraseña se ha restablecido con exito"

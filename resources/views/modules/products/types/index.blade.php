@@ -11,10 +11,11 @@
                     </div>
                 @endcan
                 <div class="p-6 bg-white border-b border-gray-200 shadow-lg sm:rounded-lg">
+                <x-splade-rehydrate on="product-type-added-or-updated">
                     <x-splade-table :for="$types" striped>
                         <x-splade-cell acciones as="$type">
                             <div class="flex justify-around">
-                                <Link href="/"><i class="mr-1 text-xl text-green-400 hover:text-green-600 fi fi-br-edit"></i></Link>
+                                <Link modal href="{{ route('pr.edit-type', [$type])}}"><i class="mr-1 text-xl text-green-400 hover:text-green-600 fi fi-br-edit"></i></Link>
                                 <Link
                                     confirm="Desea eliminar este tipo de producto?"
                                     confirm-button="Eliminar!"
@@ -27,6 +28,7 @@
 
                         </x-splade-cell>
                     </x-splade-table>
+                </x-splade-rehydrate>
                 </div>
         </div>
     </div>
