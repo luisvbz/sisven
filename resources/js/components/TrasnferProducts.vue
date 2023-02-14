@@ -12,12 +12,22 @@
             <div class="flex items-center justify-between px-4 py-2 bg-gray-100 border border-gray-300 rounded-md">
                 <div class="font-semibold grow">{{ product.name }}</div>
                 <div class="w-2/6 font-semibold text-primary-500"><span class="text-gray-600">Disponible:</span> {{ product.stock }}</div>
-                <input  class="w-1/6 input-text !text-right" type="text" v-model="product.quantity"/>
+                <input @keypress="NumbersOnly" class="w-1/6 input-text !text-right" type="text" v-model="product.quantity"/>
             </div>
-            <div v-if="product.quantity > product.stock" class="px-3 py-1 mt-2 text-sm font-semibold text-white border rounded bg-danger-400 border-danger-600">
+            <div v-if="product.quantity > product.stock" class="px-3 py-1 mt-2 text-sm font-semibold text-white border rounded bg-danger-500 border-danger-600">
                 La cantidad a solicitar supera el stock disponible
             </div>
-
+        </div>
+        <div class="flex justify-between p-5 my-4 rounded shadow-md bg-danger-500" v-if="error.show">
+            <div class="font-semibold text-white"><i class="fi fi-br-triangle-warning"></i> {{ error.message }}</div>
+            <a class="text-white cursor-pointer" @click="error.show = false"><i class="fi fi-br-user"></i></a>
+        </div>
+        <div class="flex justify-end">
+        <p v-if="form.processing">Submitting the data...</p>
+            <button v-else type="button" @click.prevent="checkProducts" class="px-4 py-2 font-bold text-white rounded-md shadow-sm bg-primary-700 hover:bg-primary-500 focus:outline-none focus:shadow-outline">
+                <span class="mr-2">Registrar Solicitud</span>
+                <i class="leading-7 fi fi-br-disk"></i>
+            </button>
         </div>
 
     </div>
@@ -41,7 +51,38 @@ export default {
   data() {
     return {
         query: '',
+        error: {
+            show: false,
+            message: ''
+        }
 
+    }
+  },
+  methods: {
+    NumbersOnly(evt) {
+      evt = (evt) ? evt : window.event;
+      var charCode = (evt.which) ? evt.which : evt.keyCode;
+      if ((charCode > 31 && (charCode < 48 || charCode > 57)) && charCode !== 46) {
+        evt.preventDefault();;
+      } else {
+        return true;
+      }
+    },
+    checkProducts()
+    {
+        let count = 0;
+        this.form.products.forEach(x => {
+            if(x.quantity > x.stock) count++;
+        })
+
+        if(count > 0)
+        {
+            this.error.message = "Existen errores en el formulario, por favor revisar"
+            this.error.show = true
+            return;
+        }
+
+        this.form.submit()
     }
   }
 }

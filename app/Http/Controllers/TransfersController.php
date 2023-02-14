@@ -31,4 +31,10 @@ class TransfersController extends Controller
             'products' => $products
         ]);
     }
+
+    public function store(Request $resquest)
+    {
+        sleep(3);
+        dd($resquest->all());
+    }
 }

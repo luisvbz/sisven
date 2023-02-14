@@ -56,6 +56,8 @@ Route::middleware('splade')->group(function () {
             //Transferencias
             Route::get('/solicitar-productos', [TransfersController::class, 'add'])
                     ->name('ti.request-product');
+            Route::post('/solicitar-productos', [TransfersController::class, 'store'])
+                    ->name('ti.request-product-store');
         });
 
         Route::group(['prefix' => 'productos'], function(){

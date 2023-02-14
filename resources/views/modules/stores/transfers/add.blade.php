@@ -6,7 +6,7 @@
     <div class="py-12">
         <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
             <div class="p-6 bg-white border-b border-gray-200 shadow-sm sm:rounded-lg">
-                <x-splade-form :default="['products' => $products, 'canSend' => true]">
+                <x-splade-form :default="['products' => $products, 'canSend' => true]" method="POST" action="{{ route('ti.request-product-store') }}">
                      <p class="font-medium text-center text-gray-600 text-md"><i class="fi-br-form"></i> Solicitar productos a la tienda principal</p>
                      <div class="flex w-3/4 p-4 pb-4 mx-auto mt-3 mb-4 border rounded-md bg-primary-100 border-primary-300">
                         <div class="flex flex-col items-center justify-center w-1/5 text-4xl leading-8 text-center text-alternative-500">
