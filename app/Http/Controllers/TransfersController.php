@@ -15,7 +15,15 @@ class TransfersController extends Controller
                     ->whereIn('id', auth()->user()->stores->pluck('id')->toArray())->get(['id', 'name'])
                     : Store::where('is_principal', false)->get(['id', 'name']);
 
-        $products = $principal->products;
+        $products = $principal->products->transform(function($p){
+            $item = new \stdClass();
+            $item->id = $p->id;
+            $item->name = $p->full_name;
+            $item->stock = $p->pivot->quantity;
+            $item->quantity = 0;
+
+            return $item;
+        });
 
         return view('modules.stores.transfers.add', [
             'principal' => $principal,
