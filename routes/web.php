@@ -7,6 +7,7 @@ use App\Http\Controllers\CommonController;
 use App\Http\Controllers\StoresController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\TransfersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,6 +53,9 @@ Route::middleware('splade')->group(function () {
             Route::get('/{store}/edit',[StoresController::class, 'edit'])->name('ti.edit')->middleware('permission:ti:edit');
             Route::patch('/{store}/edit',[StoresController::class, 'update'])->name('ti.update')->middleware('permission:ti:edit');
             Route::delete('/{store}/delete',[StoresController::class, 'delete'])->name('ti.delete')->middleware('permission:ti:delete');
+            //Transferencias
+            Route::get('/solicitar-productos', [TransfersController::class, 'add'])
+                    ->name('ti.request-product');
         });
 
         Route::group(['prefix' => 'productos'], function(){

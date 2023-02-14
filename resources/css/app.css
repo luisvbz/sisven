@@ -18,7 +18,7 @@
   }
 
 .button-orange {
-    @apply flex justify-center px-3 py-2 font-semibold text-white align-middle bg-alternative-600 rounded-md lg:w-1/6 sm:w-full hover:bg-alternative-500  shadow-alternative-500/50 shadow-md
+    @apply flex justify-center px-3 py-2 font-semibold text-white align-middle bg-alternative-400 rounded-md lg:w-1/6 sm:w-full hover:bg-alternative-300  shadow-alternative-500/50 shadow-md
   }
 
   .item-modal-stock {

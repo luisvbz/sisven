@@ -12,6 +12,70 @@
 
 namespace App\Models{
 /**
+ * App\Models\Client
+ *
+ * @property int $id
+ * @property string $document_type
+ * @property string $name
+ * @property string|null $address
+ * @property string|null $phone_office
+ * @property string|null $phone_celular
+ * @property string|null $email
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|Client newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Client newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Client query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Client whereAddress($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Client whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Client whereDocumentType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Client whereEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Client whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Client whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Client wherePhoneCelular($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Client wherePhoneOffice($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Client whereUpdatedAt($value)
+ */
+	class Client extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\Comment
+ *
+ * @property int $id
+ * @property int $user_id
+ * @property string $commentable_type
+ * @property int $commentable_id
+ * @property string $comment
+ * @property string $type
+ * @property string $action
+ * @property bool $done 0: N0, 1: Si
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Model|\Eloquent $commentable
+ * @property-read \App\Models\User $creator
+ * @property-read \Illuminate\Notifications\DatabaseNotificationCollection<int, \Illuminate\Notifications\DatabaseNotification> $notifications
+ * @property-read int|null $notifications_count
+ * @method static \Illuminate\Database\Eloquent\Builder|Comment newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Comment newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Comment query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Comment whereAction($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Comment whereComment($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Comment whereCommentableId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Comment whereCommentableType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Comment whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Comment whereDone($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Comment whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Comment whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Comment whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Comment whereUserId($value)
+ */
+	class Comment extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\Departament
  *
  * @property string $id
@@ -259,6 +323,43 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Store withoutTrashed()
  */
 	class Store extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\Transfer
+ *
+ * @property int $id
+ * @property string $status
+ * @property int $origin
+ * @property int $destination
+ * @property int $requested_by
+ * @property string|null $approved_at
+ * @property string|null $rejected_at
+ * @property string|null $canceled_at
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Comment> $comments
+ * @property-read int|null $comments_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Product> $products
+ * @property-read int|null $products_count
+ * @property-read \App\Models\Store $storeDestination
+ * @property-read \App\Models\Store $storeOrigin
+ * @method static \Illuminate\Database\Eloquent\Builder|Transfer newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Transfer newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Transfer query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Transfer whereApprovedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Transfer whereCanceledAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Transfer whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Transfer whereDestination($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Transfer whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Transfer whereOrigin($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Transfer whereRejectedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Transfer whereRequestedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Transfer whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Transfer whereUpdatedAt($value)
+ */
+	class Transfer extends \Eloquent {}
 }
 
 namespace App\Models{

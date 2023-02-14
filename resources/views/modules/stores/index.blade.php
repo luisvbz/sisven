@@ -6,8 +6,9 @@
     <div class="py-12">
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
             @can('ti:create')
-                <div class="p-3 mb-3 bg-white shadow-sm sm:rounded-lg">
-                    <Link slideover href="{{ route('ti.add') }}" class="button-primary"><span>Agregar</span> <i class="ml-2 fi fi-br-add"></i></Link>
+                <div class="p-3 mb-3 bg-white shadow-sm sm:rounded-lg flex">
+                    <Link slideover href="{{ route('ti.add') }}" class="button-primary mr-2"><span>Agregar</span> <i class="ml-2 fi fi-br-add"></i></Link>
+                    <Link href="{{ route('ti.request-product') }}" class="button-orange"><span>Solicitar productos</span> <i class="ml-2 fi fi-br-boxes"></i></Link>
                 </div>
             @endcan
             <div class="p-6 bg-white border-b border-gray-200 shadow-sm sm:rounded-lg">
