@@ -13,14 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('stores', function (Blueprint $table) {
+        Schema::create('warehouses', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->char('departament_id', 2);
             $table->char('province_id', 4);
             $table->char('district_id', 6);
             $table->string('address');
-            $table->integer('phone_number');
             $table->timestamps();
             $table->softDeletes();
 
@@ -46,6 +45,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('stores');
+        Schema::dropIfExists('warehouses');
     }
 };

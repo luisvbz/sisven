@@ -23,7 +23,6 @@ return new class extends Migration
             $table->id();
             $table->string('name')->unique();
             $table->string('alias')->unique();
-            $table->enum('category', ['unidad', 'docena', 'full']);
             $table->unsignedBigInteger('package_id');
             $table->timestamps();
 
@@ -60,22 +59,6 @@ return new class extends Migration
             ->on('products_measures');
         });
 
-
-        Schema::create('products_stock', function (Blueprint $table) {
-            $table->unsignedBigInteger('product_id');
-            $table->unsignedBigInteger('store_id');
-            $table->string('package_quantity');
-            $table->integer('quantity');
-            $table->integer('quantity_sunat');
-
-            $table->foreign('product_id')
-            ->references('id')
-            ->on('products');
-
-            $table->foreign('store_id')
-            ->references('id')
-            ->on('stores');
-        });
     }
 
     /**
@@ -89,6 +72,5 @@ return new class extends Migration
         Schema::dropIfExists('products_types');
         Schema::dropIfExists('products_measures');
         Schema::dropIfExists('products');
-        Schema::dropIfExists('products_stock');
     }
 };
