@@ -13,11 +13,11 @@
             @endcan
             <div class="p-6 bg-white border-b border-gray-200 shadow-sm sm:rounded-lg">
                 <x-splade-table :for="$stores">
-                        <x-splade-cell principal as="$store">
-                            @if($store->is_principal)
-                                <div class="text-xl text-center text-green-600"><i class="fi fi-br-badge-check"></i></div>
+                        <x-splade-cell tipo as="$store">
+                            @if($store->type == 'warehouse')
+                                <span class="bg-primary-500 text-white text-xs px-2 py-1 rounded font-semibold">ALMACEN</span>
                             @else
-                            <div class="text-xl text-center text-gray-300"><i class="fi fi-br-no-people"></i></div>
+                                <span class="bg-success-500 text-white text-xs px-2 py-1 rounded font-semibold">TIENDA</span>
                             @endif
                         </x-splade-cell>
                     <x-splade-cell actions>

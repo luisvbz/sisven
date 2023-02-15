@@ -24,7 +24,7 @@ class ProductStoreSeeder extends Seeder
             [
                 'code' => 'TI-001',
                 'name' => 'Tienda de Lince',
-                'is_principal' => true,
+                'type' => Store::TIENDA,
                 'departament_id' => '15',
                 'province_id' => '1501',
                 'district_id' => '150116',
@@ -34,13 +34,43 @@ class ProductStoreSeeder extends Seeder
             [
                 'code' => 'TI-002',
                 'name' => 'Tienda de Jesus Maria',
-                'is_principal' => false,
+                'type' => Store::TIENDA,
                 'departament_id' => '15',
                 'province_id' => '1501',
                 'district_id' => '150144',
                 'address' => 'Av. Jose Galvez 1479',
                 'phone_number' => '912575368'
            ],
+           [
+                'code' => 'TI-003',
+                'name' => 'Tienda de Jesus Maria',
+                'type' => Store::TIENDA,
+                'departament_id' => '15',
+                'province_id' => '1501',
+                'district_id' => '150144',
+                'address' => 'Av. Jose Galvez 1479',
+                'phone_number' => '912575368'
+            ],
+           [
+                'code' => 'AL-001',
+                'name' => 'Almacen Cercado',
+                'type' => Store::ALMACEN,
+                'departament_id' => '15',
+                'province_id' => '1501',
+                'district_id' => '150116',
+                'address' => 'Av. Jose Galvez 1479',
+                'phone_number' => '912575368'
+           ],
+           [
+                'code' => 'AL-002',
+                'name' => 'Almacen Breña',
+                'type' => Store::ALMACEN,
+                'departament_id' => '15',
+                'province_id' => '1501',
+                'district_id' => '150144',
+                'address' => 'Av. Jose Galvez 1479',
+                'phone_number' => '912575368'
+            ]
 
         ]);
 

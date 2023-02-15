@@ -28,21 +28,12 @@ class StoreUpdateRequest extends FormRequest
         return [
             'code' => ['required',Rule::unique(Store::class)->ignore($this->store->id)],
             'name' => 'required',
+            'type' => 'required',
             'departament_id' => 'required',
             'province_id' => 'required',
             'district_id' => 'required',
             'address' => 'required',
             'phone_number' => 'required|numeric',
-            'is_principal' => function ($attr, $value, $fail) {
-                if ($value != 0) {
-                    if(!Store::where('id', $this->store->id)->where('is_principal', true)->exists()) {
-                        if(Store::where('is_principal', true)->exists()) {
-
-                            $fail("Ya éxiste una tienda principal.");
-                        }
-                    }
-                }
-            }
         ];
     }
 
@@ -52,6 +43,7 @@ class StoreUpdateRequest extends FormRequest
             'code.required' => 'Debe escribir el código',
             'code.unique' => 'El codigo esta siendo usado',
             'name.required' => 'Debe ingresar el nombre',
+            'type.required' => 'Debe seleccionar el tipo',
             'departament_id.required' => 'Seleccione el departamento',
             'province_id.required' => 'Seleccione la provincia',
             'district_id.required' => 'Seleccione el distrito',

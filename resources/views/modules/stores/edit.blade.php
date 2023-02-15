@@ -3,8 +3,13 @@
         <p class="font-medium text-center">Complete los datos para actualizar la tienda</p>
         <div class="px-2 py-1 mb-2 mb-5 border-b-2 border-gray-300"></div>
         <x-splade-form action="{{ route('ti.update', [$store]) }}" method="PATCH" :default="$store">
-            <x-splade-input name="code" label="Código de la tienda" icon="ad" class="mb-2"/>
-            <x-splade-input name="name" label="Nombre de la tienda" icon="city" class="mb-2"/>
+             <x-splade-input name="code" label="Código" icon="ad" class="mb-2"/>
+            <x-splade-input name="name" label="Nombre" icon="city" class="mb-2"/>
+            <x-splade-select name="type" label="Tipo" class="mb-2" placeholder="Seleccione el tipo">
+                <option value="" disabled>Seleccione...</option>
+                <option value="warehouse">Almacen</option>
+                <option value="store">Tienda</option>
+            </x-splade-select>
             <x-splade-select name="departament_id" label="Departamento"
                             placeholder="Seleccione el departamento"
                             :options="$departaments"
@@ -30,9 +35,8 @@
                     choices class="mb-2"
                     remote-url="`/commons/districts/${form.province_id}`"
                 />
-                <x-splade-textarea name="address" label="Dirección de la tienda" autosize />
+                <x-splade-textarea name="address" label="Dirección" autosize />
                 <x-splade-input name="phone_number" label="Teléfono" icon="phone-office" class="mb-2"/>
-                <x-splade-checkbox name="is_principal" label="Tienda Prinicipal" class="my-2"/>
                 <div class="px-2 py-1 mb-2 mb-5 border-b-2 border-gray-300"></div>
                 <div class="w-full">
                     <x-splade-submit class="button-primary !w-full" v-if="!form.processing">

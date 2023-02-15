@@ -27,12 +27,12 @@ class StoreSaveRequest extends FormRequest
         return [
             'code' => 'required|unique:stores,code',
             'name' => 'required',
+            'type' => 'required',
             'departament_id' => 'required',
             'province_id' => 'required',
             'district_id' => 'required',
             'address' => 'required',
             'phone_number' => 'required|numeric',
-            'is_principal' => [new UniquePrincipal]
         ];
     }
 
@@ -42,6 +42,7 @@ class StoreSaveRequest extends FormRequest
             'code.required' => 'Debe escribir el código',
             'code.unique' => 'El codigo esta siendo usado',
             'name.required' => 'Debe ingresar el nombre',
+            'type.required' => 'Debe seleccionar el tipo',
             'departament_id.required' => 'Seleccione el departamento',
             'province_id.required' => 'Seleccione la provincia',
             'district_id.required' => 'Seleccione el distrito',

@@ -51,7 +51,7 @@ class Stores extends AbstractTable
             ->withGlobalSearch(columns: ['code','name','address'])
             ->defaultSort('-created_at')
             ->column(key: 'code',label: 'COD')
-            ->column(label: 'Principal')
+            ->column(label: 'Tipo')
             ->column(key: 'name',label: 'Nombre')
             ->column(key: 'departament.name',label: 'Departamento')
             ->column(key: 'province.name',label: 'Provincia')
@@ -59,12 +59,12 @@ class Stores extends AbstractTable
             ->column(key: 'address',label: 'Dirección')
             ->column('actions')
             ->selectFilter(
-                key:'is_principal',
+                key:'type',
                 noFilterOptionLabel: 'Todas',
                 label: 'Tipo',
                 options: [
-                    '1' => 'Principal',
-                    '0' => 'Otra',
+                    Store::ALMACEN => 'Almacen',
+                    Store::TIENDA => 'Tienda',
                 ]
             )
             ->paginate(15);

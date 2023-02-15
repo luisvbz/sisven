@@ -30,14 +30,15 @@ class ProductsController extends Controller
     {
         $types = ProductType::orderBy('name')->get();
         $measures = ProductMeasure::orderBy('name')->get();
-        $stores = Store::orderBy('is_principal', 'DESC')
-            ->get(['code', 'name', 'id', 'is_principal'])
+        $stores = Store::orderBy('type', 'DESC')
+            //->where('type', Store::ALMACEN)
+            ->get(['code', 'name', 'id', 'type'])
             ->transform(function($item) {
                 $store = new \stdClass;
                 $store->id = $item->id;
                 $store->name = $item->name;
                 $store->code = $item->code;
-                $store->is_principal = $item->is_principal;
+                $store->type = $item->type;
                 $store->package_quantity = null;
                 $store->quantity = null;
 

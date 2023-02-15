@@ -11,11 +11,13 @@ class Store extends Model
 {
     use HasFactory, SoftDeletes,  PowerJoins;
 
+    const ALMACEN = 'warehouse';
+    const TIENDA = 'store';
 
     protected $fillable = [
         'code',
         'name',
-        'is_principal',
+        'type',
         'departament_id',
         'province_id',
         'district_id',
