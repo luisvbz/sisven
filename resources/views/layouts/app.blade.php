@@ -4,10 +4,12 @@
     </x-sidebar>
     <main class="flex flex-col flex-grow -ml-64 transition-all duration-150 ease-in main md:ml-0">
         <x-header/>
-      <div class="flex flex-col flex-grow p-4 main-content">
-        <h1 class="text-2xl font-bold text-gray-700">{{ $header }}</h1>
+      <div class="flex flex-col flex-grow main-content">
+        <div class="px-4 py-2 border-b border-gray-300 bg-gradient-to-b from-gray-300 to-gray-200">
+            <span class="font-semibold text-">{{ $header }}</span>
+        </div>
 
-        <div class="flex flex-col flex-grow mt-4">
+        <div class="flex flex-col flex-grow p-4 mt-4">
             {{ $slot }}
         </div>
       </div>
