@@ -2,12 +2,12 @@
 
 namespace App\Tables;
 
-use App\Models\Store;
+use App\Models\Warehouse;
 use Illuminate\Http\Request;
 use ProtoneMedia\Splade\AbstractTable;
 use ProtoneMedia\Splade\SpladeTable;
 
-class Stores extends AbstractTable
+class Warehouses extends AbstractTable
 {
     /**
      * Create a new instance.
@@ -16,7 +16,7 @@ class Stores extends AbstractTable
      */
     public function __construct()
     {
-        SpladeTable::hidePaginationWhenResourceContainsOnePage();
+        //
     }
 
     /**
@@ -36,7 +36,7 @@ class Stores extends AbstractTable
      */
     public function for()
     {
-        return Store::query()->orderBy('created_at', 'DESC');
+        return Warehouse::query();
     }
 
     /**
@@ -48,14 +48,19 @@ class Stores extends AbstractTable
     public function configure(SpladeTable $table)
     {
         $table
-            ->withGlobalSearch(columns: ['code','name','address'])
-            ->defaultSort('-created_at')
-            ->column(key: 'name',label: 'Nombre', highlight: true)
-            ->column(key: 'departament.name',label: 'Departamento')
-            ->column(key: 'province.name',label: 'Provincia')
-            ->column(key: 'district.name',label: 'Distrito')
-            ->column(key: 'address',label: 'Dirección')
-            ->column('actions')
-            ->paginate(15);
+            ->withGlobalSearch(columns: ['id'])
+            ->column(key:'name', label:'Nombre', sortable: true, highlight: true)
+            ->column(key:'departament.name', label:'Departamento', sortable: false)
+            ->column(key:'province.name', label:'Provincia', sortable: false)
+            ->column(key:'district.name', label:'Distrito', sortable: false)
+            ->column(key:'address', label:'Dirección', sortable: true)
+            ->column('Acciones');
+
+            // ->searchInput()
+            // ->selectFilter()
+            // ->withGlobalSearch()
+
+            // ->bulkAction()
+            // ->export()
     }
 }

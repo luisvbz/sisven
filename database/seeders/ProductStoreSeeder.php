@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Store;
+use App\Models\Warehouse;
 use App\Models\ProductType;
 use App\Models\ProductMeasure;
 use App\Models\ProductPackage;
@@ -22,9 +23,7 @@ class ProductStoreSeeder extends Seeder
 
         Store::insert([
             [
-                'code' => 'TI-001',
                 'name' => 'Tienda de Lince',
-                'type' => Store::TIENDA,
                 'departament_id' => '15',
                 'province_id' => '1501',
                 'district_id' => '150116',
@@ -32,9 +31,7 @@ class ProductStoreSeeder extends Seeder
                 'phone_number' => '912575368'
             ],
             [
-                'code' => 'TI-002',
                 'name' => 'Tienda de Jesus Maria',
-                'type' => Store::TIENDA,
                 'departament_id' => '15',
                 'province_id' => '1501',
                 'district_id' => '150144',
@@ -42,29 +39,7 @@ class ProductStoreSeeder extends Seeder
                 'phone_number' => '912575368'
            ],
            [
-                'code' => 'TI-003',
-                'name' => 'Tienda de Jesus Maria',
-                'type' => Store::TIENDA,
-                'departament_id' => '15',
-                'province_id' => '1501',
-                'district_id' => '150144',
-                'address' => 'Av. Jose Galvez 1479',
-                'phone_number' => '912575368'
-            ],
-           [
-                'code' => 'AL-001',
-                'name' => 'Almacen Cercado',
-                'type' => Store::ALMACEN,
-                'departament_id' => '15',
-                'province_id' => '1501',
-                'district_id' => '150116',
-                'address' => 'Av. Jose Galvez 1479',
-                'phone_number' => '912575368'
-           ],
-           [
-                'code' => 'AL-002',
-                'name' => 'Almacen Breña',
-                'type' => Store::ALMACEN,
+                'name' => 'Tienda de Breña',
                 'departament_id' => '15',
                 'province_id' => '1501',
                 'district_id' => '150144',
@@ -73,6 +48,23 @@ class ProductStoreSeeder extends Seeder
             ]
 
         ]);
+
+        Warehouse::insert([
+            [
+                'name' => 'Almacen Cercado',
+                'departament_id' => '15',
+                'province_id' => '1501',
+                'district_id' => '150116',
+                'address' => 'Av. Jose Galvez 1479',
+           ],
+           [
+                'name' => 'Almacen Breña',
+                'departament_id' => '15',
+                'province_id' => '1501',
+                'district_id' => '150144',
+                'address' => 'Av. Jose Galvez 1479',
+            ]
+          ]);
 
         //Add Product Packages
         ProductPackage::insert([
@@ -85,19 +77,16 @@ class ProductStoreSeeder extends Seeder
             [
               'name' => 'ADORNOS DE METAL',
               'alias' => 'adornos-de-metal',
-              'category' => 'docena',
               'package_id' => 1,
             ],
             [
                 'name' => 'HEBILLAS',
                 'alias' => 'hebillas',
-                'category' => 'docena',
                 'package_id' => 1,
             ],
             [
                 'name' => 'SHAKIRAS',
                 'alias' => 'shakiras',
-                'category' => 'docena',
                 'package_id' => 1,
             ]
 

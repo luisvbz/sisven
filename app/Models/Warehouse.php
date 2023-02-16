@@ -2,23 +2,19 @@
 
 namespace App\Models;
 
-use Kirschbaum\PowerJoins\PowerJoins;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
-class Store extends Model
+class Warehouse extends Model
 {
-    use HasFactory, SoftDeletes,  PowerJoins;
+    use HasFactory;
 
     protected $fillable = [
         'name',
-        'type',
         'departament_id',
         'province_id',
         'district_id',
         'address',
-        'phone_number'
     ];
 
     public function departament()

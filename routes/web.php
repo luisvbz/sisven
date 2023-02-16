@@ -8,6 +8,7 @@ use App\Http\Controllers\StoresController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\TransfersController;
+use App\Http\Controllers\WarehouseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,6 +61,15 @@ Route::middleware('splade')->group(function () {
                     ->name('ti.request-product-store');
         });
 
+        Route::group(['prefix' => 'almacenes'], function(){
+
+            Route::get('/',[WarehouseController::class, 'index'])->name('wr.index')->middleware('permission:wr:access');
+            Route::get('/agregar',[WarehouseController::class, 'create'])->name('wr.add')->middleware('permission:wr:create');
+            Route::post('/agregar',[WarehouseController::class, 'store'])->name('wr.store')->middleware('permission:wr:create');
+            Route::get('/{warehouse}/edit',[WarehouseController::class, 'edit'])->name('wr.edit')->middleware('permission:wr:edit');
+            Route::patch('/{warehouse}/edit',[WarehouseController::class, 'update'])->name('wr.update')->middleware('permission:wr:edit');
+        });
+
         Route::group(['prefix' => 'productos'], function(){
 
             Route::get('/',[ProductsController::class, 'index'])->name('pr.index')->middleware('permission:pr:access');
@@ -95,4 +105,5 @@ Route::middleware('auth')->group(function () {
     Route::get('/commons/provinces/{departamentId}', [CommonController::class, 'getProvices'])->name('get-province');
     Route::get('/commons/districts/{provinceId}', [CommonController::class, 'getDistricts'])->name('get-districts');
     Route::get('/commons/get-type-category/{typeId}', [CommonController::class, 'getCategory'])->name('get-category');
+    Route::post('/commons/get-person', [CommonController::class, 'getPerson'])->name('get-person');
 });

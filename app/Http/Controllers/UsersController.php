@@ -26,7 +26,7 @@ class UsersController extends Controller
     {
         return view('modules.users.add', [
             'roles' => User::getRolesAllowed(),
-            'stores' => Store::orderBy('is_principal', 'DESC')->get(['code', 'name', 'id', 'is_principal']),
+            'stores' => Store::orderBy('name', 'ASC')->get(['name', 'id']),
             'modules' => Module::with('permissions:name,display_name,module_id')->orderby('name', 'ASC')->get(['id', 'name'])
         ]);
     }
@@ -76,7 +76,7 @@ class UsersController extends Controller
         return view('modules.users.edit', [
             'user' => $user,
             'roles' => User::getRolesAllowed(),
-            'stores' => Store::orderBy('is_principal', 'DESC')->get(['code', 'name', 'id', 'is_principal']),
+            'stores' => Store::orderBy('name', 'ASC')->get(['name', 'id']),
             'modules' => Module::with('permissions:name,display_name,module_id')->orderby('name', 'ASC')->get(['id', 'name'])
         ]);
     }
@@ -93,8 +93,12 @@ class UsersController extends Controller
         $user->syncRoles([$request->rol]);
         $user->syncPermissions($request->permissions);
 
+        if($request->rol == 'vendedor') {
+            $user->stores()->sync($request->stores);
+        }
 
-        $user->notify(new UserUpdated());
+
+        //$user->notify(new UserUpdated());
 
 
         Toast::title('Exito!')

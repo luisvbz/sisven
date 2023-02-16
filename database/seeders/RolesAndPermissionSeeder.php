@@ -43,6 +43,11 @@ class RolesAndPermissionSeeder extends Seeder
             ['name' => 'ti:edit', 'guard_name' => 'web', 'display_name' => 'Editar una tienda', 'module_id' => 'TI'],
             ['name' => 'ti:delete', 'guard_name' => 'web', 'display_name' => 'Eliminar una tienda', 'module_id' => 'TI'],
             ['name' => 'ti:show-deleted', 'guard_name' => 'web', 'display_name' => 'Ver tiendas eliminadas', 'module_id' => 'TI'],
+            //Mdoulo de Alamacen
+            ['name' => 'wr:access', 'guard_name' => 'web', 'display_name' => 'Acceder al modulo de almacenes', 'module_id' => 'WR'],
+            ['name' => 'wr:create', 'guard_name' => 'web', 'display_name' => 'Crear un nuevo almacen', 'module_id' => 'WR'],
+            ['name' => 'wr:edit', 'guard_name' => 'web', 'display_name' => 'Editar un almacen', 'module_id' => 'WR'],
+            ['name' => 'wr:delete', 'guard_name' => 'web', 'display_name' => 'Eliminar un almacen', 'module_id' => 'WR'],
             //Mdoulo de productos
             ['name' => 'pr:access', 'guard_name' => 'web', 'display_name' => 'Acceder al modulo de productos', 'module_id' => 'PR'],
             ['name' => 'pr:create', 'guard_name' => 'web', 'display_name' => 'Agregar un nuevo producto', 'module_id' => 'PR'],

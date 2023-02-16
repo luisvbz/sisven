@@ -53,13 +53,13 @@ class ModulesSeeder extends Seeder
                  'route' => '/productos',
                  'permission_to_access' => 'pr:access'
             ],
-            // [
-            //     'id' => 'IN',
-            //     'name' => 'Inventario',
-            //     'description' => 'Stock de productos',
-            //     'route' => '/inventario',
-            //     'permission_to_access' => 'in:access'
-            // ],
+            [
+                 'id' => 'WR',
+                 'name' => 'Almacen',
+                 'description' => 'Manejo de almacenes',
+                 'route' => '/almacenes',
+                 'permission_to_access' => 'wr:access'
+            ],
             // [
             //     'id' => 'PV',
             //     'name' => 'Proveedores',

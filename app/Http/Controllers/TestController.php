@@ -10,7 +10,7 @@ class TestController extends Controller
 {
     public function index(Request $request)
     {
-        $modules = Module::all();
+        $modules = Module::orderBy('name')->get();
         return view('dashboard', ['modules' => $modules]);
     }
 }

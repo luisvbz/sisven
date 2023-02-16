@@ -11,8 +11,21 @@
                         <p class="text-sm font-medium text-gray-600"><i class="fi-br-form"></i> Complete los datos del formulario para crear un nuevo usuario</p>
                         <div class="px-2 py-2 mb-2 border-b-2 border-gray-300"></div>
                         <div class="grid gap-4 pb-2 lg:grid-cols-2">
-                            <x-splade-input name="dni" label="Numero de DNI" icon="id-badge"/>
-                            <x-splade-input name="name" label="Nombre Completo" icon="user"/>
+                        <x-splade-defer
+                            url="/commons/get-person"
+                            method="POST"
+                            watch-value="form.dni"
+                             request="{ dni: form.dni}"
+                            watch-debounce="1000"
+                            manual
+                            @success="(response) => form.name = response.name"
+                        >
+                            <div>
+                                <x-splade-input name="dni" label="Numero de DNI" icon="id-badge"/>
+                                <span v-if="processing" class="text-xs text-primary-500">Buscando datos de este DNI...</span>
+                            </div>
+                            <x-splade-input v-bind:disabled="processing" name="name" label="Nombre Completo" icon="user"/>
+                        </x-splade-defer>
                             <x-splade-input name="username" label="Nombre de usuario" icon="user"/>
                             <x-splade-input name="email" label="Correo Electrónico" icon="at"/>
                             <x-splade-input name="password" type="password" label="Contraseña" icon="key"/>

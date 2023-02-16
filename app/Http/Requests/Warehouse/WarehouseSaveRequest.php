@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Stores;
+namespace App\Http\Requests\Warehouse;
 
-use App\Rules\UniquePrincipal;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreSaveRequest extends FormRequest
+class WarehouseSaveRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -14,7 +13,7 @@ class StoreSaveRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->user()->hasPermissionTo('ti:create');
+        return $this->user()->hasPermissionTo('wr:create');
     }
 
     /**
@@ -30,7 +29,6 @@ class StoreSaveRequest extends FormRequest
             'province_id' => 'required',
             'district_id' => 'required',
             'address' => 'required',
-            'phone_number' => 'required|numeric',
         ];
     }
 
@@ -43,7 +41,6 @@ class StoreSaveRequest extends FormRequest
             'district_id.required' => 'Seleccione el distrito',
             'address.required' => 'Escriba la dirección',
             'phone_number.required' => 'Ingrese en teléfono',
-            'phone_number.numeric' => 'Solo se permiten numeros'
         ];
     }
 }

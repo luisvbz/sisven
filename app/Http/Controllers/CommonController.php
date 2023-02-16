@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Tools\DniRuc;
 use App\Models\District;
-use App\Models\ProductType;
 use App\Models\Province;
+use App\Models\ProductType;
 use Illuminate\Http\Request;
 
 class CommonController extends Controller
@@ -24,5 +25,15 @@ class CommonController extends Controller
         $type = ProductType::find($typeId);
 
         return response()->json(['category' => $type->category]);
+    }
+
+    public function getPerson(Request $request)
+    {
+        $person = DniRuc::getData('DNI', $request->dni);
+        $name = gettype($person) == 'object'
+            ? "{$person->nombres} {$person->apellidoPaterno} {$person->apellidoMaterno}"
+            : null;
+
+        return response()->json(['name' => $name ]);
     }
 }
