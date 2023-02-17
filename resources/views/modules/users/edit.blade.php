@@ -1,9 +1,11 @@
-<x-app-layout>
-    <x-slot name="header">
-        <x-back-button-title route="/usuarios" module="Usuarios" page="Editar" />
-    </x-slot>
+@extends('modules.users.base')
 
-    <div class="py-12">
+@section('header')
+    Usuarios / <small>Editar Usuario</small>
+@endsection
+
+@section('content')
+<div class="py-0">
         <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
             <div class="overflow-hidden bg-white shadow-lg sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
@@ -57,4 +59,4 @@
             </div>
         </div>
     </div>
-</x-app-layout>
+@endsection

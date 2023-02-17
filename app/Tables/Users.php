@@ -22,7 +22,7 @@ class Users extends AbstractTable
     public function __construct()
     {
         $this->roles = User::getRolesAllowed();
-        SpladeTable::hidePaginationWhenResourceContainsOnePage();
+        //SpladeTable::hidePaginationWhenResourceContainsOnePage();
     }
 
     /**

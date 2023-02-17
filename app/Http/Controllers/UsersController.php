@@ -115,12 +115,13 @@ class UsersController extends Controller
         $user->status = !$user->status;
         $user->save();
 
+
         Toast::title('Exito!')
         ->rightTop('Operación Satisfactoria')
         ->success()
         ->autoDismiss(15);
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'El usuarios se ha desactivado con éxito');
     }
 
 

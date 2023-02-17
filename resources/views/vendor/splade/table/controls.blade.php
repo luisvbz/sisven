@@ -1,4 +1,5 @@
-<div class="flex flex-row sm:justify-end mb-3 px-4 sm:px-0 -mr-2 sm:-mr-3">
+{{-- <div class="flex flex-row sm:justify-end mb-3 px-4 sm:px-0 -mr-2 sm:-mr-3"> --}}
+<div class="flex flex-row sm:justify-end mb-3 p-4 border border-gray-300 bg-gradient-to-b from-gray-300 to-gray-200 rounded-lg shadow">
     @if($table->hasExports() || $table->hasBulkActions())
         <div class="order-1 mr-2 sm:mr-3" v-if="table.hasSelectedItems || @js($table->hasExports())">
             @include('splade::table.bulk-actions-exports')

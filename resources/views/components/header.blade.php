@@ -1,8 +1,8 @@
 <x-splade-toggle>
-    <nav class="bg-white border-b border-gray-100 shadow fixe">
+    <nav class="bg-white border-b border-gray-100 shadow">
         <!-- Primary Navigation Menu -->
         <div class="px-4 mx-auto sm:px-6 lg:px-8">
-            <div class="flex justify-end h-16">
+            <div class="flex justify-end h-14">
                 <!-- Settings Dropdown -->
                 <div class="hidden sm:flex sm:items-center sm:ml-6">
                     <x-dropdown placement="bottom-end">

@@ -9,6 +9,20 @@
             <span class="font-semibold text-">{{ $header }}</span>
         </div>
 
+        {{-- <x-splade-flash>
+            <div v-if="flash.has('success')" class="max-w-4xl mx-auto  sm:px-6 lg:px-8 p-3 mt-8 bg-success-200 rounded flex items-center">
+                <div tabindex="0" aria-label="success icon" role="img" class="focus:outline-none w-8 h-8 border rounded-full border-green-200 flex flex-shrink-0 items-center justify-center">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M6.66674 10.1147L12.7947 3.98599L13.7381 4.92866L6.66674 12L2.42407 7.75733L3.36674 6.81466L6.66674 10.1147Z" fill="#047857"></path>
+                    </svg>
+                </div>
+                <div class="pl-3 w-full">
+                    <div class="flex items-center justify-between">
+                    <p tabindex="0" class="focus:outline-none font-semibold text-sm leading-none text-success-600" v-text="flash.success"></p>
+                    </div>
+                </div>
+            </div>
+        </x-splade-flash> --}}
         <div class="flex flex-col flex-grow p-4 mt-4">
             {{ $slot }}
         </div>

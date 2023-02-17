@@ -1,14 +1,14 @@
 <aside
       class="w-64 transition-transform duration-150 ease-in transform -translate-x-full bg-gradient-to-b from-primary-800 to-cyan-600 sidebar md:shadow md:translate-x-0"
     >
-      <div class="flex items-center justify-center py-4 sidebar-header">
-        <div class="inline-flex w-3/4">
-          <Link href="/" class="inline-flex flex-row items-center">
-            <img src="{{ asset('images/logo-white.svg')}}" alt="logo-white">
-          </Link>
+      <div class="flex flex-col items-center justify-center py-4 sidebar-header">
+        <div class="w-3/4">
+          <x-splade-link href="/" class="inline-flex flex-row items-center">
+            <img src="{{ asset('images/logo-white.svg')}}" alt="logo-white"/>
+          </x-splade-link>
         </div>
       </div>
-      <div class="px-4 py-6 sidebar-content">
+      <div class="py-6 sidebar-content">
         <ul class="flex flex-col w-full">
           <li class="my-px">
             <x-nav-link-sidebar  :href="route('dashboard')" :active="request()->routeIs('dashboard')">
