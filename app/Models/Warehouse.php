@@ -33,4 +33,9 @@ class Warehouse extends Model
     {
         return $this->belongsTo(District::class);
     }
+
+    public function products()
+    {
+        return $this->belongsToMany(Product::class, 'warehouse_product');
+    }
 }

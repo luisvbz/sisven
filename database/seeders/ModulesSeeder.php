@@ -60,20 +60,20 @@ class ModulesSeeder extends Seeder
                  'route' => '/almacenes',
                  'permission_to_access' => 'wr:access'
             ],
-            // [
-            //     'id' => 'PV',
-            //     'name' => 'Proveedores',
-            //     'description' => 'Catalago de Proveedores',
-            //     'route' => '/proveedores',
-            //     'permission_to_access' => 'pv:access'
-            // ],
-            // [
-            //     'id' => 'CO',
-            //     'name' => 'Compras',
-            //     'description' => 'Compras de materia prima',
-            //     'route' => '/proveedores',
-            //     'permission_to_access' => 'pv:access'
-            // ],
+            [
+                 'id' => 'PV',
+                 'name' => 'Proveedores',
+                 'description' => 'Catalago de Proveedores',
+                 'route' => '/proveedores',
+                 'permission_to_access' => 'pv:access'
+             ],
+            [
+                 'id' => 'CO',
+                 'name' => 'Compras',
+                 'description' => 'Compras de materia prima',
+                 'route' => '/compras',
+                 'permission_to_access' => 'co:access'
+            ],
         ];
 
         Module::insert($modules);

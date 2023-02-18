@@ -26,7 +26,7 @@ class UsersDefaultSeeder extends Seeder
 
         $super_admin->assignRole('super-admin');
 
-        $super_admin->givePermissionTo(Permission::all()->pluck('name'));
+        //$super_admin->givePermissionTo(Permission::all()->pluck('name'));
 
 
         $admin = User::create([
@@ -39,7 +39,7 @@ class UsersDefaultSeeder extends Seeder
 
         $admin->assignRole('admin');
 
-        $admin->givePermissionTo(Permission::where('module_id', 'US')->get()->pluck('name'));
+       // $admin->givePermissionTo(Permission::where('module_id', 'US')->get()->pluck('name'));
 
 
         $operator = User::create([

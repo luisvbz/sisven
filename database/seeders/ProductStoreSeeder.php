@@ -3,7 +3,9 @@
 namespace Database\Seeders;
 
 use App\Models\Store;
+use App\Models\InputType;
 use App\Models\Warehouse;
+use App\Models\OutputType;
 use App\Models\ProductType;
 use App\Models\ProductMeasure;
 use App\Models\ProductPackage;
@@ -97,8 +99,18 @@ class ProductStoreSeeder extends Seeder
             ['name' => 'Galones', 'alias' => 'gl'],
             ['name' => 'Latas', 'alias' => 'latas'],
             ['name' => 'Metros', 'alias' => 'mts'],
-            ['name' => 'Listros', 'alias' => 'lts'],
+            ['name' => 'Litros', 'alias' => 'lts'],
             ['name' => 'Rollo', 'alias' => 'rollo'],
+        ]);
+
+
+        InputType::insert([
+            ['name' => 'Compra', 'alias' => 'compra'],
+            ['name' => 'Manual', 'alias' => 'manual'],
+        ]);
+
+        OutputType::insert([
+            ['name' => 'Traslado', 'alias' => 'traslado'],
         ]);
 
     }

@@ -2,10 +2,11 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Spatie\Permission\Models\Permission;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class RolesAndPermissionSeeder extends Seeder
 {
@@ -53,11 +54,58 @@ class RolesAndPermissionSeeder extends Seeder
             ['name' => 'pr:create', 'guard_name' => 'web', 'display_name' => 'Agregar un nuevo producto', 'module_id' => 'PR'],
             ['name' => 'pr:edit', 'guard_name' => 'web', 'display_name' => 'Editar producto', 'module_id' => 'PR'],
             ['name' => 'pr:delete', 'guard_name' => 'web', 'display_name' => 'Eliminar producto', 'module_id' => 'PR'],
+            //Mdoulo de productos
+            ['name' => 'pv:access', 'guard_name' => 'web', 'display_name' => 'Acceder al modulo de proveedores', 'module_id' => 'PV'],
+            ['name' => 'pv:create', 'guard_name' => 'web', 'display_name' => 'Agregar un nuevo proveedores', 'module_id' => 'PV'],
+            ['name' => 'pv:edit', 'guard_name' => 'web', 'display_name' => 'Editar proveedores', 'module_id' => 'PV'],
+            ['name' => 'pv:delete', 'guard_name' => 'web', 'display_name' => 'Eliminar proveedores', 'module_id' => 'PV'],
+            //Compras
+            ['name' => 'co:access', 'guard_name' => 'web', 'display_name' => 'Acceder al modulo de compras', 'module_id' => 'CO'],
+            ['name' => 'co:create', 'guard_name' => 'web', 'display_name' => 'Agregar un nuevo compras', 'module_id' => 'CO'],
+            ['name' => 'co:edit', 'guard_name' => 'web', 'display_name' => 'Editar compras', 'module_id' => 'CO'],
+            ['name' => 'co:delete', 'guard_name' => 'web', 'display_name' => 'Eliminar compras', 'module_id' => 'CO'],
+
          ];
 
          Permission::insert($permissions);
 
          //Asing permission to users admin
          //$admin->syncPermissions(Permission::where('name', 'like', "ti:%")->get()->pluck('name'));
+
+         $super_admin = User::create([
+            'dni' => '002683688',
+            'username' => 'superadmin',
+            'name' => 'Super Administrador',
+            'email' => 'superadmin@local.com',
+            'password' => 'laravel'
+        ]);
+
+        $super_admin->assignRole('super-admin');
+
+        $super_admin->givePermissionTo(Permission::all()->pluck('name'));
+
+
+        $admin = User::create([
+            'dni' => '19098518',
+            'username' => 'admin',
+            'name' => 'Administrador',
+            'email' => 'admin@local.com',
+            'password' =>'laravel'
+        ]);
+
+        $admin->assignRole('admin');
+
+       $admin->givePermissionTo(Permission::where('module_id', 'US')->get()->pluck('name'));
+
+
+        $operator = User::create([
+            'dni' => '19098517',
+            'username' => 'operador',
+            'name' => 'Operador',
+            'email' => 'operator@local.com',
+            'password' => 'laravel'
+        ]);
+
+        $operator->assignRole('operator');
     }
 }
