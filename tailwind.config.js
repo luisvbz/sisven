@@ -6,6 +6,7 @@ module.exports = {
         "./vendor/protonemedia/laravel-splade/resources/views/**/*.blade.php",
         "./storage/framework/views/*.php",
         "./resources/views/**/*.blade.php",
+        "./app/Tables/views/*.php",
         "./resources/js/**/*.vue",
     ],
 

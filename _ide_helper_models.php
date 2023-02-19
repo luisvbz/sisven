@@ -110,6 +110,23 @@ namespace App\Models{
 
 namespace App\Models{
 /**
+ * App\Models\InputType
+ *
+ * @property int $id
+ * @property string $name
+ * @property string $alias
+ * @method static \Illuminate\Database\Eloquent\Builder|InputType newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|InputType newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|InputType query()
+ * @method static \Illuminate\Database\Eloquent\Builder|InputType whereAlias($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|InputType whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|InputType whereName($value)
+ */
+	class InputType extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\Module
  *
  * @property string $id
@@ -129,6 +146,58 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Module whereRoute($value)
  */
 	class Module extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\Order
+ *
+ * @property int $id
+ * @property string $status
+ * @property int $supplier_id
+ * @property string $date
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|Order newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Order newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Order query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Order whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Order whereDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Order whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Order whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Order whereSupplierId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Order whereUpdatedAt($value)
+ */
+	class Order extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\OrderDetail
+ *
+ * @property-read \App\Models\Product|null $product
+ * @method static \Illuminate\Database\Eloquent\Builder|OrderDetail newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|OrderDetail newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|OrderDetail query()
+ */
+	class OrderDetail extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\OutputType
+ *
+ * @property int $id
+ * @property string $name
+ * @property string $alias
+ * @method static \Illuminate\Database\Eloquent\Builder|OutputType newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|OutputType newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|OutputType query()
+ * @method static \Illuminate\Database\Eloquent\Builder|OutputType whereAlias($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|OutputType whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|OutputType whereName($value)
+ */
+	class OutputType extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -219,7 +288,6 @@ namespace App\Models{
  * @property int $id
  * @property string $name
  * @property string $alias
- * @property string $category
  * @property int $package_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
@@ -229,7 +297,6 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|ProductType newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ProductType query()
  * @method static \Illuminate\Database\Eloquent\Builder|ProductType whereAlias($value)
- * @method static \Illuminate\Database\Eloquent\Builder|ProductType whereCategory($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ProductType whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ProductType whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ProductType whereName($value)
@@ -261,8 +328,6 @@ namespace App\Models{
  * App\Models\Store
  *
  * @property int $id
- * @property string $code
- * @property bool $is_principal
  * @property string $name
  * @property string $departament_id
  * @property string $province_id
@@ -308,13 +373,11 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Store rightJoinRelationship($relation, $callback = null, $useAlias = false, bool $disableExtraConditions = false)
  * @method static \Illuminate\Database\Eloquent\Builder|Store rightJoinRelationshipUsingAlias($relationName, $callback = null, bool $disableExtraConditions = false)
  * @method static \Illuminate\Database\Eloquent\Builder|Store whereAddress($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Store whereCode($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Store whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Store whereDeletedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Store whereDepartamentId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Store whereDistrictId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Store whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Store whereIsPrincipal($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Store whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Store wherePhoneNumber($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Store whereProvinceId($value)
@@ -323,6 +386,72 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Store withoutTrashed()
  */
 	class Store extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\StoreMovement
+ *
+ * @property int $id
+ * @property string $type
+ * @property int|null $input_type_id
+ * @property int|null $output_type_id
+ * @property string|null $type_action
+ * @property int $store_id
+ * @property int $product_id
+ * @property int $packages
+ * @property int $quantity_per_packages
+ * @property int $total
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\InputType|null $input
+ * @property-read \App\Models\OutputType|null $output
+ * @property-read \App\Models\Product|null $product
+ * @property-read \App\Models\Store $store
+ * @method static \Illuminate\Database\Eloquent\Builder|StoreMovement newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|StoreMovement newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|StoreMovement query()
+ * @method static \Illuminate\Database\Eloquent\Builder|StoreMovement whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|StoreMovement whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|StoreMovement whereInputTypeId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|StoreMovement whereOutputTypeId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|StoreMovement wherePackages($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|StoreMovement whereProductId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|StoreMovement whereQuantityPerPackages($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|StoreMovement whereStoreId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|StoreMovement whereTotal($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|StoreMovement whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|StoreMovement whereTypeAction($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|StoreMovement whereUpdatedAt($value)
+ */
+	class StoreMovement extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\Supplier
+ *
+ * @property int $id
+ * @property string $status
+ * @property string $ruc
+ * @property string $name
+ * @property string|null $address
+ * @property string|null $phone_number
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|Supplier newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Supplier newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Supplier query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Supplier whereAddress($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Supplier whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Supplier whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Supplier whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Supplier wherePhoneNumber($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Supplier whereRuc($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Supplier whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Supplier whereUpdatedAt($value)
+ */
+	class Supplier extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -414,5 +543,78 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|User withoutTrashed()
  */
 	class User extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\WareHouseMovement
+ *
+ * @property int $id
+ * @property string $type
+ * @property int|null $input_type_id
+ * @property int|null $output_type_id
+ * @property string|null $type_action
+ * @property int $warehouse_id
+ * @property int $product_id
+ * @property int $packages
+ * @property int $quantity_per_packages
+ * @property int $total
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\InputType|null $input
+ * @property-read \App\Models\OutputType|null $output
+ * @property-read \App\Models\Product|null $product
+ * @property-read \App\Models\Warehouse $warehouse
+ * @method static \Illuminate\Database\Eloquent\Builder|WareHouseMovement newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|WareHouseMovement newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|WareHouseMovement query()
+ * @method static \Illuminate\Database\Eloquent\Builder|WareHouseMovement whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|WareHouseMovement whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|WareHouseMovement whereInputTypeId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|WareHouseMovement whereOutputTypeId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|WareHouseMovement wherePackages($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|WareHouseMovement whereProductId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|WareHouseMovement whereQuantityPerPackages($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|WareHouseMovement whereTotal($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|WareHouseMovement whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|WareHouseMovement whereTypeAction($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|WareHouseMovement whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|WareHouseMovement whereWarehouseId($value)
+ */
+	class WareHouseMovement extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\Warehouse
+ *
+ * @property int $id
+ * @property string $name
+ * @property string $departament_id
+ * @property string $province_id
+ * @property string $district_id
+ * @property string $address
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property string|null $deleted_at
+ * @property-read \App\Models\Departament $departament
+ * @property-read \App\Models\District $district
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Product> $products
+ * @property-read int|null $products_count
+ * @property-read \App\Models\Province $province
+ * @method static \Illuminate\Database\Eloquent\Builder|Warehouse newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Warehouse newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Warehouse query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Warehouse whereAddress($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Warehouse whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Warehouse whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Warehouse whereDepartamentId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Warehouse whereDistrictId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Warehouse whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Warehouse whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Warehouse whereProvinceId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Warehouse whereUpdatedAt($value)
+ */
+	class Warehouse extends \Eloquent {}
 }
 

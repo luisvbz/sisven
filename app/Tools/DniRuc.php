@@ -3,6 +3,8 @@
 
 namespace App\Tools;
 
+use Peru\Jne\DniFactory;
+use Peru\Sunat\RucFactory;
 use Peru\Http\ContextClient;
 use Peru\Jne\{Dni, DniParser};
 use Peru\Sunat\{HtmlParser, Ruc, RucParser};
@@ -20,7 +22,8 @@ class DniRuc
                     throw new \Exception("EL DNI {$numeroDocumento} debe tener 8 dígitos para poder consultarlo");
                 }
 
-                $cs = new Dni(new ContextClient(), new DniParser());
+                $factory = new DniFactory();
+                $cs = $factory->create();
                 $persona = $cs->get($numeroDocumento);
                 if(!$persona) {
                     throw new \Exception("La persona con el DNI {$numeroDocumento} no fue encontrada");
@@ -32,7 +35,8 @@ class DniRuc
                     throw new \Exception("EL RUC {$numeroDocumento} debe tener 11 dígitos para poder consultarlo");
                 }
 
-                $cs = new Ruc(new ContextClient(), new RucParser(new HtmlParser()));
+                $factory = new RucFactory();
+                $cs = $factory->create();
                 $empresa = $cs->get($numeroDocumento);
                 if(!$empresa) {
                     throw new \Exception("La empresa con el RUC {$numeroDocumento} no fue encontrada");

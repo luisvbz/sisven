@@ -7,6 +7,7 @@ use App\Http\Controllers\CommonController;
 use App\Http\Controllers\StoresController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\SuplliersController;
 use App\Http\Controllers\TransfersController;
 use App\Http\Controllers\WarehouseController;
 
@@ -70,6 +71,16 @@ Route::middleware('splade')->group(function () {
             Route::patch('/{warehouse}/edit',[WarehouseController::class, 'update'])->name('wr.update')->middleware('permission:wr:edit');
         });
 
+        Route::group(['prefix' => 'proveedores'], function(){
+
+            Route::get('/',[SuplliersController::class, 'index'])->name('pv.index')->middleware('permission:pv:access');
+            Route::get('/agregar',[SuplliersController::class, 'create'])->name('pv.add')->middleware('permission:pv:create');
+            Route::post('/agregar',[SuplliersController::class, 'store'])->name('pv.store')->middleware('permission:pv:create');
+            Route::get('{supplier}/editar',[SuplliersController::class, 'edit'])->name('pv.edit')->middleware('permission:pv:edit');
+            Route::patch('{supplier}/editar',[SuplliersController::class, 'update'])->name('pv.update')->middleware('permission:pv:edit');
+
+        });
+
         Route::group(['prefix' => 'productos'], function(){
 
             Route::get('/',[ProductsController::class, 'index'])->name('pr.index')->middleware('permission:pr:access');
@@ -106,4 +117,5 @@ Route::middleware('auth')->group(function () {
     Route::get('/commons/districts/{provinceId}', [CommonController::class, 'getDistricts'])->name('get-districts');
     Route::get('/commons/get-type-category/{typeId}', [CommonController::class, 'getCategory'])->name('get-category');
     Route::post('/commons/get-person', [CommonController::class, 'getPerson'])->name('get-person');
+    Route::post('/commons/get-bussiness', [CommonController::class, 'getBussiness'])->name('get-bussiness');
 });

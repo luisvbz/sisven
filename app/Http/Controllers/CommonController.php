@@ -36,4 +36,14 @@ class CommonController extends Controller
 
         return response()->json(['name' => $name ]);
     }
+
+    public function getBussiness(Request $request)
+    {
+        $bussines = DniRuc::getData('RUC', $request->ruc);
+        $name = gettype($bussines) == 'object'
+            ? "{$bussines->razonSocial}"
+            : null;
+
+        return response()->json(['name' => $name ]);
+    }
 }
