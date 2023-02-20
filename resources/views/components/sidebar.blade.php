@@ -1,10 +1,10 @@
 <aside
-      class="w-64 transition-transform duration-150 ease-in transform -translate-x-full bg-gradient-to-b from-primary-800 to-cyan-600 sidebar md:shadow md:translate-x-0"
+      class="w-64 transition-transform duration-150 ease-in transform -translate-x-full bg-gradient-to-b from-slate-100 to-slate-50 max-w-64 sidebar md:shadow md:translate-x-0"
     >
       <div class="flex flex-col items-center justify-center py-4 sidebar-header">
         <div class="w-3/4">
           <x-splade-link href="/" class="inline-flex flex-row items-center">
-            <img src="{{ asset('images/logo-white.svg')}}" alt="logo-white"/>
+            <img src="{{ asset('images/logo.svg')}}" alt="logo-white"/>
           </x-splade-link>
         </div>
       </div>

@@ -5,7 +5,7 @@
 
     <x-slot name="menu">
         <li>
-            <span class="flex px-4 my-4 text-sm font-medium text-white uppercase">Proveedores</span>
+            <span class="flex px-4 my-4 text-sm font-medium text-gray-700 uppercase">Proveedores</span>
           </li>
           <li>
             <x-nav-link-sidebar  :href="route('pv.index')" :active="request()->routeIs('pv.index')">
