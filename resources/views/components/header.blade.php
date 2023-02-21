@@ -2,7 +2,10 @@
     <nav class="bg-white border-b border-gray-100 shadow">
         <!-- Primary Navigation Menu -->
         <div class="px-4 mx-auto sm:px-6 lg:px-8">
-            <div class="flex justify-end h-14">
+            <div class="flex justify-between h-14">
+                <div class="flex items-center text-2xl font-extrabold md:hidden text-primary-700">
+                    <i class="pt-1 mr-1 text-2xl fi fi-br-shop text-alternative-600"></i> Marleny's
+                </div>
                 <!-- Settings Dropdown -->
                 <div class="hidden sm:flex sm:items-center sm:ml-6">
                     <x-dropdown placement="bottom-end">

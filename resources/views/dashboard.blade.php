@@ -13,7 +13,7 @@
             <div class="pb-2 mb-4 text-sm text-gray-600 border-b border-gray-300">
             Haga click en el modulo que desea acceder:
             </div>
-            <div class="grid gap-2 lg:grid-cols-4 sm:grid-cols-1 sm:gap-4">
+            <div class="grid grid-cols-1 gap-2 gap-4 lg:grid-cols-4 md:grid-cols-3">
                 @foreach ($modules as $module )
                     @can($module->permission_to_access)
                         <x-item-module :module="$module"/>

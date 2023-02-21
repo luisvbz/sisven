@@ -1,5 +1,5 @@
 <aside
-      class="w-64 transition-transform duration-150 ease-in transform -translate-x-full bg-gradient-to-b from-slate-100 to-slate-50 min-w-64 sidebar md:shadow md:translate-x-0"
+      class="hidden md:block transition-transform duration-150 ease-in transform -translate-x-full md:min-w-[220px] md:w-[220px] lg:min-w-[300px] lg:w-[300px] bg-gradient-to-b from-slate-100 to-slate-50 sidebar md:shadow md:translate-x-0"
     >
       <div class="flex flex-col items-center justify-center py-4 sidebar-header">
         <div class="w-3/4">
