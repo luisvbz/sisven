@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\CommonController;
+use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\StoresController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductsController;
@@ -81,6 +82,15 @@ Route::middleware('splade')->group(function () {
 
         });
 
+
+        Route::group(['prefix' => 'compras'], function(){
+
+            Route::get('/',[OrdersController::class, 'index'])->name('co.index')->middleware('permission:co:access');
+            Route::get('/agregar',[OrdersController::class, 'create'])->name('co.add')->middleware('permission:co:create');
+            Route::post('/agregar',[OrdersController::class, 'store'])->name('co.store')->middleware('permission:co:create');
+
+        });
+
         Route::group(['prefix' => 'productos'], function(){
 
             Route::get('/',[ProductsController::class, 'index'])->name('pr.index')->middleware('permission:pr:access');
@@ -118,4 +128,5 @@ Route::middleware('auth')->group(function () {
     Route::get('/commons/get-type-category/{typeId}', [CommonController::class, 'getCategory'])->name('get-category');
     Route::post('/commons/get-person', [CommonController::class, 'getPerson'])->name('get-person');
     Route::post('/commons/get-bussiness', [CommonController::class, 'getBussiness'])->name('get-bussiness');
+    Route::post('/commons/get-product', [CommonController::class, 'getProduct'])->name('get-product');
 });

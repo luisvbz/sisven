@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('status')->default('proccesed');
             $table->unsignedBigInteger('supplier_id');
             $table->date('date');
+            $table->decimal('cost', 9,2);
             $table->timestamps();
 
             $table->foreign('supplier_id')
@@ -32,6 +33,7 @@ return new class extends Migration
             $table->integer('packages');
             $table->integer('quantity_per_packages');
             $table->integer('total');
+            $table->decimal('cost', 9,2);
 
             $table->foreign('order_id')
             ->references('id')

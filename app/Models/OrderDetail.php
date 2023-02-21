@@ -15,6 +15,7 @@ class OrderDetail extends Model
         'packages',
         'quantity_per_packages',
         'total',
+        'cost'
     ];
 
     public function product()

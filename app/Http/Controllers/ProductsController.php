@@ -30,24 +30,9 @@ class ProductsController extends Controller
     {
         $types = ProductType::orderBy('name')->get();
         $measures = ProductMeasure::orderBy('name')->get();
-        $stores = Store::orderBy('type', 'DESC')
-            //->where('type', Store::ALMACEN)
-            ->get(['code', 'name', 'id', 'type'])
-            ->transform(function($item) {
-                $store = new \stdClass;
-                $store->id = $item->id;
-                $store->name = $item->name;
-                $store->code = $item->code;
-                $store->type = $item->type;
-                $store->package_quantity = null;
-                $store->quantity = null;
-
-                return $store;
-            });
         return view('modules.products.add', [
             'types' => $types,
             'measures' => $measures,
-            'stores' => $stores
         ]);
     }
 
@@ -101,17 +86,6 @@ class ProductsController extends Controller
         ]);
 
 
-        //verify anda attach stores with stock
-        if($data['add_stock'] == 1) {
-            foreach($data['stores'] as $s) {
-                $product->stores()->attach($s['id'], [
-                    'quantity' => $s['quantity'],
-                    'package_quantity' => $s['package_quantity'],
-                    'quantity_sunat' => 0
-                    ]);
-            }
-        }
-
         DB::commit();
 
         Toast::title('Exito!')
@@ -121,6 +95,8 @@ class ProductsController extends Controller
         ->autoDismiss(15);
 
         session()->flash('status', 'Producto guardado exitosamente');
+
+        return redirect()->route('pr.index');
     }
 
     public function getStockTiendas(Product $product)

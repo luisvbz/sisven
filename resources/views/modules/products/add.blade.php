@@ -6,7 +6,7 @@
     <div class="py-12">
         <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
             <div class="p-6 bg-white border-b border-gray-200 shadow-lg sm:rounded-lg">
-                <x-splade-form stay restore-on-success preserve-scroll action="{{ route('pr.store') }}" :default="['price_per_dozen' => 0, 'stores' => $stores ]">
+                <x-splade-form  action="{{ route('pr.store') }}">
                     <p class="text-sm font-medium text-gray-600"><i class="fi-br-form"></i> Complete los datos del formulario para agregar un nuevo producto</p>
                     <div class="px-2 py-2 mb-2 border-b-2 border-gray-300"></div>
                     <div class="grid gap-4 pb-2 lg:grid-cols-2">
@@ -39,62 +39,8 @@
                         v-model="form.cost"
                         :options="{ currency: 'PEN' }"
                       />
-                      <div class="flex flex-col justify-center pt-5">
-
-                          <x-splade-checkbox name="add_stock" label="¿Desea agrega stock de este producto?" />
-                      </div>
                     </div>
                     <div class="px-2 py-1 mb-2 mb-5 border-b-2 border-gray-300"></div>
-                    <div v-if="form.add_stock">
-                        <div class="mb-2" v-for="(store,index) in form.stores">
-                            <div class="flex items-center justify-between p-1 px-2 border border-gray-400 rounded-md shadow-inner bg-slate-100">
-                                <div class="font-medium text-MD" v-text="`${store.code} ${store.name}`"></div>
-                                <div v-if="store.is_principal" class="text-xl text-center text-green-600"><i class="fi fi-br-badge-check"></i></div>
-                            </div>
-                            <div class="p-2">
-                                <div class="grid gap-4 lg:grid-cols-2">
-                                    {{-- Cantidad --}}
-                                    <div>
-                                        <label class="block">
-                                            <span class="block mb-1 font-sans text-sm font-medium text-gray-700">Cantidad</span>
-                                            <div class="flex border border-gray-300 rounded-md shadow-sm">
-                                                <span class="inline-flex items-center px-3 text-gray-500 border border-t-0 border-b-0 border-l-0 border-gray-300 rounded-l-md bg-gray-50"><i class="fi fi-br-hastag"></i></span>
-                                                <input
-                                                    v-model="form.stores[index].quantity"
-                                                    type="text"
-                                                    class="block w-full border-0 rounded-md focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 disabled:opacity-50 disabled:bg-gray-50 disabled:cursor-not-allowed"
-                                                />
-                                            </div>
-                                        </label>
-                                        <x-splade-errors>
-                                            <p class="p-1 px-2 mt-1 text-xs font-bold text-white border rounded-lg bg-danger-500 text-centered" v-if="form.hasError(`stores.${index}.quantity`)" v-text="errors.first(`stores.${index}.quantity`)"/>
-                                        </x-splade-errors>
-                                    </div>
-
-                                    {{--/ Cantidad --}}
-                                    {{--Paquetes --}}
-                                    <div>
-                                        <label class="block">
-                                            <span class="block mb-1 font-sans text-sm font-medium text-gray-700">Descripcion de cantidad</span>
-                                            <div class="flex border border-gray-300 rounded-md shadow-sm">
-                                                <span class="inline-flex items-center px-3 text-gray-500 border border-t-0 border-b-0 border-l-0 border-gray-300 rounded-l-md bg-gray-50"><i class="fi fi-br-box"></i></span>
-                                                <input
-                                                    v-model="form.stores[index].package_quantity"
-                                                    type="text"
-                                                    class="block w-full border-0 rounded-md focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 disabled:opacity-50 disabled:bg-gray-50 disabled:cursor-not-allowed"
-                                                />
-                                            </div>
-                                        </label>
-                                        <x-splade-errors>
-                                            <p class="p-1 px-2 mt-1 text-xs font-bold text-white border rounded-lg bg-danger-500 text-centered" v-if="form.hasError(`stores.${index}.package_quantity`)" v-text="errors.first(`stores.${index}.package_quantity`)"/>
-                                        </x-splade-errors>
-                                    </div>
-                                    {{--/Paquetes --}}
-                                </div>
-                            </div>
-                        </div>
-                    <div class="px-2 py-1 mb-2 mb-5 border-b-2 border-gray-300"></div>
-                    </div>
                     <x-splade-flash>
                         <div v-if="flash.has('status')" v-text="flash.status"/>
                     </x-splade-flash>

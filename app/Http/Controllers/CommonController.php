@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Tools\DniRuc;
+use App\Models\Product;
 use App\Models\District;
 use App\Models\Province;
 use App\Models\ProductType;
@@ -45,5 +46,23 @@ class CommonController extends Controller
             : null;
 
         return response()->json(['name' => $name ]);
+    }
+
+    public function getProduct(Request $request)
+    {
+        $product = Product::find($request->product);
+
+        if(!$product) {
+            return response()->json(['error' => 'No se ha encontrado'], 422);
+        }
+
+        $response = [];
+        $response['id'] = $product->id;
+        $response['name'] = $product->full_name." ({$product->measure->name})";
+        $response['packages'] = null;
+        $response['quantity_per_packages'] = null;
+        $response['cost'] = $product->cost;
+
+        return response()->json(['product' => $response]);
     }
 }

@@ -12,6 +12,7 @@ class Order extends Model
     protected $fillable = [
         'status',
         'supplier_id',
+        'cost',
         'date'
     ];
 
