@@ -36,7 +36,7 @@ class Orders extends AbstractTable
      */
     public function for()
     {
-        return Order::query();
+        return Order::query()->withCount('details');
     }
 
     /**
@@ -49,7 +49,12 @@ class Orders extends AbstractTable
     {
         $table
             ->withGlobalSearch(columns: ['id'])
-            ->column('id', sortable: true);
+            ->column(label: 'estado')
+            ->column(key:'supplier.name', label: 'Proveedor', highlight: true)
+            ->column(key:'date', label: 'Fecha de Compra', sortable: true)
+            ->column(key:'details_count', label: 'Productos')
+            ->column(key:'cost_formated', label: 'Costo', highlight: true, sortable: true)
+            ->column(label: 'acciones');
 
             // ->searchInput()
             // ->selectFilter()

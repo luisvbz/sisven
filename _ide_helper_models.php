@@ -156,11 +156,17 @@ namespace App\Models{
  * @property string $status
  * @property int $supplier_id
  * @property string $date
+ * @property string $cost
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\OrderDetail> $details
+ * @property-read int|null $details_count
+ * @property-read mixed $cost_formated
+ * @property-read \App\Models\Supplier $supplier
  * @method static \Illuminate\Database\Eloquent\Builder|Order newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Order newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Order query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Order whereCost($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Order whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Order whereDate($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Order whereId($value)
@@ -175,10 +181,24 @@ namespace App\Models{
 /**
  * App\Models\OrderDetail
  *
- * @property-read \App\Models\Product|null $product
+ * @property int $id
+ * @property int $order_id
+ * @property int $product_id
+ * @property int $packages
+ * @property int $quantity_per_packages
+ * @property int $total
+ * @property string $cost
+ * @property-read \App\Models\Product $product
  * @method static \Illuminate\Database\Eloquent\Builder|OrderDetail newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|OrderDetail newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|OrderDetail query()
+ * @method static \Illuminate\Database\Eloquent\Builder|OrderDetail whereCost($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|OrderDetail whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|OrderDetail whereOrderId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|OrderDetail wherePackages($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|OrderDetail whereProductId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|OrderDetail whereQuantityPerPackages($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|OrderDetail whereTotal($value)
  */
 	class OrderDetail extends \Eloquent {}
 }
@@ -225,6 +245,8 @@ namespace App\Models{
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Store> $stores
  * @property-read int|null $stores_count
  * @property-read \App\Models\ProductType $type
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Warehouse> $warehouse
+ * @property-read int|null $warehouse_count
  * @method static \Illuminate\Database\Eloquent\Builder|Product newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Product newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Product query()
@@ -325,6 +347,17 @@ namespace App\Models{
 
 namespace App\Models{
 /**
+ * App\Models\STMovementDetail
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder|STMovementDetail newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|STMovementDetail newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|STMovementDetail query()
+ */
+	class STMovementDetail extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\Store
  *
  * @property int $id
@@ -398,28 +431,22 @@ namespace App\Models{
  * @property int|null $output_type_id
  * @property string|null $type_action
  * @property int $store_id
- * @property int $product_id
- * @property int $packages
- * @property int $quantity_per_packages
- * @property int $total
+ * @property string $date
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\InputType|null $input
  * @property-read \App\Models\OutputType|null $output
- * @property-read \App\Models\Product|null $product
+ * @property-read \App\Models\Product $product
  * @property-read \App\Models\Store $store
  * @method static \Illuminate\Database\Eloquent\Builder|StoreMovement newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|StoreMovement newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|StoreMovement query()
  * @method static \Illuminate\Database\Eloquent\Builder|StoreMovement whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|StoreMovement whereDate($value)
  * @method static \Illuminate\Database\Eloquent\Builder|StoreMovement whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|StoreMovement whereInputTypeId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|StoreMovement whereOutputTypeId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|StoreMovement wherePackages($value)
- * @method static \Illuminate\Database\Eloquent\Builder|StoreMovement whereProductId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|StoreMovement whereQuantityPerPackages($value)
  * @method static \Illuminate\Database\Eloquent\Builder|StoreMovement whereStoreId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|StoreMovement whereTotal($value)
  * @method static \Illuminate\Database\Eloquent\Builder|StoreMovement whereType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|StoreMovement whereTypeAction($value)
  * @method static \Illuminate\Database\Eloquent\Builder|StoreMovement whereUpdatedAt($value)
@@ -547,6 +574,35 @@ namespace App\Models{
 
 namespace App\Models{
 /**
+ * App\Models\WRMovementDetail
+ *
+ * @property int $id
+ * @property int $movement_id
+ * @property int $product_id
+ * @property int $packages
+ * @property int $quantity_per_packages
+ * @property int $total
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\WareHouseMovement $parent
+ * @property-read \App\Models\Product $product
+ * @method static \Illuminate\Database\Eloquent\Builder|WRMovementDetail newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|WRMovementDetail newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|WRMovementDetail query()
+ * @method static \Illuminate\Database\Eloquent\Builder|WRMovementDetail whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|WRMovementDetail whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|WRMovementDetail whereMovementId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|WRMovementDetail wherePackages($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|WRMovementDetail whereProductId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|WRMovementDetail whereQuantityPerPackages($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|WRMovementDetail whereTotal($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|WRMovementDetail whereUpdatedAt($value)
+ */
+	class WRMovementDetail extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\WareHouseMovement
  *
  * @property int $id
@@ -555,27 +611,22 @@ namespace App\Models{
  * @property int|null $output_type_id
  * @property string|null $type_action
  * @property int $warehouse_id
- * @property int $product_id
- * @property int $packages
- * @property int $quantity_per_packages
- * @property int $total
+ * @property string $date
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\WRMovementDetail> $details
+ * @property-read int|null $details_count
  * @property-read \App\Models\InputType|null $input
  * @property-read \App\Models\OutputType|null $output
- * @property-read \App\Models\Product|null $product
  * @property-read \App\Models\Warehouse $warehouse
  * @method static \Illuminate\Database\Eloquent\Builder|WareHouseMovement newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|WareHouseMovement newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|WareHouseMovement query()
  * @method static \Illuminate\Database\Eloquent\Builder|WareHouseMovement whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|WareHouseMovement whereDate($value)
  * @method static \Illuminate\Database\Eloquent\Builder|WareHouseMovement whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|WareHouseMovement whereInputTypeId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|WareHouseMovement whereOutputTypeId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WareHouseMovement wherePackages($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WareHouseMovement whereProductId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WareHouseMovement whereQuantityPerPackages($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WareHouseMovement whereTotal($value)
  * @method static \Illuminate\Database\Eloquent\Builder|WareHouseMovement whereType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|WareHouseMovement whereTypeAction($value)
  * @method static \Illuminate\Database\Eloquent\Builder|WareHouseMovement whereUpdatedAt($value)
@@ -599,6 +650,8 @@ namespace App\Models{
  * @property string|null $deleted_at
  * @property-read \App\Models\Departament $departament
  * @property-read \App\Models\District $district
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\WareHouseMovement> $movements
+ * @property-read int|null $movements_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Product> $products
  * @property-read int|null $products_count
  * @property-read \App\Models\Province $province

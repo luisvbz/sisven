@@ -17,21 +17,13 @@ class WareHouseMovement extends Model
         'output_type_id',
         'type_action',
         'warehouse_id',
-        'product_id',
-        'packages',
-        'quantity_per_packages',
-        'total',
+        'date'
     ];
 
 
     public function warehouse()
     {
         return $this->belongsTo(Warehouse::class);
-    }
-
-    public function product()
-    {
-        return $this->belongsTo(Product::class);
     }
 
     public function input()
@@ -42,5 +34,10 @@ class WareHouseMovement extends Model
     public function output()
     {
         return $this->belongsTo(OutputType::class, 'output_type_id');
+    }
+
+    public function details()
+    {
+        return $this->hasMany(WRMovementDetail::class, 'movement_id');
     }
 }

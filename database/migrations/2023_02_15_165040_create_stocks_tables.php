@@ -32,10 +32,7 @@ return new class extends Migration
             $table->unsignedBigInteger('output_type_id')->nullable();
             $table->string('type_action')->nullable();
             $table->unsignedBigInteger('warehouse_id');
-            $table->unsignedBigInteger('product_id');
-            $table->integer('packages');
-            $table->integer('quantity_per_packages');
-            $table->integer('total');
+            $table->date('date');
             $table->timestamps();
 
 
@@ -50,11 +47,31 @@ return new class extends Migration
             $table->foreign('warehouse_id')
             ->references('id')
             ->on('warehouses');
+
+
+        });
+
+        Schema::create('warehouse_stock_movements_details', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('movement_id');
+            $table->unsignedBigInteger('product_id');
+            $table->integer('packages');
+            $table->integer('quantity_per_packages');
+            $table->integer('total');
+            $table->timestamps();
+
+            $table->foreign('movement_id')
+            ->references('id')
+            ->on('warehouse_stock_movements');
+
+            $table->foreign('product_id')
+            ->references('id')
+            ->on('products');
         });
 
         Schema::create('warehouse_product', function (Blueprint $table) {
             $table->unsignedBigInteger('warehouse_id');
-            $table->unsignedBigInteger('producto_id');
+            $table->unsignedBigInteger('product_id');
             $table->unsignedBigInteger('quantity');
             $table->unsignedBigInteger('description_quantity')->nullable();
         });
@@ -67,10 +84,7 @@ return new class extends Migration
             $table->unsignedBigInteger('output_type_id')->nullable();
             $table->string('type_action')->nullable();
             $table->unsignedBigInteger('store_id');
-            $table->unsignedBigInteger('product_id');
-            $table->integer('packages');
-            $table->integer('quantity_per_packages');
-            $table->integer('total');
+            $table->date('date');
             $table->timestamps();
 
             $table->foreign('input_type_id')
@@ -84,11 +98,31 @@ return new class extends Migration
             $table->foreign('store_id')
             ->references('id')
             ->on('stores');
+
+
+        });
+
+        Schema::create('store_stock_movements_details', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('movement_id');
+            $table->unsignedBigInteger('product_id');
+            $table->integer('packages');
+            $table->integer('quantity_per_packages');
+            $table->integer('total');
+            $table->timestamps();
+
+            $table->foreign('movement_id')
+            ->references('id')
+            ->on('store_stock_movements');
+
+            $table->foreign('product_id')
+            ->references('id')
+            ->on('products');
         });
 
         Schema::create('store_product', function (Blueprint $table) {
             $table->unsignedBigInteger('store_id');
-            $table->unsignedBigInteger('producto_id');
+            $table->unsignedBigInteger('product_id');
             $table->unsignedBigInteger('quantity');
             $table->unsignedBigInteger('description_quantity')->nullable();
         });

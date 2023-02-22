@@ -40,7 +40,14 @@
                             option-label="full_name"
                             choices
                             option-value="id" />
-                            </x-splade-defer>
+                </x-splade-defer>
+
+                <x-splade-select name="warehouse_id" label="Almacen"
+                        placeholder="Seleccione el almacen de destino"
+                        :options="$warehouses"
+                        option-label="name"
+                        choices
+                        option-value="id" />
 
 
                  </div>

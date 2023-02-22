@@ -20,10 +20,16 @@ class Product extends Model
         'cost',
     ];
 
+    public function warehouse()
+    {
+        return $this->belongsToMany(Warehouse::class, 'warehouse_product', 'product_id', 'warehouse_id')
+        ->withPivot(['quantity','description_quantity']);
+    }
+
     public function stores()
     {
-        return $this->belongsToMany(Store::class, 'products_stock', 'product_id', 'store_id')
-        ->withPivot(['package_quantity','quantity_sunat', 'quantity']);
+        return $this->belongsToMany(Store::class, 'storee_product', 'product_id', 'store_id')
+        ->withPivot(['quantity','description_quantity']);
     }
 
 
@@ -44,7 +50,7 @@ class Product extends Model
 
     public function getFullStockAttribute()
     {
-        return $this->stores->sum('pivot.quantity');
+        return $this->warehouse->sum('pivot.quantity');
     }
 
     public function getAlertStockAttribute()
