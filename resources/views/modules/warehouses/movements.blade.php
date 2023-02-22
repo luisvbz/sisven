@@ -38,6 +38,19 @@
                         </span>
                     </div>
                 </x-splade-cell>
+                <x-splade-cell enlace as="$movement">
+                    <div class="w-full">
+                        <span class="p-1 text-[0.70rem] text-primary-600 font-semibold uppercase">
+                            <Link href="{{ $movement->type_action }}">
+                                @if($movement->type == 'input')
+                                   ir a la {{ $movement->input->name }} <i class="fi fi-br-link-alt"></i>
+                                @else
+                                    ir a la {{ $movement->output->name }}
+                                @endif
+                            </Link>
+                        </span>
+                    </div>
+                </x-splade-cell>
                 <x-splade-cell acciones as="$movement" use="$warehouse">
                     <Link modal rel="tooltip" title="Ver entradas y salidas de mercancia" href="{{ route('wr.movements-details', [$warehouse, $movement])}}"><i class="mr-1 text-xl text-primary-400 hover:text-primary-600 fi fi-br-layer-plus"></i></Link>
                 </x-splade-cell>

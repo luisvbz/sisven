@@ -55,7 +55,7 @@ class WarehousesMovements extends AbstractTable
             ->withGlobalSearch(columns: ['id'])
             ->column('tipo')
             ->column('origen')
-            ->column(key: 'type_action', label: 'enlace')
+            ->column(label: 'enlace')
             ->column(key: 'details_count', label: 'registros')
             ->column(key: 'date', label: 'fecha')
             ->column('acciones')

@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class WareHouseMovement extends Model
 {
@@ -19,7 +21,6 @@ class WareHouseMovement extends Model
         'warehouse_id',
         'date'
     ];
-
 
     public function warehouse()
     {
@@ -39,5 +40,12 @@ class WareHouseMovement extends Model
     public function details()
     {
         return $this->hasMany(WRMovementDetail::class, 'movement_id');
+    }
+
+    protected function date(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => Carbon::createFromFormat('Y-m-d',$value)->format('d/m/Y'),
+        );
     }
 }

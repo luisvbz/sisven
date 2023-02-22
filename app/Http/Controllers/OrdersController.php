@@ -45,7 +45,7 @@ class OrdersController extends Controller
             $movement = $warehouse->movements()->create([
                 'type' => 'input',
                 'input_type_id' => $input->id,
-                'type_action' => 'url',
+                'type_action' => route('co.details', [$order]),
                 'warehouse_id' => $warehouse->id,
                 'date' => $request->date
             ]);
@@ -95,5 +95,10 @@ class OrdersController extends Controller
            DB::rollback();
            dd($e->getMessage().$e->getLine());
         }
+    }
+
+    public function details()
+    {
+        return view('modules.orders.details');
     }
 }

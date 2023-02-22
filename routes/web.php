@@ -91,6 +91,7 @@ Route::middleware('splade')->group(function () {
             Route::get('/',[OrdersController::class, 'index'])->name('co.index')->middleware('permission:co:access');
             Route::get('/agregar',[OrdersController::class, 'create'])->name('co.add')->middleware('permission:co:create');
             Route::post('/agregar',[OrdersController::class, 'store'])->name('co.store')->middleware('permission:co:create');
+            Route::get('/{order}/detalles',[OrdersController::class, 'details'])->name('co.details')->middleware('permission:co:access');
 
         });
 
