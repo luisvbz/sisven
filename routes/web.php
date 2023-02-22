@@ -70,6 +70,9 @@ Route::middleware('splade')->group(function () {
             Route::post('/agregar',[WarehouseController::class, 'store'])->name('wr.store')->middleware('permission:wr:create');
             Route::get('/{warehouse}/edit',[WarehouseController::class, 'edit'])->name('wr.edit')->middleware('permission:wr:edit');
             Route::patch('/{warehouse}/edit',[WarehouseController::class, 'update'])->name('wr.update')->middleware('permission:wr:edit');
+            Route::get('/{warehouse}/movimientos',[WarehouseController::class, 'movements'])->name('wr.movements')->middleware('permission:wr:access');
+            Route::get('/{warehouse}/movimientos/{movement}/detalles',[WarehouseController::class, 'movementsDetails'])->name('wr.movements-details')->middleware('permission:wr:access');
+            Route::get('/{warehouse}/stock',[WarehouseController::class, 'stock'])->name('wr.stock')->middleware('permission:wr:access');
         });
 
         Route::group(['prefix' => 'proveedores'], function(){

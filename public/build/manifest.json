@@ -28,7 +28,7 @@
       "_nprogress.77b68cea.js"
     ],
     "css": [
-      "assets/app.96c849e0.css",
+      "assets/app.119fc060.css",
       "assets/uicons-bold-rounded.7be41fbc.css"
     ]
   },
@@ -92,7 +92,7 @@
     "isEntry": true
   },
   "resources/js/app.css": {
-    "file": "assets/app.96c849e0.css",
+    "file": "assets/app.119fc060.css",
     "src": "resources/js/app.css"
   }
 }

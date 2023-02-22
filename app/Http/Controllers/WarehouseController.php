@@ -7,9 +7,11 @@ use App\Tables\Warehouses;
 use App\Models\Departament;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Tables\WarehousesMovements;
 use ProtoneMedia\Splade\Facades\Toast;
 use ProtoneMedia\Splade\Facades\Splade;
 use App\Http\Requests\Warehouse\WarehouseSaveRequest;
+use App\Models\WareHouseMovement;
 
 class WarehouseController extends Controller
 {
@@ -131,14 +133,18 @@ class WarehouseController extends Controller
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function movements(Warehouse $warehouse)
     {
-        //
+        $movements_table = new WarehousesMovements($warehouse->id);
+        return view('modules.warehouses.movements', [
+            'warehouse' => $warehouse,
+            'movements' => $movements_table
+        ]);
+    }
+
+    public function movementsDetails(Warehouse $warehouse, WareHouseMovement $movement) {
+        return view('modules.warehouses.movement-details', [
+            'movement' => $movement
+        ]);
     }
 }
