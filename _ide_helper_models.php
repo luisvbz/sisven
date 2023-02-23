@@ -188,6 +188,7 @@ namespace App\Models{
  * @property int $quantity_per_packages
  * @property int $total
  * @property string $cost
+ * @property-read mixed $cost_formated
  * @property-read \App\Models\Product $product
  * @method static \Illuminate\Database\Eloquent\Builder|OrderDetail newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|OrderDetail newQuery()
@@ -245,8 +246,8 @@ namespace App\Models{
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Store> $stores
  * @property-read int|null $stores_count
  * @property-read \App\Models\ProductType $type
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Warehouse> $warehouse
- * @property-read int|null $warehouse_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Warehouse> $warehouses
+ * @property-read int|null $warehouses_count
  * @method static \Illuminate\Database\Eloquent\Builder|Product newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Product newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Product query()

@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Order extends Model
 {
@@ -16,10 +18,6 @@ class Order extends Model
         'supplier_id',
         'cost',
         'date'
-    ];
-
-    protected $casts = [
-        'done' => 'boolean'
     ];
 
 
@@ -36,6 +34,13 @@ class Order extends Model
     public function getCostFormatedAttribute()
     {
         return "S/ ".number_format($this->cost, 2,".", ",");
+    }
+
+    protected function date(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => Carbon::createFromFormat('Y-m-d',$value)->format('d/m/Y'),
+        );
     }
 
 }

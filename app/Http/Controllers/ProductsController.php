@@ -101,19 +101,22 @@ class ProductsController extends Controller
 
     public function getStockTiendas(Product $product)
     {
-        $stores = $product->stores->transform(function($store){
+        $stock = $product->warehouses->transform(function($warehouse){
             $item = new \stdClass;
-            $item->id = $store->id;
+            $item->id = $warehouse->id;
+            $item->name = $warehouse->name;
+            $item->quantity = $warehouse->pivot->quantity;
+           /*  $item->id = $store->id;
             $item->code = $store->code;
             $item->name = $store->name;
             $item->is_principal = $store->is_principal;
             $item->stock = number_format($store->pivot->quantity, 0, "",",");
-            $item->stock_description = $store->pivot->package_quantity;
+            $item->stock_description = $store->pivot->package_quantity; */
 
             return $item;
         });
 
-        return view('modules.products.modals.stock-tiendas', ['product' => $product, 'stores' => $stores]);
+        return view('modules.products.modals.stock-tiendas', ['product' => $product, 'stock' => $stock]);
     }
 
 

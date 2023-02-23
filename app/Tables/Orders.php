@@ -36,7 +36,7 @@ class Orders extends AbstractTable
      */
     public function for()
     {
-        return Order::query()->withCount('details');
+        return Order::query()->withCount('details')->orderBy('created_at', 'DESC');
     }
 
     /**

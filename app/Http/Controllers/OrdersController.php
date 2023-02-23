@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use App\Enums\SupplierStatuses;
 use Illuminate\Support\Facades\DB;
 use ProtoneMedia\Splade\Facades\Toast;
+use App\Http\Requests\Orders\OrderStoreRequest;
 
 class OrdersController extends Controller
 {
@@ -31,7 +32,7 @@ class OrdersController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(OrderStoreRequest $request)
     {
         try {
 
@@ -97,8 +98,10 @@ class OrdersController extends Controller
         }
     }
 
-    public function details()
+    public function details(Order $order)
     {
-        return view('modules.orders.details');
+        return view('modules.orders.details', [
+            'order' => $order,
+        ]);
     }
 }

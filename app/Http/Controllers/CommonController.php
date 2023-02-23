@@ -61,7 +61,7 @@ class CommonController extends Controller
         $response['name'] = $product->full_name." ({$product->measure->name})";
         $response['packages'] = null;
         $response['quantity_per_packages'] = null;
-        $response['cost'] = $product->cost;
+        $response['cost'] = 0;
 
         return response()->json(['product' => $response]);
     }

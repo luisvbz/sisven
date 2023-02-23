@@ -17,7 +17,13 @@
                      @endif
                 </x-splade-cell>
                 <x-splade-cell acciones as="$order">
-
+                <div class="w-full">
+                    <span class="p-1 text-[0.70rem] text-primary-600 font-semibold uppercase">
+                        <Link href="{{ route('co.details', [$order]) }}">
+                                Ver detalles <i class="fi fi-br-link-alt"></i>
+                        </Link>
+                    </span>
+                </div>
                 </x-splade-cell>
             </x-splade-table>
         </div>

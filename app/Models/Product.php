@@ -20,7 +20,7 @@ class Product extends Model
         'cost',
     ];
 
-    public function warehouse()
+    public function warehouses()
     {
         return $this->belongsToMany(Warehouse::class, 'warehouse_product', 'product_id', 'warehouse_id')
         ->withPivot(['quantity','description_quantity']);
@@ -50,7 +50,7 @@ class Product extends Model
 
     public function getFullStockAttribute()
     {
-        return $this->warehouse->sum('pivot.quantity');
+        return $this->warehouses->sum('pivot.quantity');
     }
 
     public function getAlertStockAttribute()

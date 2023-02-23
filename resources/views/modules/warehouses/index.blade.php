@@ -13,7 +13,7 @@
                         @can('wr:edit')
                             <Link  rel="tooltip" title="Editar este almacen" slideover href="{{ route('wr.edit', [$item])}}"><i class="mr-1 text-xl text-green-400 hover:text-green-600 fi fi-br-edit"></i></Link>
                         @endcan
-                        <Link rel="tooltip" title="Ver inventario en este almacen" slideover href="{{ route('wr.edit', [$item])}}"><i class="mr-1 text-xl text-primary-400 hover:text-primary-600 fi fi-br-boxes"></i></Link>
+                        <Link rel="tooltip" title="Ver inventario en este almacen" href="{{ route('wr.stock', [$item])}}"><i class="mr-1 text-xl text-primary-400 hover:text-primary-600 fi fi-br-boxes"></i></Link>
                         <Link rel="tooltip" title="Ver entradas y salidas de mercancia" href="{{ route('wr.movements', [$item])}}"><i class="mr-1 text-xl text-alternative-400 hover:text-alternative-600 fi fi-br-arrows-retweet"></i></Link>
                     </div>
                     {{--  @can('wr:delete')

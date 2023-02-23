@@ -1,10 +1,13 @@
-<x-app-layout>
-    <x-slot name="header">
-        <x-back-button-title route="/productos" module="Productos" page="Agregar" />
-    </x-slot>
+@extends('modules.products.base')
 
-    <div class="py-12">
-        <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
+@section('header')
+     Productos / <small>Nuevo producto</small>
+@endsection
+
+
+@section('content')
+    <div class="py-0">
+        <div class="mx-auto max-w-4xl sm:px-6 lg:px-8">
             <div class="p-6 bg-white border-b border-gray-200 shadow-lg sm:rounded-lg">
                 <x-splade-form  action="{{ route('pr.store') }}">
                     <p class="text-sm font-medium text-gray-600"><i class="fi-br-form"></i> Complete los datos del formulario para agregar un nuevo producto</p>
@@ -55,4 +58,4 @@
             </div>
         </div>
     </div>
-</x-app-layout>
+@endsection

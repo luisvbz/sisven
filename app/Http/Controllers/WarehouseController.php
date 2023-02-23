@@ -6,12 +6,13 @@ use App\Models\Warehouse;
 use App\Tables\Warehouses;
 use App\Models\Departament;
 use Illuminate\Http\Request;
+use App\Models\WareHouseMovement;
 use Illuminate\Support\Facades\DB;
 use App\Tables\WarehousesMovements;
+use App\Tables\WarehouseStockTable;
 use ProtoneMedia\Splade\Facades\Toast;
 use ProtoneMedia\Splade\Facades\Splade;
 use App\Http\Requests\Warehouse\WarehouseSaveRequest;
-use App\Models\WareHouseMovement;
 
 class WarehouseController extends Controller
 {
@@ -145,6 +146,15 @@ class WarehouseController extends Controller
     public function movementsDetails(Warehouse $warehouse, WareHouseMovement $movement) {
         return view('modules.warehouses.movement-details', [
             'movement' => $movement
+        ]);
+    }
+
+    public function stock(Warehouse $warehouse)
+    {
+        $stock_table = new WarehouseStockTable($warehouse);
+        return view('modules.warehouses.stock', [
+            'warehouse' => $warehouse,
+            'stock' => $stock_table
         ]);
     }
 }

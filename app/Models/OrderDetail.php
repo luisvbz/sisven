@@ -25,4 +25,9 @@ class OrderDetail extends Model
     {
         return $this->belongsTo(Product::class);
     }
+
+    public function getCostFormatedAttribute()
+    {
+        return "S/ ".number_format($this->cost, 2,".", ",");
+    }
 }

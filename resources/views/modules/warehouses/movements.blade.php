@@ -52,7 +52,7 @@
                     </div>
                 </x-splade-cell>
                 <x-splade-cell acciones as="$movement" use="$warehouse">
-                    <Link modal rel="tooltip" title="Ver entradas y salidas de mercancia" href="{{ route('wr.movements-details', [$warehouse, $movement])}}"><i class="mr-1 text-xl text-primary-400 hover:text-primary-600 fi fi-br-layer-plus"></i></Link>
+                    <Link modal rel="tooltip" title="Ver detalles" href="{{ route('wr.movements-details', [$warehouse, $movement])}}"><i class="mr-1 text-xl text-primary-400 hover:text-primary-600 fi fi-br-layer-plus"></i></Link>
                 </x-splade-cell>
             </x-splade-table>
         </div>

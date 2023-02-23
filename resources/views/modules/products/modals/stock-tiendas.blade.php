@@ -2,18 +2,30 @@
     <div class="py-3 mb-4 text-center border-b border-primary-300">
         <i class="mt-1 text-lg fi fi-br-box text-primary-600"></i> Stock Individual del producto: <span class="font-semibold">{{ $product->full_name }}</span>
     </div>
-    @if(sizeof($stores) > 0)
-        @foreach ($stores as $store)
-            <div class="flex justify-between p-3 px-5 mb-3 border rounded-md shadow-sm bg-primary-50 border-primary-500 shadow-primar">
-                <div class="flex-grow font-semibold">{{ $store->code }} - {{ $store->name }}</div>
-                <div>{{ $store->stock }}</div>
-            </div>
-        @endforeach
-    @else
-        <div class="flex flex-col items-center justify-center w-full text-gray-500 bg-gray-200 rounded-lg" style="padding-top: 30px;padding-bottom: 30px;">
-            <div>
-                No se ha registrado stock de este producto
-            </div>
-        </div>
-    @endif
+     <div class="relative mt-2 overflow-x-auto">
+        <table class="w-full text-sm text-left text-gray-500 ">
+            <thead class="text-xs text-gray-700 uppercase bg-primary-100 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+                    <th scope="col" class="px-6 py-3">
+                        Ubicación
+                    </th>
+                    <th scope="col" class="px-6 py-3 text-right">
+                        Cantidad
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($stock as $detail)
+                <tr class="bg-white border-b">
+                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowra">
+                    {{ $detail->name }}
+                    </th>
+                    <td class="px-6 py-4 font-semibold text-right text-success-600">
+                    {{ $detail->quantity }}
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
 </x-splade-modal>
