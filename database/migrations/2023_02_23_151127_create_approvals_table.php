@@ -13,14 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('comments', function (Blueprint $table) {
+        Schema::create('approvals', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->morphs('commentable');
+            $table->morphs('approvable');
             $table->string('comment');
-            $table->string('type');
+            $table->enum('type', ['requested', 'approved', 'rejected']);
             $table->string('action')->nullable();
             $table->timestamps();
+
             $table->foreign('user_id')
             ->references('id')
             ->on('users');
@@ -34,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('comments');
+        Schema::dropIfExists('approvals');
     }
 };

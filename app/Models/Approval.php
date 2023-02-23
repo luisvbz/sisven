@@ -2,25 +2,23 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
-class Comment extends Model
+class Approval extends Model
 {
-    use HasFactory, Notifiable;
+    use HasFactory;
 
     protected $fillable = [
         'user_id',
-        'commentable_type',
-        'commentable_id',
-        'comment',
-        'type',
+        'approvable_type',
+        'approvable_id',
+        'justification',
         'action',
     ];
 
     protected $hidden = [
-        'commentable_type', 'commentable_id'
+        'approvable_type', 'approvable_id'
     ];
 
     public function creator()
@@ -28,7 +26,7 @@ class Comment extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function commentable()
+    public function approvable()
     {
         return $this->morphTo();
     }

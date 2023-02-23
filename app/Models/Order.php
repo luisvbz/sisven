@@ -43,4 +43,19 @@ class Order extends Model
         );
     }
 
+    public function comments()
+    {
+        return $this->morphMany(Comment::class, 'commentable');
+    }
+
+    public function approvals()
+    {
+        return $this->morphMany(Approval::class, 'approvable');
+    }
+
+    public function justifications()
+    {
+        return $this->morphMany(Approval::class, 'approvable');
+    }
+
 }

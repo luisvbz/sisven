@@ -3,12 +3,14 @@
 namespace Database\Seeders;
 
 use App\Models\Store;
+use App\Models\Product;
 use App\Models\InputType;
 use App\Models\Warehouse;
 use App\Models\OutputType;
 use App\Models\ProductType;
 use App\Models\ProductMeasure;
 use App\Models\ProductPackage;
+use App\Models\Supplier;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
@@ -112,6 +114,26 @@ class ProductStoreSeeder extends Seeder
         OutputType::insert([
             ['name' => 'Traslado', 'alias' => 'traslado'],
         ]);
+
+
+        Product::factory()->count(50)->create();
+
+        Supplier::create(
+            [
+              'name' => 'IMPORTADORA HOME CHINA S.A.C.',
+              'ruc' => '20600473892',
+              'phone_number' => '12345678',
+              'address' => 'Jr. Lima 1312'
+            ]
+         );
+
+        Supplier::create(
+            [
+                'name' => 'TIA CHINA S.A.C.',
+                'ruc' => '20600699734',
+                'phone_number' => '87654321',
+                'address' => 'Jr. Lima 1522'
+              ]);
 
     }
 }

@@ -82,6 +82,14 @@ class OrdersController extends Controller
 
             }
 
+            $order->comments()->create([
+                'user_id' => auth()->user()->id,
+                'comment' => "Se ha registrado una compra por {$order->cost}",
+                'type' => 'comment',
+                'action' =>  route('co.details', [$order]),
+                'done' => true,
+            ]);
+
         DB::commit();
 
         Toast::title('Exito!')

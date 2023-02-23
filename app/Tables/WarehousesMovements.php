@@ -39,7 +39,9 @@ class WarehousesMovements extends AbstractTable
     public function for()
     {
         $query =  WareHouseMovement::query();
-        $query->withCount('details')->where('warehouse_id', $this->warehouse_id);
+        $query->withCount('details')
+        ->where('warehouse_id', $this->warehouse_id)
+        ->orderBy('date','DESC');
         return $query;
     }
 

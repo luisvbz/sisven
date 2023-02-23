@@ -12,6 +12,37 @@
 
 namespace App\Models{
 /**
+ * App\Models\Approval
+ *
+ * @property int $id
+ * @property int $user_id
+ * @property string $approvable_type
+ * @property int $approvable_id
+ * @property string $comment
+ * @property string $type
+ * @property string|null $action
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Model|\Eloquent $approvable
+ * @property-read \App\Models\User $creator
+ * @method static \Illuminate\Database\Eloquent\Builder|Approval newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Approval newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Approval query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Approval whereAction($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Approval whereApprovableId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Approval whereApprovableType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Approval whereComment($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Approval whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Approval whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Approval whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Approval whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Approval whereUserId($value)
+ */
+	class Approval extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\Client
  *
  * @property int $id
@@ -49,8 +80,7 @@ namespace App\Models{
  * @property int $commentable_id
  * @property string $comment
  * @property string $type
- * @property string $action
- * @property bool $done 0: N0, 1: Si
+ * @property string|null $action
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Model|\Eloquent $commentable
@@ -65,7 +95,6 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Comment whereCommentableId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Comment whereCommentableType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Comment whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Comment whereDone($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Comment whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Comment whereType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Comment whereUpdatedAt($value)
@@ -127,6 +156,19 @@ namespace App\Models{
 
 namespace App\Models{
 /**
+ * App\Models\Jusitification
+ *
+ * @property-read \App\Models\User $creator
+ * @property-read \Illuminate\Database\Eloquent\Model|\Eloquent $justifiable
+ * @method static \Illuminate\Database\Eloquent\Builder|Jusitification newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Jusitification newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Jusitification query()
+ */
+	class Jusitification extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\Module
  *
  * @property string $id
@@ -159,9 +201,15 @@ namespace App\Models{
  * @property string $cost
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Approval> $approvals
+ * @property-read int|null $approvals_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Comment> $comments
+ * @property-read int|null $comments_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\OrderDetail> $details
  * @property-read int|null $details_count
  * @property-read mixed $cost_formated
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Approval> $justifications
+ * @property-read int|null $justifications_count
  * @property-read \App\Models\Supplier $supplier
  * @method static \Illuminate\Database\Eloquent\Builder|Order newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Order newQuery()
