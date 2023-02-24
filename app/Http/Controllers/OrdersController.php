@@ -87,7 +87,6 @@ class OrdersController extends Controller
                 'comment' => "Se ha registrado una compra por {$order->cost}",
                 'type' => 'comment',
                 'action' =>  route('co.details', [$order]),
-                'done' => true,
             ]);
 
         DB::commit();

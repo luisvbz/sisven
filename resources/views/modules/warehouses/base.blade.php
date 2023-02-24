@@ -23,12 +23,22 @@
               class="flex flex-row items-center h-10 px-3 text-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700"
             >
               <span class="flex items-center justify-center text-lg text-alternative-400">
-                <i class="fi fi-br-user-add"></i>
+                <i class="fi fi-br-layer-plus"></i>
               </span>
               <span class="ml-3">Agregar</span>
             </x-nav-link-sidebar>
           </li>
           @endcan
+           <li class="my-px">
+            <x-nav-link-sidebar slideover :href="route('wr.add')" :active="request()->routeIs('wr.add')"
+              class="flex flex-row items-center h-10 px-3 text-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700"
+            >
+              <span class="flex items-center justify-center text-lg text-alternative-400">
+                <i class="fi fi-br-truck-loading"></i>
+              </span>
+              <span class="ml-3">Trasladar Mercancia</span>
+            </x-nav-link-sidebar>
+          </li>
     </x-slot>
 
     @yield('content')
