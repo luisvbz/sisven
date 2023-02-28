@@ -2,10 +2,12 @@
 
 namespace App\Notifications;
 
+use App\Models\User;
+use App\Models\Order;
 use Illuminate\Bus\Queueable;
+use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
-use Illuminate\Notifications\Notification;
 
 class OrderCreated extends Notification
 {
@@ -16,9 +18,12 @@ class OrderCreated extends Notification
      *
      * @return void
      */
-    public function __construct()
+    private $order;
+    private $creator;
+    public function __construct(Order $order, User $creator)
     {
-        //
+        $this->order = $order;
+        $this->creator = $creator;
     }
 
     /**
@@ -29,7 +34,7 @@ class OrderCreated extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['mail', 'database'];
     }
 
     /**
@@ -41,9 +46,11 @@ class OrderCreated extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+                    ->subject("Nueva compra registrada")
+                    ->greeting("Hola, **{$notifiable->name}**.")
+                    ->line("El usuario **{$this->creator->name}** ha registrado una nueva compra, por el monto de: **{$this->order->cost}**, al proveedor **{$this->order->supplier->name}**")
+                    ->action('VER DETALLES DE LA COMPRA', route('co.details', [$this->order->id]))
+                    ->line('Enviado automáticamente');
     }
 
     /**
@@ -55,7 +62,10 @@ class OrderCreated extends Notification
     public function toArray($notifiable)
     {
         return [
-            //
+            'creator' => $this->creator->name,
+            'link' => route('co.details', [$this->order->id]),
+            'cost' => $this->order->cost,
+            'supplier' => $this->order->supplier->name
         ];
     }
 }

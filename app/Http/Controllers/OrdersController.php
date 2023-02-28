@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Order;
 use App\Tables\Orders;
 use App\Models\Product;
@@ -12,7 +13,9 @@ use App\Models\OrderDetail;
 use Illuminate\Http\Request;
 use App\Enums\SupplierStatuses;
 use Illuminate\Support\Facades\DB;
+use App\Notifications\OrderCreated;
 use ProtoneMedia\Splade\Facades\Toast;
+use Illuminate\Support\Facades\Notification;
 use App\Http\Requests\Orders\OrderStoreRequest;
 
 class OrdersController extends Controller
@@ -88,6 +91,8 @@ class OrdersController extends Controller
                 'type' => 'comment',
                 'action' =>  route('co.details', [$order]),
             ]);
+
+            Notification::send(User::role('admin')->get(), new OrderCreated($order, auth()->user()));
 
         DB::commit();
 

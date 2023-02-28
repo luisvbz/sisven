@@ -47,7 +47,7 @@ class UserCreated extends Notification
         return (new MailMessage)
                     ->subject('Usuario Creado')
                     ->greeting("Hola, {$this->user->name}.")
-                    ->line("Se te ha creado un usuario para el sistema <b>[SISTEMA]</b>, con el usuario: **{$this->user->username}** y y la contraseña: **{$this->password}**")
+                    ->line("Se te ha creado un usuario para el sistema <b>SISVEN</b>, con el usuario: **{$this->user->username}** y y la contraseña: **{$this->password}**")
                     ->action('Para ingresa dirigete haz click aqui', url('/login'))
                     ->line('No compartas esta información con nadie!');
     }

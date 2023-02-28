@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('transfers', function (Blueprint $table) {
             $table->id();
             $table->enum('status', ['requested','approved','rejected','canceled'])->default('requested');
-            $table->unsignedBigInteger('origin');
-            $table->unsignedBigInteger('destination');
+            $table->unsignedBigInteger('warehouse_id');
+            $table->unsignedBigInteger('store_id');
             $table->unsignedBigInteger('requested_by');
             $table->timestamp('approved_at')->nullable();
             $table->timestamp('rejected_at')->nullable();
@@ -28,11 +28,11 @@ return new class extends Migration
             ->references('id')
             ->on('users');
 
-            $table->foreign('origin')
+            $table->foreign('warehouse_id')
             ->references('id')
-            ->on('stores');
+            ->on('warehouses');
 
-            $table->foreign('destination')
+            $table->foreign('store_id')
             ->references('id')
             ->on('stores');
         });
