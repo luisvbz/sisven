@@ -30,7 +30,7 @@
           </li>
           @endcan
            <li class="my-px">
-            <x-nav-link-sidebar slideover :href="route('wr.add')" :active="request()->routeIs('wr.add')"
+            <x-nav-link-sidebar :href="route('wr.trasnfer')" :active="request()->routeIs('wr.trasnfer')"
               class="flex flex-row items-center h-10 px-3 text-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700"
             >
               <span class="flex items-center justify-center text-lg text-alternative-400">

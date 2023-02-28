@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Store;
 use App\Models\Warehouse;
 use App\Tables\Warehouses;
 use App\Models\Departament;
@@ -156,5 +157,28 @@ class WarehouseController extends Controller
             'warehouse' => $warehouse,
             'stock' => $stock_table
         ]);
+    }
+
+    public function formTrasfer()
+    {
+        return view('modules.warehouses.transfers.new', [
+            'warehouses' => Warehouse::all(),
+            'stores' => Store::all(),
+        ]);
+    }
+
+    public function getProductsByWarehouse($id)
+    {
+        $warehouse = Warehouse::find($id);
+
+        $products = $warehouse->products()->get()->transform(function($item) {
+            $p = new \stdClass();
+            $p->id = $item->id;
+            $p->name = $item->full_name." (".$item->measure->name.")";
+            return $p;
+        });
+
+
+        return response()->json($products);
     }
 }
