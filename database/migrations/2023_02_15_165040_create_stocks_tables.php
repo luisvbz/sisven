@@ -55,8 +55,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('movement_id');
             $table->unsignedBigInteger('product_id');
-            $table->integer('packages');
-            $table->integer('quantity_per_packages');
+            $table->integer('packages')->nullable();
+            $table->integer('quantity_per_packages')->nullable();
             $table->integer('total');
             $table->timestamps();
 
@@ -106,9 +106,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('movement_id');
             $table->unsignedBigInteger('product_id');
-            $table->integer('packages');
-            $table->integer('quantity_per_packages');
-            $table->integer('total');
+            $table->integer('quantity');
             $table->timestamps();
 
             $table->foreign('movement_id')

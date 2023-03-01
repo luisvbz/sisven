@@ -9,7 +9,7 @@ class OutputType extends Model
 {
     use HasFactory;
 
-    protected $table = "inputs_types";
+    protected $table = "outputs_types";
 
     protected $fillable = [
         'name',

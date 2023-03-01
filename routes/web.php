@@ -69,6 +69,7 @@ Route::middleware('splade')->group(function () {
             Route::get('/agregar',[WarehouseController::class, 'create'])->name('wr.add')->middleware('permission:wr:create');
             Route::post('/agregar',[WarehouseController::class, 'store'])->name('wr.store')->middleware('permission:wr:create');
             Route::get('/trasladar-mercancia',[WarehouseController::class, 'formTrasfer'])->name('wr.trasnfer')->middleware('permission:wr:create');
+            Route::post('/trasladar-mercancia',[WarehouseController::class, 'storeTransfer'])->name('wr.trasnfer-store')->middleware('permission:wr:create');
             Route::get('/{warehouse}/edit',[WarehouseController::class, 'edit'])->name('wr.edit')->middleware('permission:wr:edit');
             Route::patch('/{warehouse}/edit',[WarehouseController::class, 'update'])->name('wr.update')->middleware('permission:wr:edit');
             Route::get('/{warehouse}/movimientos',[WarehouseController::class, 'movements'])->name('wr.movements')->middleware('permission:wr:access');
@@ -138,5 +139,6 @@ Route::middleware('auth')->group(function () {
     Route::post('/commons/get-person', [CommonController::class, 'getPerson'])->name('get-person');
     Route::post('/commons/get-bussiness', [CommonController::class, 'getBussiness'])->name('get-bussiness');
     Route::post('/commons/get-product', [CommonController::class, 'getProduct'])->name('get-product');
+    Route::get('/api/warehouse/{id}/product/{productId}', [WarehouseController::class, 'getProduct'])->name('wr.get-product');
     Route::get('/api/warehouse/{id}/get-products', [WarehouseController::class, 'getProductsByWarehouse'])->name('wr.get-products');
 });

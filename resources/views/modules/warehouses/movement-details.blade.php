@@ -5,7 +5,7 @@
                 @if($movement->type == 'input')
                     <div>Entrada de productos por <span class="text-sm font-semibold uppercase">{{ $movement->input->name }}</span></div>
                 @else
-                    <div>Salida de productos por <span class="text-sm font-semibold uppercase">{{ $movement->input->name }}</span></div>
+                    <div>Salida de productos por <span class="text-sm font-semibold uppercase">{{ $movement->output->name }}</span></div>
                 @endif
             </div>
             <div class="flex flex-col items-center justify-center">

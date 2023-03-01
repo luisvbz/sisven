@@ -40,6 +40,11 @@ class Store extends Model
 
     public function products()
     {
-        return $this->belongsToMany(Product::class, 'warehouse_product');
+        return $this->belongsToMany(Product::class, 'store_product');
+    }
+
+    public function movements()
+    {
+        return $this->hasMany(StoreMovement::class, 'store_id');
     }
 }

@@ -210,7 +210,6 @@ class ProductsController extends Controller
         ProductType::create([
             'name' => Str::upper($request->name),
             'alias' => Str::slug($request->name),
-            'category' => 'docena',
             'package_id' => $request->package_id
         ]);
 

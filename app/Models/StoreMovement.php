@@ -18,9 +18,7 @@ class StoreMovement extends Model
         'type_action',
         'store_id',
         'product_id',
-        'packages',
-        'quantity_per_packages',
-        'total',
+        'date'
     ];
 
 
@@ -42,5 +40,10 @@ class StoreMovement extends Model
     public function output()
     {
         return $this->belongsTo(OutputType::class, 'output_type_id');
+    }
+
+    public function details()
+    {
+        return $this->hasMany(STMovementDetail::class, 'movement_id');
     }
 }
