@@ -84,7 +84,7 @@
                                         />
                                         <p v-if="product.quantity > product.avalaible" class="p-1 px-2 mt-1 text-xs font-bold text-white border rounded-lg bg-danger-500 text-centered">No puede agregar una cantidad mayor a la disponible</p>
                                         <x-splade-errors>
-                                                <p class="p-1 px-2 mt-1 text-xs font-bold text-white border rounded-lg bg-danger-500 text-centered" v-if="form.hasError(`products.${index}.quantity_per_packages`)" v-text="errors.first(`products.${index}.quantity`)"/>
+                                                <p class="p-1 px-2 mt-1 text-xs font-bold text-white border rounded-lg bg-danger-500 text-centered" v-if="form.hasError(`products.${index}.quantity`)" v-text="errors.first(`products.${index}.quantity`)"/>
                                             </x-splade-errors>
                                     </div>
                                 </div>
@@ -98,7 +98,6 @@
                         </x-splade-submit>
                         <img src="{{ asset('images/commons/loading.svg') }}" v-else/>
                     </div>
-                    <pre v-text="form.$all" />
                 </x-splade-form>
             </div>
         </div>

@@ -17,6 +17,7 @@ use App\Tables\WarehousesMovements;
 use App\Tables\WarehouseStockTable;
 use ProtoneMedia\Splade\Facades\Toast;
 use ProtoneMedia\Splade\Facades\Splade;
+use App\Http\Requests\Warehouse\TransferRequest;
 use App\Http\Requests\Warehouse\WarehouseSaveRequest;
 
 class WarehouseController extends Controller
@@ -171,82 +172,96 @@ class WarehouseController extends Controller
         ]);
     }
 
-    public function storeTransfer(Request $request)
+    public function storeTransfer(TransferRequest $request)
     {
         //store transfer
 
-        $warehouse = Warehouse::find($request->warehouse_id);
-        $store = Store::find($request->store_id);
-        DB::beginTransaction();
+        try {
+            $warehouse = Warehouse::find($request->warehouse_id);
+            $store = Store::find($request->store_id);
+            DB::beginTransaction();
 
-        $transfer = Transfer::create([
-            'status' => 'approved',
-            'warehouse_id' => $request->warehouse_id,
-            'store_id' => $request->store_id,
-            'requested_by' => auth()->user()->id,
-            'approved_at' => now(),
-        ]);
+            $transfer = Transfer::create([
+                'status' => 'approved',
+                'warehouse_id' => $request->warehouse_id,
+                'store_id' => $request->store_id,
+                'requested_by' => auth()->user()->id,
+                'approved_at' => now(),
+            ]);
 
-        $input = InputType::whereAlias('traslado')->first();
-        $output = OutputType::whereAlias('traslado')->first();
+            $input = InputType::whereAlias('traslado')->first();
+            $output = OutputType::whereAlias('traslado')->first();
 
-        $movementWarehouse = $warehouse->movements()->create([
-            'type' => 'ouput',
-            'output_type_id' => $output->id,
-            'type_action' => "https://sisven.test",
-            'warehouse_id' => $warehouse->id,
-            'date' => date('Y-m-d')
-        ]);
-
-        $movementStore = $store->movements()->create([
-            'type' => 'input',
-            'input_type_id' => $input->id,
-            'type_action' => "https://sisven.test",
-            'store_id' => $store->id,
-            'date' => now()
-        ]);
-
-
-        foreach($request->products as $product)
-        {
-            $transfer->products()->attach($product['id'], ['quantity' => $product['quantity']]);
-
-            $movementWarehouse->details()->create([
+            $movementWarehouse = $warehouse->movements()->create([
+                'type' => 'ouput',
+                'output_type_id' => $output->id,
+                'type_action' => "https://sisven.test",
                 'warehouse_id' => $warehouse->id,
-                'product_id' => $product['id'],
-                'total' => $product['quantity'],
+                'date' => date('Y-m-d')
             ]);
 
-            $movementStore->details()->create([
+            $movementStore = $store->movements()->create([
+                'type' => 'input',
+                'input_type_id' => $input->id,
+                'type_action' => "https://sisven.test",
                 'store_id' => $store->id,
-                'product_id' => $product['id'],
-                'quantity' => $product['quantity'],
+                'date' => now()
             ]);
 
-            //update stock warehouse
-            $productStockWareouse = $warehouse->products()->where('id', $product['id'])->first();
-            $total = $productStockWareouse->pivot->quantity - $product['quantity'];
-            $warehouse->products()->updateExistingPivot($product['id'], ['quantity' => $total]);
 
-            //update stock stores
-            if(!$store->products()->where('id', $product['id'])->first()) {
-                $store->products()->attach($product['id'], ['quantity' => $product['quantity']]);
-            }else {
-                $productStock = $store->products()->where('id', $product['id'])->first();
-                $total = $productStock->pivot->quantity + ($product['packages']*$product['quantity']);
-                $store->products()->updateExistingPivot($product['id'], ['quantity' => $total]);
+            foreach($request->products as $product)
+            {
+                $transfer->products()->attach($product['id'], ['quantity' => $product['quantity']]);
+
+                $movementWarehouse->details()->create([
+                    'warehouse_id' => $warehouse->id,
+                    'product_id' => $product['id'],
+                    'total' => $product['quantity'],
+                ]);
+
+                $movementStore->details()->create([
+                    'store_id' => $store->id,
+                    'product_id' => $product['id'],
+                    'quantity' => $product['quantity'],
+                ]);
+
+                //update stock warehouse
+                $productStockWareouse = $warehouse->products()->where('id', $product['id'])->first();
+                $total = $productStockWareouse->pivot->quantity - $product['quantity'];
+                $warehouse->products()->updateExistingPivot($product['id'], ['quantity' => $total]);
+
+                //update stock stores
+                if(!$store->products()->where('id', $product['id'])->first()) {
+                    $store->products()->attach($product['id'], ['quantity' => $product['quantity']]);
+                }else {
+                    $productStock = $store->products()->where('id', $product['id'])->first();
+                    $total = $productStock->pivot->quantity + $product['quantity'];
+                    $store->products()->updateExistingPivot($product['id'], ['quantity' => $total]);
+                }
+
             }
+
+            /* $warehouse->comments()->create([
+                'user_id' => auth()->user()->id,
+                'comment' => "Se ha registrado un tralado a la tienda  {$store->name}",
+                'type' => 'comment',
+                'action' =>  "https://sisven.test",
+            ]); */
+
+            DB::commit();
+
+            Toast::title('Exito!')
+            ->center('EL traslado se gha efectuado con éxito')
+            ->success()
+            ->backdrop()
+            ->autoDismiss(15);
+
+            return redirect()->route('wr.movements-details', [$warehouse, $movementStore]);
+
+        }catch(\Exception $e) {
 
         }
 
-        /* $warehouse->comments()->create([
-            'user_id' => auth()->user()->id,
-            'comment' => "Se ha registrado un tralado a la tienda  {$store->name}",
-            'type' => 'comment',
-            'action' =>  "https://sisven.test",
-        ]); */
-
-        DB::commit();
 
 
 
