@@ -56,6 +56,8 @@ Route::middleware('splade')->group(function () {
             Route::get('/{store}/edit',[StoresController::class, 'edit'])->name('ti.edit')->middleware('permission:ti:edit');
             Route::patch('/{store}/edit',[StoresController::class, 'update'])->name('ti.update')->middleware('permission:ti:edit');
             Route::delete('/{store}/delete',[StoresController::class, 'delete'])->name('ti.delete')->middleware('permission:ti:delete');
+            Route::get('/{store}/movimientos',[StoresController::class, 'movements'])->name('ti.movements')->middleware('permission:ti:access');
+            Route::get('/{store}/movimientos/{movement}/detalles',[StoresController::class, 'movementsDetails'])->name('ti.movements-details')->middleware('permission:ti:access');
             //Transferencias
             Route::get('/solicitar-productos', [TransfersController::class, 'add'])
                     ->name('ti.request-product');
@@ -119,6 +121,8 @@ Route::middleware('splade')->group(function () {
             Route::delete('/administrar/medidas/{measure}/delete', [ProductsController::class, 'deleteMeasure'])->name('pr.delete-measure');
 
         });
+
+        Route::get('/traslado/{transfer}', [CommonController::class, 'transferDetail'])->name('transfer.details');
 
         Route::get('/notificaciones-sin-leer', function() {
             return view('components.notifications-panel');

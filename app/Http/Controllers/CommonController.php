@@ -6,6 +6,7 @@ use App\Tools\DniRuc;
 use App\Models\Product;
 use App\Models\District;
 use App\Models\Province;
+use App\Models\Transfer;
 use App\Models\ProductType;
 use Illuminate\Http\Request;
 
@@ -64,5 +65,10 @@ class CommonController extends Controller
         $response['cost'] = 0;
 
         return response()->json(['product' => $response]);
+    }
+
+    public function transferDetail($transfer)
+    {
+        return view('modules.commons.transfer-detail', ['transfer' => $transfer]);
     }
 }

@@ -5,11 +5,6 @@
         <x-splade-form action="{{ route('ti.update', [$store]) }}" method="PATCH" :default="$store">
              <x-splade-input name="code" label="Código" icon="ad" class="mb-2"/>
             <x-splade-input name="name" label="Nombre" icon="city" class="mb-2"/>
-            <x-splade-select name="type" label="Tipo" class="mb-2" placeholder="Seleccione el tipo">
-                <option value="" disabled>Seleccione...</option>
-                <option value="warehouse">Almacen</option>
-                <option value="store">Tienda</option>
-            </x-splade-select>
             <x-splade-select name="departament_id" label="Departamento"
                             placeholder="Seleccione el departamento"
                             :options="$departaments"

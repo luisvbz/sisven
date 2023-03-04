@@ -16,14 +16,14 @@
             </thead>
             <tbody>
                 @foreach ($stock as $detail)
-                <tr class="bg-white border-b">
-                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowra">
-                    {{ $detail->name }}
-                    </th>
-                    <td class="px-6 py-4 font-semibold text-right text-success-600">
-                    {{ $detail->quantity }}
-                    </td>
-                </tr>
+                    <tr class="@if($detail->type == 'warehouse') bg-yellow-100 @else bg-white  @endif border-b">
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowra">
+                        {{ $detail->name }}
+                        </th>
+                        <td class="px-6 py-4 font-semibold text-right text-success-600">
+                        {{ $detail->quantity }}
+                        </td>
+                    </tr>
                 @endforeach
             </tbody>
         </table>

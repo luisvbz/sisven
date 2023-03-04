@@ -16,6 +16,7 @@
                         @endif
                     </x-splade-cell>
                 <x-splade-cell actions>
+                    <Link rel="tooltip" title="Ver entradas y salidas de mercancia" href="{{ route('ti.movements', [$item])}}"><i class="mr-1 text-xl text-alternative-400 hover:text-alternative-600 fi fi-br-arrows-retweet"></i></Link>
                     @can('ti:edit')
                         <Link slideover href="{{ route('ti.edit', [$item])}}"><i class="mr-1 text-xl text-green-400 hover:text-green-600 fi fi-br-edit"></i></Link>
                     @endcan

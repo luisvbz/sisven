@@ -6,6 +6,8 @@ use App\Models\Store;
 use App\Tables\Stores;
 use App\Models\Departament;
 use Illuminate\Http\Request;
+use App\Models\StoreMovement;
+use App\Tables\StoresMovements;
 use Illuminate\Support\Facades\DB;
 use ProtoneMedia\Splade\Facades\Toast;
 use ProtoneMedia\Splade\Facades\Splade;
@@ -104,5 +106,20 @@ class StoresController extends Controller
         ->autoDismiss(15);
 
         return redirect()->route('ti.index');
+    }
+
+    public function movements(Store $store)
+    {
+        $movements_table = new StoresMovements($store->id);
+        return view('modules.stores.movements', [
+            'store' => $store,
+            'movements' => $movements_table
+        ]);
+    }
+
+    public function movementsDetails(Store $store, StoreMovement $movement) {
+        return view('modules.stores.movement-details', [
+            'movement' => $movement
+        ]);
     }
 }

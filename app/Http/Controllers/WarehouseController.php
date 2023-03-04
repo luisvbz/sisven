@@ -195,7 +195,7 @@ class WarehouseController extends Controller
             $movementWarehouse = $warehouse->movements()->create([
                 'type' => 'ouput',
                 'output_type_id' => $output->id,
-                'type_action' => "https://sisven.test",
+                'type_action' => route('transfer.details', [$transfer->id]),
                 'warehouse_id' => $warehouse->id,
                 'date' => date('Y-m-d')
             ]);
@@ -203,7 +203,7 @@ class WarehouseController extends Controller
             $movementStore = $store->movements()->create([
                 'type' => 'input',
                 'input_type_id' => $input->id,
-                'type_action' => "https://sisven.test",
+                'type_action' => route('transfer.details', [$transfer->id]),
                 'store_id' => $store->id,
                 'date' => now()
             ]);
@@ -256,7 +256,7 @@ class WarehouseController extends Controller
             ->backdrop()
             ->autoDismiss(15);
 
-            return redirect()->route('wr.movements-details', [$warehouse, $movementStore]);
+            return redirect()->route('wr.index');
 
         }catch(\Exception $e) {
 
