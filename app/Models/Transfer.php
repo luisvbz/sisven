@@ -55,4 +55,9 @@ class Transfer extends Model
         return $this->belongsToMany(Product::class, 'transfer_product')
         ->withPivot(['quantity']);
     }
+
+    public function requested()
+    {
+        return $this->belongsTo(User::class, 'requested_by');
+    }
 }

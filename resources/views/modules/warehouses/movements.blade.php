@@ -41,7 +41,6 @@
                 <x-splade-cell enlace as="$movement">
                     <div class="w-full">
                         <span class="p-1 text-[0.70rem] text-primary-600 font-semibold uppercase">
-
                                 @if($movement->type == 'input')
                                 <Link href="{{ $movement->type_action }}">
                                    Ver {{ $movement->input->name }} <i class="fi fi-br-link-alt"></i>

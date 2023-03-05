@@ -69,6 +69,7 @@ class CommonController extends Controller
 
     public function transferDetail($transfer)
     {
+        $transfer = Transfer::find($transfer);
         return view('modules.commons.transfer-detail', ['transfer' => $transfer]);
     }
 }

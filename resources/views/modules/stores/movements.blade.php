@@ -41,13 +41,15 @@
                 <x-splade-cell enlace as="$movement">
                     <div class="w-full">
                         <span class="p-1 text-[0.70rem] text-primary-600 font-semibold uppercase">
-                            <Link href="{{ $movement->type_action }}">
-                                @if($movement->type == 'input')
-                                   ir a la {{ $movement->input->name }} <i class="fi fi-br-link-alt"></i>
+                            @if($movement->type == 'input')
+                                <Link modal href="{{ $movement->type_action }}">
+                                   Ver {{ $movement->input->name }} <i class="fi fi-br-link-alt"></i>
+                                </Link>
                                 @else
-                                    ir a la {{ $movement->output->name }}
+                                <Link modal href="{{ $movement->type_action }}">
+                                   Ver {{ $movement->output->name }} <i class="fi fi-br-link-alt"></i>
+                                </Link>
                                 @endif
-                            </Link>
                         </span>
                     </div>
                 </x-splade-cell>
