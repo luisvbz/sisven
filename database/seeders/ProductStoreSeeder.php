@@ -109,6 +109,7 @@ class ProductStoreSeeder extends Seeder
         InputType::insert([
             ['name' => 'Compra', 'alias' => 'compra'],
             ['name' => 'Manual', 'alias' => 'manual'],
+            ['name' => 'Traslado', 'alias' => 'traslado'],
         ]);
 
         OutputType::insert([

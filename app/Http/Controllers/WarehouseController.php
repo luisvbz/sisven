@@ -251,7 +251,7 @@ class WarehouseController extends Controller
             DB::commit();
 
             Toast::title('Exito!')
-            ->center('EL traslado se gha efectuado con éxito')
+            ->center('EL traslado se ha efectuado con éxito')
             ->success()
             ->backdrop()
             ->autoDismiss(15);
@@ -259,16 +259,8 @@ class WarehouseController extends Controller
             return redirect()->route('wr.index');
 
         }catch(\Exception $e) {
-
+            dd($e->getMessage().$e->getLine());
         }
-
-
-
-
-        //update stock warehouse
-
-
-        dd($request->all());
     }
 
     public function getProductsByWarehouse($id)

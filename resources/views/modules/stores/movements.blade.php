@@ -18,7 +18,7 @@
             <x-splade-table :for="$movements">
                 <x-splade-cell tipo as="$movement">
                     @if($movement->type == 'input')
-                    <div class="w-fullr">
+                    <div class="w-full">
                         <span class="bg-success-500 p-1 text-[0.70rem] text-white rounded font-semibold">ENTRADA</span>
                     </div>
                     @else

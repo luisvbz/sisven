@@ -36,7 +36,12 @@ class Stores extends AbstractTable
      */
     public function for()
     {
-        return Store::query()->orderBy('created_at', 'DESC');
+        $storeQuery = Store::query()->orderBy('created_at', 'DESC');
+        if(auth()->user()->hasRole('vendedor')){
+            $storeQuery->wherein('id', auth()->user()->stores->pluck('id')->toArray());
+        }
+
+        return $storeQuery;
     }
 
     /**
