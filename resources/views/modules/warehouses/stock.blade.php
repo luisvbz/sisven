@@ -16,6 +16,9 @@
             </div>
             <div class="py-2 mb-4 border-b border-gray-600 border-dotted"></div>
             <x-splade-table :for="$stock">
+                    <x-splade-cell stock as="$product">
+                        {{ $product->warehouses[0]->pivot->quantity }}
+                    </x-splade-cell>
             </x-splade-table>
         </div>
     </div>

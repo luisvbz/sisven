@@ -2,6 +2,7 @@
 
 namespace App\Tables;
 
+use App\Models\Product;
 use App\Models\Warehouse;
 use App\Models\ProductType;
 use Illuminate\Http\Request;
@@ -38,7 +39,13 @@ class WarehouseStockTable extends AbstractTable
      */
     public function for()
     {
-        return $this->warehouse->products;
+        return Product::query()
+        ->with(['warehouses' => function($q) {
+            $q->where('id', $this->warehouse->id)
+                ->select('quantity');
+            }
+        ])
+        ->whereIn('id', $this->warehouse->products->pluck('id')->toArray());
     }
 
     /**
@@ -56,7 +63,7 @@ class WarehouseStockTable extends AbstractTable
             ->column(key: 'price_formated', label: 'Precio', highlight: true)
             ->column(key: 'cost_formated', label: 'Costo', highlight: true)
             ->column(key: 'measure.name', label: 'medida')
-            ->column(key: 'pivot.quantity', label:'stock', highlight: true)
+            ->column(label:'stock', highlight: true)
             ->selectFilter(
                 key:'type_id',
                 noFilterOptionLabel: 'Todos',

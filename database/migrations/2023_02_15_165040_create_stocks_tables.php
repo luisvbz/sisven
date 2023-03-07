@@ -46,7 +46,8 @@ return new class extends Migration
 
             $table->foreign('warehouse_id')
             ->references('id')
-            ->on('warehouses');
+            ->on('warehouses')
+            ->restrictOnDelete();
 
 
         });
@@ -97,7 +98,8 @@ return new class extends Migration
 
             $table->foreign('store_id')
             ->references('id')
-            ->on('stores');
+            ->on('stores')
+            ->restrictOnDelete();
 
 
         });

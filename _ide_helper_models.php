@@ -296,6 +296,7 @@ namespace App\Models{
  * @property-read \App\Models\ProductType $type
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Warehouse> $warehouses
  * @property-read int|null $warehouses_count
+ * @method static \Database\Factories\ProductFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|Product newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Product newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Product query()
@@ -398,11 +399,94 @@ namespace App\Models{
 /**
  * App\Models\STMovementDetail
  *
+ * @property int $id
+ * @property int $movement_id
+ * @property int $product_id
+ * @property int $quantity
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\StoreMovement $parent
+ * @property-read \App\Models\Product $product
  * @method static \Illuminate\Database\Eloquent\Builder|STMovementDetail newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|STMovementDetail newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|STMovementDetail query()
+ * @method static \Illuminate\Database\Eloquent\Builder|STMovementDetail whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|STMovementDetail whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|STMovementDetail whereMovementId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|STMovementDetail whereProductId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|STMovementDetail whereQuantity($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|STMovementDetail whereUpdatedAt($value)
  */
 	class STMovementDetail extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\Sale
+ *
+ * @property string $id
+ * @property string $status
+ * @property int $client_id
+ * @property int $store_id
+ * @property int $user_id
+ * @property int $type_id
+ * @property int $has_discount
+ * @property string $currency
+ * @property int|null $discount_percent
+ * @property string|null $total_discount
+ * @property string $sub_total
+ * @property string $total
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|Sale newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Sale newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Sale query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Sale whereClientId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Sale whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Sale whereCurrency($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Sale whereDiscountPercent($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Sale whereHasDiscount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Sale whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Sale whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Sale whereStoreId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Sale whereSubTotal($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Sale whereTotal($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Sale whereTotalDiscount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Sale whereTypeId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Sale whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Sale whereUserId($value)
+ */
+	class Sale extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\SaleProduct
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder|SaleProduct newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|SaleProduct newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|SaleProduct query()
+ */
+	class SaleProduct extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\SaleType
+ *
+ * @property int $id
+ * @property string $name
+ * @property string $alias
+ * @property int $quantity
+ * @method static \Illuminate\Database\Eloquent\Builder|SaleType newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|SaleType newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|SaleType query()
+ * @method static \Illuminate\Database\Eloquent\Builder|SaleType whereAlias($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|SaleType whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|SaleType whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|SaleType whereQuantity($value)
+ */
+	class SaleType extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -421,6 +505,8 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property-read \App\Models\Departament $departament
  * @property-read \App\Models\District $district
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\StoreMovement> $movements
+ * @property-read int|null $movements_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Product> $products
  * @property-read int|null $products_count
  * @property-read \App\Models\Province $province
@@ -483,6 +569,8 @@ namespace App\Models{
  * @property string $date
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\STMovementDetail> $details
+ * @property-read int|null $details_count
  * @property-read \App\Models\InputType|null $input
  * @property-read \App\Models\OutputType|null $output
  * @property-read \App\Models\Product $product
@@ -536,33 +624,36 @@ namespace App\Models{
  *
  * @property int $id
  * @property string $status
- * @property int $origin
- * @property int $destination
+ * @property int $warehouse_id
+ * @property int $store_id
  * @property int $requested_by
  * @property string|null $approved_at
  * @property string|null $rejected_at
  * @property string|null $canceled_at
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Approval> $approvals
+ * @property-read int|null $approvals_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Comment> $comments
  * @property-read int|null $comments_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Product> $products
  * @property-read int|null $products_count
- * @property-read \App\Models\Store $storeDestination
- * @property-read \App\Models\Store $storeOrigin
+ * @property-read \App\Models\User $requested
+ * @property-read \App\Models\Store $store
+ * @property-read \App\Models\Warehouse $warehouse
  * @method static \Illuminate\Database\Eloquent\Builder|Transfer newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Transfer newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Transfer query()
  * @method static \Illuminate\Database\Eloquent\Builder|Transfer whereApprovedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Transfer whereCanceledAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Transfer whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Transfer whereDestination($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Transfer whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Transfer whereOrigin($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Transfer whereRejectedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Transfer whereRequestedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Transfer whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Transfer whereStoreId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Transfer whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Transfer whereWarehouseId($value)
  */
 	class Transfer extends \Eloquent {}
 }
@@ -628,8 +719,8 @@ namespace App\Models{
  * @property int $id
  * @property int $movement_id
  * @property int $product_id
- * @property int $packages
- * @property int $quantity_per_packages
+ * @property int|null $packages
+ * @property int|null $quantity_per_packages
  * @property int $total
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at

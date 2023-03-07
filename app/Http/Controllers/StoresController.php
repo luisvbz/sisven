@@ -8,6 +8,7 @@ use App\Models\Departament;
 use Illuminate\Http\Request;
 use App\Models\StoreMovement;
 use App\Tables\StoresMovements;
+use App\Tables\StoreStockTable;
 use Illuminate\Support\Facades\DB;
 use ProtoneMedia\Splade\Facades\Toast;
 use ProtoneMedia\Splade\Facades\Splade;
@@ -97,6 +98,17 @@ class StoresController extends Controller
 
     public function delete(Store $store)
     {
+
+        if(count($store->products) > 0) {
+            Toast::title('Exito!')
+            ->center('Existen productos asociados a la tienda, no se puede eliminar')
+            ->danger()
+            ->backdrop()
+            ->autoDismiss(15);
+
+            return redirect()->route('ti.index');
+        }
+
         $store->delete();
 
         Toast::title('Exito!')
@@ -120,6 +132,15 @@ class StoresController extends Controller
     public function movementsDetails(Store $store, StoreMovement $movement) {
         return view('modules.stores.movement-details', [
             'movement' => $movement
+        ]);
+    }
+
+    public function stock(Store $store)
+    {
+        $stock_table = new StoreStockTable($store);
+        return view('modules.stores.stock', [
+            'store' => $store,
+            'stock' => $stock_table
         ]);
     }
 }

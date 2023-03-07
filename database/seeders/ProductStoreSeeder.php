@@ -4,13 +4,14 @@ namespace Database\Seeders;
 
 use App\Models\Store;
 use App\Models\Product;
+use App\Models\SaleType;
+use App\Models\Supplier;
 use App\Models\InputType;
 use App\Models\Warehouse;
 use App\Models\OutputType;
 use App\Models\ProductType;
 use App\Models\ProductMeasure;
 use App\Models\ProductPackage;
-use App\Models\Supplier;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
@@ -135,6 +136,30 @@ class ProductStoreSeeder extends Seeder
                 'phone_number' => '87654321',
                 'address' => 'Jr. Lima 1522'
               ]);
+
+
+        SaleType::insert([
+            [
+                'name' => 'Docena',
+                'alias' => 'DOC',
+                'quantity' => 12
+            ],
+            [
+                'name' => 'Media Docena',
+                'alias' => '1/2 DOC',
+                'quantity' => 6
+            ],
+            [
+                'name' => 'Un cuarto de Docena',
+                'alias' => '1/4 DOC',
+                'quantity' => 3
+            ],
+            [
+                'name' => 'Unidad',
+                'alias' => 'Unidad',
+                'quantity' => 1
+            ],
+        ]);
 
     }
 }

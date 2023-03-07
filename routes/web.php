@@ -58,6 +58,7 @@ Route::middleware('splade')->group(function () {
             Route::delete('/{store}/delete',[StoresController::class, 'delete'])->name('ti.delete')->middleware('permission:ti:delete');
             Route::get('/{store}/movimientos',[StoresController::class, 'movements'])->name('ti.movements')->middleware('permission:ti:access');
             Route::get('/{store}/movimientos/{movement}/detalles',[StoresController::class, 'movementsDetails'])->name('ti.movements-details')->middleware('permission:ti:access');
+            Route::get('/{store}/stock',[StoresController::class, 'stock'])->name('ti.stock')->middleware('permission:st:access');
             //Transferencias
             Route::get('/solicitar-productos', [TransfersController::class, 'add'])
                     ->name('ti.request-product');

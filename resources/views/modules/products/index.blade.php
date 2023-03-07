@@ -8,7 +8,7 @@
 @section('content')
     <div class="py-0">
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
-            <x-splade-table :for="$products" striped>
+            <x-splade-table :for="$products" striped search-debounce="500">
                 <x-splade-cell stock as="$product">
                     @if(!$product->alert_stock)
                         <p class="font-bold text-success-500">{{ $product->full_stock_formated}}</p>
