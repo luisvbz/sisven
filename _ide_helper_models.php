@@ -47,6 +47,7 @@ namespace App\Models{
  *
  * @property int $id
  * @property string $document_type
+ * @property string $document_number
  * @property string $name
  * @property string|null $address
  * @property string|null $phone_office
@@ -59,6 +60,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Client query()
  * @method static \Illuminate\Database\Eloquent\Builder|Client whereAddress($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Client whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Client whereDocumentNumber($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Client whereDocumentType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Client whereEmail($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Client whereId($value)
