@@ -29,7 +29,7 @@
                 </div>
                 <div class="flex flex-col lg:flex-row h-screen">
   <!-- Columna para la lista de productos -->
-  <div class="w-full lg:w-4/5 bg-gray-100 px-4 py-8">
+  <div class="w-full lg:w-3/5 bg-gray-100 px-4 py-8">
     <h1 class="text-3xl font-bold mb-8">Venta de productos</h1>
     <table class="w-full border-collapse">
       <thead>
