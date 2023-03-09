@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TestController;
+use App\Http\Controllers\SalesController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\CommonController;
 use App\Http\Controllers\OrdersController;
@@ -121,6 +122,10 @@ Route::middleware('splade')->group(function () {
             Route::patch('/administrar/medidas/{measure}/actualizar', [ProductsController::class, 'updateMeasure'])->name('pr.update-measure');
             Route::delete('/administrar/medidas/{measure}/delete', [ProductsController::class, 'deleteMeasure'])->name('pr.delete-measure');
 
+        });
+
+        Route::group(['prefix' => 'ventas'], function(){
+            Route::get('/generar',[SalesController::class, 'new'])->name('ve.add')->middleware('permission:ve:access');
         });
 
         Route::get('/traslado/{transfer}', [CommonController::class, 'transferDetail'])->name('transfer.details');

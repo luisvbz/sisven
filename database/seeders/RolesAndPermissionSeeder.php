@@ -64,6 +64,9 @@ class RolesAndPermissionSeeder extends Seeder
             ['name' => 'co:create', 'guard_name' => 'web', 'display_name' => 'Agregar un nuevo compras', 'module_id' => 'CO'],
             ['name' => 'co:edit', 'guard_name' => 'web', 'display_name' => 'Editar compras', 'module_id' => 'CO'],
             ['name' => 'co:delete', 'guard_name' => 'web', 'display_name' => 'Eliminar compras', 'module_id' => 'CO'],
+            //Ventas
+            ['name' => 've:access', 'guard_name' => 'web', 'display_name' => 'Acceder al modulo de ventas', 'module_id' => 'VE'],
+            ['name' => 've:create', 'guard_name' => 'web', 'display_name' => 'Generar una nueva venta', 'module_id' => 'VE'],
 
          ];
 

@@ -1,14 +1,14 @@
 <aside
       class="hidden md:block transition-transform duration-150 ease-in transform -translate-x-full md:min-w-[220px] md:w-[220px] lg:min-w-[300px] lg:w-[300px] bg-gradient-to-b from-slate-100 to-slate-50 sidebar md:shadow md:translate-x-0"
     >
-      <div class="flex flex-col items-center justify-center py-4 sidebar-header">
+      <div class="flex flex-col items-center justify-center  sidebar-header">
         <div class="w-3/4">
           <x-splade-link href="/" class="inline-flex flex-row items-center">
-            <img src="{{ asset('images/logo.svg')}}" alt="logo-white"/>
+            <img src="{{ asset('images/logo.png')}}" alt="logo-white"/>
           </x-splade-link>
         </div>
       </div>
-      <div class="py-6 sidebar-content">
+      <div class="py-2 sidebar-content">
         <ul class="flex flex-col w-full">
           <li class="my-px">
             <x-nav-link-sidebar  :href="route('dashboard')" :active="request()->routeIs('dashboard')">
@@ -30,6 +30,18 @@
               <span class="ml-3">Inicio</span>
             </x-nav-link-sidebar>
           </li>
+          @can('ve:create')
+          <li class="my-px">
+            <x-nav-link-sidebar :href="route('ve.add')" :active="request()->routeIs('ve.add')"
+              class="flex flex-row items-center h-10 px-3 text-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700"
+            >
+              <span class="flex items-center justify-center text-lg text-alternative-400">
+                <i class="fi fi-br-money"></i>
+              </span>
+              <span class="ml-3">Nueva Venta</span>
+            </x-nav-link-sidebar>
+          </li>
+          @endcan
           {{ $slot }}
         </ul>
       </div>

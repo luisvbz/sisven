@@ -39,13 +39,13 @@ class ModulesSeeder extends Seeder
                 'route' => '/tiendas',
                 'permission_to_access' => 'ti:access'
             ],
-            // [
-            //     'id' => 'VE',
-            //     'name' => 'Ventas',
-            //     'description' => 'Modulo de Ventas',
-            //     'route' => '/ventas',
-            //     'permission_to_access' => 've:access'
-            // ],
+            [
+                 'id' => 'VE',
+                 'name' => 'Ventas',
+                 'description' => 'Modulo de Ventas',
+                 'route' => '/ventas',
+                 'permission_to_access' => 've:access'
+            ],
             [
                  'id' => 'PR',
                  'name' => 'Productos',

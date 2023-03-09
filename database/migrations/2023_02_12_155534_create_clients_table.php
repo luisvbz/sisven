@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('clients', function (Blueprint $table) {
             $table->id();
             $table->enum('document_type', ['dni','ce','ruc','passport','ptp','cpp','other'])->unique();
+            $table->string('document_number');
             $table->string('name');
             $table->string('address')->nullable();
             $table->string('phone_office')->nullable();

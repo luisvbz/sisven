@@ -13,7 +13,7 @@ module.exports = {
     theme: {
         extend: {
             colors: {
-                primary: {
+                /* primary: {
                     '50': '#eef5ff',
                     '100': '#d9e7ff',
                     '200': '#bcd5ff',
@@ -24,6 +24,18 @@ module.exports = {
                     '700': '#1438e1',
                     '800': '#172eb6',
                     '900': '#192d8f',
+                }, */
+                primary: {
+                    '50': '#f5f4fe',
+                    '100': '#ecebfc',
+                    '200': '#dad9fb',
+                    '300': '#bebaf8',
+                    '400': '#9d93f2',
+                    '500': '#7c67eb',
+                    '600': '#6947e0',
+                    '700': '#5a35cc',
+                    '800': '#4f2eb4',
+                    '900': '#3f268c',
                 },
                 alternative: {
                     '50': '#fff9eb',
