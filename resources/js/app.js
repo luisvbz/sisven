@@ -5,6 +5,7 @@ import "@protonemedia/laravel-splade/dist/style.css";
 import CurrencyInput from './components/CurrencyInput.vue';
 import InputMask from './components/InputMask.vue';
 import TransferProducts from './components/TrasnferProducts.vue';
+import NuevaVenta from './components/NuevaVenta.vue';
 
 import { createApp } from "vue/dist/vue.esm-bundler.js";
 import { renderSpladeApp, SpladePlugin } from "@protonemedia/laravel-splade";
@@ -21,7 +22,7 @@ createApp({
         "components": {
             CurrencyInput,
             InputMask,
-            TransferProducts
+            NuevaVenta
         }
     })
     .mount(el);

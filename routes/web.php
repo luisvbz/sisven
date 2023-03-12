@@ -151,4 +151,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/commons/get-product', [CommonController::class, 'getProduct'])->name('get-product');
     Route::get('/api/warehouse/{id}/product/{productId}', [WarehouseController::class, 'getProduct'])->name('wr.get-product');
     Route::get('/api/warehouse/{id}/get-products', [WarehouseController::class, 'getProductsByWarehouse'])->name('wr.get-products');
+    //Sales
+    Route::get('/api/sales/store/{storeId}/products', [SalesController::class, 'getProductosByStore'])->name('ve.get-products');
+    Route::get('/api/sales/clients', [SalesController::class, 'getClients'])->name('ve.get-clients');
 });

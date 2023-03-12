@@ -2,7 +2,7 @@
 <label class="block">
     <span class="block mb-1 font-sans text-sm font-medium text-gray-700">{{ label }}</span>
     <div class="flex border border-gray-300 rounded-md shadow-sm">
-        <span class="inline-flex items-center px-3 text-gray-500 border border-t-0 border-b-0 border-l-0 border-gray-300 rounded-l-md bg-gray-50"><i class="fi fi-br-dollar"></i></span>
+        <span v-if="icon" class="inline-flex items-center px-3 text-gray-500 border border-t-0 border-b-0 border-l-0 border-gray-300 rounded-l-md bg-gray-50"><i class="fi fi-br-dollar"></i></span>
          <input
             ref="inputRef"
             type="text"
@@ -22,7 +22,11 @@ export default {
   props: {
     modelValue:Number,
     options: Object,
-    label: String
+    label: String,
+    icon: {
+        type: Boolean,
+        default: true
+    }
   },
   setup(props) {
     const { inputRef, setOptions, setValue  } = useCurrencyInput(props.options)
