@@ -431,7 +431,6 @@ namespace App\Models{
  * @property int $client_id
  * @property int $store_id
  * @property int $user_id
- * @property int $type_id
  * @property int $has_discount
  * @property string $currency
  * @property int|null $discount_percent
@@ -440,6 +439,11 @@ namespace App\Models{
  * @property string $total
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Client $client
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\SaleProduct> $products
+ * @property-read int|null $products_count
+ * @property-read \App\Models\Store $store
+ * @property-read \App\Models\User $user
  * @method static \Illuminate\Database\Eloquent\Builder|Sale newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Sale newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Sale query()
@@ -454,7 +458,6 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Sale whereSubTotal($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Sale whereTotal($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Sale whereTotalDiscount($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Sale whereTypeId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Sale whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Sale whereUserId($value)
  */
@@ -465,9 +468,26 @@ namespace App\Models{
 /**
  * App\Models\SaleProduct
  *
+ * @property int $id
+ * @property string $sale_id
+ * @property int $product_id
+ * @property int $type_id
+ * @property int $quantity_type
+ * @property int $quantity_total
+ * @property string $unit_price
+ * @property string $total
+ * @property-read \App\Models\Product $product
  * @method static \Illuminate\Database\Eloquent\Builder|SaleProduct newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|SaleProduct newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|SaleProduct query()
+ * @method static \Illuminate\Database\Eloquent\Builder|SaleProduct whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|SaleProduct whereProductId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|SaleProduct whereQuantityTotal($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|SaleProduct whereQuantityType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|SaleProduct whereSaleId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|SaleProduct whereTotal($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|SaleProduct whereTypeId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|SaleProduct whereUnitPrice($value)
  */
 	class SaleProduct extends \Eloquent {}
 }

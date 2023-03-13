@@ -18,7 +18,13 @@
                 <div class="py-2 mb-4 border-b border-gray-600 border-dotted"></div>
             @else
             @endif
-            <x-splade-form :default="[
+            <x-splade-form
+            action="{{ route('ve.store')}}"
+            confirm="Registra Venta"
+            confirm-text="Estas seguro de registrar esta venta, esta acción no se puede eliminar?"
+            confirm-button="Si, Vender!"
+            cancel-button="Cancelar!"
+             :default="[
                     'store_id' =>  $stores->id,
                     'client_id' => null,
                     'types' => $types,
@@ -28,7 +34,7 @@
                     'subtotal' => 0,
                     'total' => 0
                     ]">
-            <nueva-venta :form="form"></nueva-venta>
+                <nueva-venta :form="form"/>
                 <pre class="bg-white p-4 rounded border border-gray-300 mt-4" v-text="form.$all"/>
             </x-splade-form>
         </div>

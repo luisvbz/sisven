@@ -4,7 +4,8 @@ import "../css/uicons/css/uicons-bold-rounded.css"
 import "@protonemedia/laravel-splade/dist/style.css";
 import CurrencyInput from './components/CurrencyInput.vue';
 import InputMask from './components/InputMask.vue';
-import TransferProducts from './components/TrasnferProducts.vue';
+import ToastPlugin from 'vue-toast-notification';
+import 'vue-toast-notification/dist/theme-sugar.css'
 import NuevaVenta from './components/NuevaVenta.vue';
 
 import { createApp } from "vue/dist/vue.esm-bundler.js";
@@ -25,4 +26,5 @@ createApp({
             NuevaVenta
         }
     })
+    .use(ToastPlugin)
     .mount(el);

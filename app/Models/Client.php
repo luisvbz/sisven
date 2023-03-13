@@ -18,4 +18,12 @@ class Client extends Model
         'phone_celular',
         'email',
     ];
+
+    protected function name(): Attribute
+    {
+        return Attribute::make(
+            set: fn ($value) => strtoupper($value),
+            get: fn ($value) => strtoupper($value),
+        );
+    }
 }

@@ -7,6 +7,7 @@ use App\Http\Controllers\UsersController;
 use App\Http\Controllers\CommonController;
 use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\StoresController;
+use App\Http\Controllers\ClientsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\SuplliersController;
@@ -125,7 +126,14 @@ Route::middleware('splade')->group(function () {
         });
 
         Route::group(['prefix' => 'ventas'], function(){
+            Route::get('/{sale}/detalle', [SalesController::class, 'show'])->name('ve.show')->middleware('permission:ve:access');
             Route::get('/generar',[SalesController::class, 'new'])->name('ve.add')->middleware('permission:ve:access');
+            Route::post('/generar',[SalesController::class, 'store'])->name('ve.store')->middleware('permission:ve:access');
+        });
+
+        Route::group(['prefix' => 'clientes'], function(){
+            Route::get('/nuevo',[ClientsController::class, 'new'])->name('cl.add')->middleware('permission:ve:access');
+            Route::post('/nuevo',[ClientsController::class, 'store'])->name('cl.store')->middleware('permission:ve:access');
         });
 
         Route::get('/traslado/{transfer}', [CommonController::class, 'transferDetail'])->name('transfer.details');

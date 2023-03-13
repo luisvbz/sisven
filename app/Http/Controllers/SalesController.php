@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Sale;
 use App\Models\Store;
 use App\Models\Client;
 use App\Models\Product;
 use App\Models\SaleType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use ProtoneMedia\Splade\Facades\Toast;
+use App\Http\Requests\Sales\NewSaleRequest;
 
 class SalesController extends Controller
 {
@@ -32,6 +36,65 @@ class SalesController extends Controller
         }
 
         return $stores;
+    }
+
+    public function store(NewSaleRequest $request)
+    {
+        try {
+            $data = $request->all();
+            //saveing sale
+            DB::beginTransaction();
+            $store = Store::find($request->store_id);
+            $sale = Sale::create([
+                'client_id'=> $data['client_id'],
+                'store_id'=> $data['store_id'],
+                'user_id'=> auth()->user()->id,
+                'has_discount'=> false,
+                'currency'=> "S",
+                'discount_percent'=> 0,
+                'sub_total'=> $data['total'],
+                'total' => $data['total']
+            ]);
+
+            foreach($data['products'] as $product) {
+                if(!$product['omit']) {
+                    $typeSale = SaleType::find($product['type_sale']);
+                    $totalProduct = $typeSale->quantity*$product['quantity_type'];
+                    $sale->products()->create([
+                        'product_id' => $product['product_id'],
+                        'type_id' => $product['type_sale'],
+                        'quantity_type' => $product['quantity_type'],
+                        'quantity_total' => $totalProduct,
+                        'unit_price' => $product['unit_price'],
+                        'total' => $product['total_price']
+                    ]);
+
+                    //update stock
+                    $productStock = $store->products()->where('id', $product['product_id'])->first();
+                    $total = $productStock->pivot->quantity - $totalProduct;
+                    $store->products()->updateExistingPivot($product['product_id'], ['quantity' => $total]);
+                }
+            }
+
+            DB::commit();
+
+            Toast::title('Exito!')
+            ->center('La venta se ha realizado con éxito')
+            ->success()
+            ->backdrop()
+            ->autoDismiss(15);
+
+        return redirect()->route('ve.show', [$sale]);
+
+        }catch(\Exception $e) {
+            dd($e->getMessage().$e->getLine());
+        }
+        //dd($request->all());
+    }
+
+    public function show(Sale $sale)
+    {
+        return view('modules.sales.show', ['sale' => $sale]);
     }
 
     public function getProductosByStore(Request $request, $storeId)
