@@ -30,18 +30,6 @@
               <span class="ml-3">Inicio</span>
             </x-nav-link-sidebar>
           </li>
-          @can('ve:create')
-          <li class="my-px">
-            <x-nav-link-sidebar :href="route('ve.add')" :active="request()->routeIs('ve.add')"
-              class="flex flex-row items-center h-10 px-3 text-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700"
-            >
-              <span class="flex items-center justify-center text-lg text-alternative-400">
-                <i class="fi fi-br-money"></i>
-              </span>
-              <span class="ml-3">Nueva Venta</span>
-            </x-nav-link-sidebar>
-          </li>
-          @endcan
           {{ $slot }}
         </ul>
       </div>

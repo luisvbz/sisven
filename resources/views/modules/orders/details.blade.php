@@ -1,7 +1,7 @@
 @extends('modules.orders.base')
 
 @section('header')
-    Almacenes /<small>Detalle de la compra</small>
+    Compras /<small>Detalle de la compra</small>
 @endsection
 
 @section('content')

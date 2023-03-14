@@ -8,7 +8,7 @@
             <span class="flex px-4 my-4 text-sm font-medium text-gray-800 uppercase">Ventas</span>
           </li>
           <li class="my-px">
-            <x-nav-link-sidebar :href="route('ti.index')" :active="request()->routeIs('ti.index')"
+            <x-nav-link-sidebar :href="route('ve.index')" :active="request()->routeIs('ve.index')"
               class="flex flex-row items-center h-10 px-3 text-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700"
             >
               <span class="flex items-center justify-center text-lg text-alternative-400">
@@ -19,7 +19,7 @@
           </li>
           @can('ve:create')
           <li class="my-px">
-            <x-nav-link-sidebar slideover :href="route('ti.add')" :active="request()->routeIs('ti.add')"
+            <x-nav-link-sidebar :href="route('ve.add')" :active="request()->routeIs('ve.add')"
               class="flex flex-row items-center h-10 px-3 text-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700"
             >
               <span class="flex items-center justify-center text-lg text-alternative-400">

@@ -440,6 +440,7 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\Client $client
+ * @property-read mixed $total_formated
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\SaleProduct> $products
  * @property-read int|null $products_count
  * @property-read \App\Models\Store $store
@@ -477,6 +478,7 @@ namespace App\Models{
  * @property string $unit_price
  * @property string $total
  * @property-read \App\Models\Product $product
+ * @property-read \App\Models\SaleType $type
  * @method static \Illuminate\Database\Eloquent\Builder|SaleProduct newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|SaleProduct newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|SaleProduct query()

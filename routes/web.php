@@ -60,7 +60,7 @@ Route::middleware('splade')->group(function () {
             Route::delete('/{store}/delete',[StoresController::class, 'delete'])->name('ti.delete')->middleware('permission:ti:delete');
             Route::get('/{store}/movimientos',[StoresController::class, 'movements'])->name('ti.movements')->middleware('permission:ti:access');
             Route::get('/{store}/movimientos/{movement}/detalles',[StoresController::class, 'movementsDetails'])->name('ti.movements-details')->middleware('permission:ti:access');
-            Route::get('/{store}/stock',[StoresController::class, 'stock'])->name('ti.stock')->middleware('permission:st:access');
+            Route::get('/{store}/stock',[StoresController::class, 'stock'])->name('ti.stock')->middleware('permission:ti:access');
             //Transferencias
             Route::get('/solicitar-productos', [TransfersController::class, 'add'])
                     ->name('ti.request-product');
@@ -126,6 +126,7 @@ Route::middleware('splade')->group(function () {
         });
 
         Route::group(['prefix' => 'ventas'], function(){
+            Route::get('/', [SalesController::class, 'index'])->name('ve.index')->middleware('permission:ve:access');
             Route::get('/{sale}/detalle', [SalesController::class, 'show'])->name('ve.show')->middleware('permission:ve:access');
             Route::get('/generar',[SalesController::class, 'new'])->name('ve.add')->middleware('permission:ve:access');
             Route::post('/generar',[SalesController::class, 'store'])->name('ve.store')->middleware('permission:ve:access');

@@ -26,4 +26,9 @@ class SaleProduct extends Model
     {
         return $this->belongsTo(Product::class);
     }
+
+    public function type()
+    {
+        return $this->belongsTo(SaleType::class, 'type_id');
+    }
 }

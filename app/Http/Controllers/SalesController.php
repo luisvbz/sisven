@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Sale;
 use App\Models\Store;
+use App\Tables\Sales;
 use App\Models\Client;
 use App\Models\Product;
 use App\Models\SaleType;
@@ -20,7 +21,13 @@ class SalesController extends Controller
         return view('modules.sales.new', [
             'types' => SaleType::all(),
             'stores' => $stores,
+            'store' => auth()->user()->hasRole('vendedor') ?  $stores : null
         ]);
+    }
+
+    public function index()
+    {
+        return view('modules.sales.index', ['sales' => Sales::class]);
     }
 
     private function getMyStores()

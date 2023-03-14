@@ -42,4 +42,9 @@ class Sale extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function getTotalFormatedAttribute()
+    {
+        return "S/ ".number_format($this->total, 2,".", ",");
+    }
+
 }

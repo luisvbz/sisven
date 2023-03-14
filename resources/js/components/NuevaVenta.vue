@@ -207,6 +207,10 @@ export default {
             this.products.loading = false
         }
     },
+    'form.store_id' ()
+    {
+        this.form.products = [];
+    }
   },
   computed: {
     totalSale()
