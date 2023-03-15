@@ -69,9 +69,9 @@ class Sale extends Model
         return $anioActual . str_pad($numeroConsecutivo, 5, '0', STR_PAD_LEFT);
     }
 
-    public function justifications()
+    public function justification()
     {
-        return $this->morphMany(Justification::class, 'justifiable');
+        return $this->hasOne(SaleJustification::class, 'sale_id');
     }
 
 }

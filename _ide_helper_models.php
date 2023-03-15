@@ -458,8 +458,7 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\Client $client
  * @property-read mixed $total_formated
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Justification> $justifications
- * @property-read int|null $justifications_count
+ * @property-read \App\Models\SaleJustification|null $justification
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\SaleProduct> $products
  * @property-read int|null $products_count
  * @property-read \App\Models\Store $store
@@ -483,6 +482,30 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Sale whereUserId($value)
  */
 	class Sale extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\SaleJustification
+ *
+ * @property int $id
+ * @property string $sale_id
+ * @property int $user_id
+ * @property string $justification
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\User $user
+ * @method static \Illuminate\Database\Eloquent\Builder|SaleJustification newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|SaleJustification newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|SaleJustification query()
+ * @method static \Illuminate\Database\Eloquent\Builder|SaleJustification whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|SaleJustification whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|SaleJustification whereJustification($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|SaleJustification whereSaleId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|SaleJustification whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|SaleJustification whereUserId($value)
+ */
+	class SaleJustification extends \Eloquent {}
 }
 
 namespace App\Models{

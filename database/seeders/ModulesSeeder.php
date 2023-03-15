@@ -74,6 +74,27 @@ class ModulesSeeder extends Seeder
                  'route' => '/compras',
                  'permission_to_access' => 'co:access'
             ],
+            [
+                'id' => 'RP',
+                'name' => 'Reportes',
+                'description' => 'Modulo de reportes',
+                'route' => '/reportes',
+                'permission_to_access' => 'rp:access'
+            ],
+            [
+                'id' => 'CL',
+                'name' => 'Clientes',
+                'description' => 'Modulo de clientes',
+                'route' => '/clientes',
+                'permission_to_access' => 'cl:access'
+            ],
+            [
+                'id' => 'DE',
+                'name' => 'Documentos',
+                'description' => 'Facturas / Boletas / Notas',
+                'route' => '/clientes',
+                'permission_to_access' => 'de:access'
+            ],
         ];
 
         Module::insert($modules);

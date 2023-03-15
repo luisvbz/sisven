@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('bills', function (Blueprint $table) {
             $table->uuid('id');
+            $table->foreignIdFor(Sale::class)->constrained();
             $table->enum('type', ['FACT','BOL','NDD','NDC']);
             $table->string('serie');
             $table->string('number');

@@ -113,7 +113,7 @@ class SalesController extends Controller
                         ->withInput();
         }
 
-        $jus = $request->justification;
+        $justificacion = $request->justification;
         $sale = Sale::find($request->sale_id);
         $store = Store::find($sale->store_id);
         $input = InputType::whereAlias('venta-cancelada')->first();
@@ -139,6 +139,11 @@ class SalesController extends Controller
                 'quantity' => $product->quantity_total,
             ]);
         }
+
+        $sale->justification()->create([
+            'user_id' => auth()->user()->id,
+            'justification' => $justificacion
+        ]);
 
         $sale->status = 'canceled';
         $sale->save();

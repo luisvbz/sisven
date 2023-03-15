@@ -3191,20 +3191,20 @@
         },
         {
             "name": "protonemedia/laravel-splade",
-            "version": "1.2.5",
+            "version": "1.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/protonemedia/laravel-splade.git",
-                "reference": "2be4fda17eaa40eda278d703ba42853b819eb67d"
+                "reference": "294c7f0fbf7335ac482a6c6557cf36a52090a764"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/protonemedia/laravel-splade/zipball/2be4fda17eaa40eda278d703ba42853b819eb67d",
-                "reference": "2be4fda17eaa40eda278d703ba42853b819eb67d",
+                "url": "https://api.github.com/repos/protonemedia/laravel-splade/zipball/294c7f0fbf7335ac482a6c6557cf36a52090a764",
+                "reference": "294c7f0fbf7335ac482a6c6557cf36a52090a764",
                 "shasum": ""
             },
             "require": {
-                "illuminate/contracts": "^9.28|^10.0",
+                "illuminate/contracts": "^9.41|^10.0",
                 "php": "^8.0 || ^8.1 || ^8.2"
             },
             "conflict": {
@@ -3219,7 +3219,8 @@
             },
             "suggest": {
                 "kirschbaum-development/eloquent-power-joins": "Required to enable support sorting by (nested) relationships in Splade Tables (^2.6)",
-                "maatwebsite/excel": "Required to enable support exports in Splade Tables (^3.1)"
+                "maatwebsite/excel": "Required to enable support exports in Splade Tables (^3.1)",
+                "spatie/fractalistic": "Required to enable support for Fractal transformers (^2.9)"
             },
             "type": "library",
             "extra": {
@@ -3260,7 +3261,7 @@
             ],
             "support": {
                 "issues": "https://github.com/protonemedia/laravel-splade/issues",
-                "source": "https://github.com/protonemedia/laravel-splade/tree/1.2.5"
+                "source": "https://github.com/protonemedia/laravel-splade/tree/1.4.1"
             },
             "funding": [
                 {
@@ -3268,7 +3269,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-01-30T21:27:12+00:00"
+            "time": "2023-03-15T14:54:35+00:00"
         },
         {
             "name": "protonemedia/laravel-splade-breeze",
@@ -10444,5 +10445,5 @@
         "php": "^8.0.2"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.2.0"
 }

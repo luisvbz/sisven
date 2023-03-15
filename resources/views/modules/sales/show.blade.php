@@ -9,7 +9,7 @@
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
              <div class="flex space-x-2">
                 <div class="flex flex-col justify-center w-14"><img src="{{ asset('images/modules/VE.svg') }}"/></div>
-                <div class="flex flex-col flex-grow justify-center">
+                <div class="flex flex-col justify-center flex-grow">
                     <div class="text-lg font-semibold"><span class="text-gray-500">Venta:</span> {{ $sale->number }}</div>
                     <div class="text-sm font-semibold text-gray-500">
                         Fecha: <span class="text-alternative-500">{{ $sale->created_at->format('d/m/Y') }}</span>
@@ -27,8 +27,8 @@
                 </div>
             </div>
             <div class="py-2 mb-4 border-b border-gray-600 border-dotted"></div>
-            <div class="grid gap-4 pb-2 grid-cols-3 bg-white rounded-md p-3 border border-gray-300 mb-4">
-                <div class="flex flex-col justify-center items-center">
+            <div class="grid grid-cols-3 gap-4 p-3 pb-2 mb-4 bg-white border border-gray-300 rounded-md">
+                <div class="flex flex-col items-center justify-center">
                     <div class="text-sm font-semibold">
                         CLIENTE
                     </div>
@@ -36,7 +36,7 @@
                         {{ $sale->client->name }}
                     </div>
                 </div>
-                <div class="flex flex-col justify-center items-center">
+                <div class="flex flex-col items-center justify-center">
                     <div class="text-sm font-semibold">
                         VENDEDOR
                     </div>
@@ -44,7 +44,7 @@
                         {{ $sale->user->name }}
                     </div>
                 </div>
-                <div class="flex flex-col justify-center items-center">
+                <div class="flex flex-col items-center justify-center">
                     <div class="text-sm font-semibold">
                         TIENDA
                     </div>
@@ -53,7 +53,7 @@
                     </div>
                 </div>
             </div>
-            <div class="relative mt-2 overflow-x-auto rounded-lg shadow-md border border-gray-300">
+            <div class="relative mt-2 overflow-x-auto border border-gray-300 rounded-lg shadow-md">
                 <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                     <thead class="text-xs text-gray-700 uppercase bg-primary-100 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
@@ -101,10 +101,10 @@
                         </tr>
                         @endforeach
                         <tr class="bg-primary-50/2">
-                            <td colspan="5" class="px-6 py-4 text-right text-lg font-semibold">
+                            <td colspan="5" class="px-6 py-4 text-lg font-semibold text-right">
                                 Total
                             </td>
-                            <td  class="px-6 py-4 text-right text-lg font-semibold text-green-500">
+                            <td  class="px-6 py-4 text-lg font-semibold text-right text-green-500">
                                 {{ $sale->total_formated }}
                             </td>
                         </tr>
@@ -119,15 +119,24 @@
                 class="text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2  focus:outline-none">Cancelar Venta</Link>
                 @endif
             </div>
+            @if($sale->justification != null)
+                <div class="py-2 border-b border-gray-300 border-dashed"></div>
+                <div class="p-4 mt-4 bg-white border border-gray-300 rounded-md">
+                    <div class="py-1 text-xs uppercase border-b border-gray-300 border-dashed">Venta cancelada por <span class="font-medium">{{ $sale->justification->user->name }}</span> el <span class="font-medium text-red-500">{{ $sale->justification->created_at->format('d/m/Y h:i a') }}</span></div>
+                    <div class="pt-2">
+                        {{ $sale->justification->justification }}
+                    </div>
+                </div>
+            @endif
             @if($sale->status == 'proccesed')
                 <x-splade-modal max-width="md" name="cancelar-compra">
                     <x-splade-form :default="['sale_id' => $sale->id]" action="{{ route('ve.cancel', [$sale->id]) }}" class="py-2">
-                        <p class="text-gray-700 pb-2 mb-2 border-b border-gray-300 border-dashed font-medium">Deje una breve explicación del porque se está cancelando esta venta</p>
+                        <p class="pb-2 mb-2 font-medium text-gray-700 border-b border-gray-300 border-dashed">Deje una breve explicación del porque se está cancelando esta venta</p>
                         <x-splade-textarea name="justification" label="Justificación" autosize />
                         <div class="py-2 border-b border-gray-300 border-dashed"></div>
-                        <div class="grid gap-4 grid-cols-2 py-2">
+                        <div class="grid grid-cols-2 gap-4 py-2">
                             <button @click.prevent="modal.close" type="button"
-                    class="rounded-md shadow-sm bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 focus:outline-none focus:shadow-outline">Salir</button>
+                    class="px-4 py-2 font-bold text-white bg-red-500 rounded-md shadow-sm hover:bg-red-700 focus:outline-none focus:shadow-outline">Salir</button>
                         <x-splade-submit label="Cancelar Venta"/>
                         </div>
                     </x-splade-form>
