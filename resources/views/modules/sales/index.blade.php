@@ -13,6 +13,10 @@
                         <div class="w-full">
                             <span class="bg-green-500 p-1 text-[0.70rem] text-white rounded font-semibold">PROCESADA</span>
                         </div>
+                     @elseif($sale->status == 'canceled')
+                        <div class="w-full">
+                            <span class="bg-red-500 p-1 text-[0.70rem] text-white rounded font-semibold">CANCELADA</span>
+                        </div>
                      @endif
                 </x-splade-cell>
                 <x-splade-cell Fecha as="$sale">

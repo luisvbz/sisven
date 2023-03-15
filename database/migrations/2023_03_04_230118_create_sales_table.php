@@ -28,6 +28,7 @@ return new class extends Migration
 
         Schema::create('sales', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->string('number')->unique();
             $table->enum('status', ['proccesed','pending','canceled']);
             $table->foreignIdFor(Client::class, 'client_id')->constrained();
             $table->foreignIdFor(Store::class, 'store_id')->constrained();

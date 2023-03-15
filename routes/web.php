@@ -130,6 +130,7 @@ Route::middleware('splade')->group(function () {
             Route::get('/{sale}/detalle', [SalesController::class, 'show'])->name('ve.show')->middleware('permission:ve:access');
             Route::get('/generar',[SalesController::class, 'new'])->name('ve.add')->middleware('permission:ve:access');
             Route::post('/generar',[SalesController::class, 'store'])->name('ve.store')->middleware('permission:ve:access');
+            Route::post('/cancelar-venta',[SalesController::class, 'cancelSale'])->name('ve.cancel')->middleware('permission:ve:access');
         });
 
         Route::group(['prefix' => 'clientes'], function(){

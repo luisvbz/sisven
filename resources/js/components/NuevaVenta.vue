@@ -66,7 +66,7 @@
                             </div>
                             <div class="w-20">
                                 <CurrencyInput
-                                    label="Price"
+                                    label="P. Unit"
                                     v-model="product.unit_price"
                                     :icon="false"
                                     :options="{ currency: 'PEN' }"

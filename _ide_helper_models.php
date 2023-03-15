@@ -158,15 +158,31 @@ namespace App\Models{
 
 namespace App\Models{
 /**
- * App\Models\Jusitification
+ * App\Models\Justification
  *
+ * @property int $id
+ * @property int $user_id
+ * @property string $justifiable_type
+ * @property int $justifiable_id
+ * @property string $justification
+ * @property string|null $action
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\User $creator
  * @property-read \Illuminate\Database\Eloquent\Model|\Eloquent $justifiable
- * @method static \Illuminate\Database\Eloquent\Builder|Jusitification newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Jusitification newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Jusitification query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Justification newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Justification newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Justification query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Justification whereAction($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Justification whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Justification whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Justification whereJustifiableId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Justification whereJustifiableType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Justification whereJustification($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Justification whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Justification whereUserId($value)
  */
-	class Jusitification extends \Eloquent {}
+	class Justification extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -427,6 +443,7 @@ namespace App\Models{
  * App\Models\Sale
  *
  * @property string $id
+ * @property string $number
  * @property string $status
  * @property int $client_id
  * @property int $store_id
@@ -441,6 +458,8 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\Client $client
  * @property-read mixed $total_formated
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Justification> $justifications
+ * @property-read int|null $justifications_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\SaleProduct> $products
  * @property-read int|null $products_count
  * @property-read \App\Models\Store $store
@@ -454,6 +473,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Sale whereDiscountPercent($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Sale whereHasDiscount($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Sale whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Sale whereNumber($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Sale whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Sale whereStoreId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Sale whereSubTotal($value)
@@ -660,6 +680,8 @@ namespace App\Models{
  * @property-read int|null $approvals_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Comment> $comments
  * @property-read int|null $comments_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Justification> $justifications
+ * @property-read int|null $justifications_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Product> $products
  * @property-read int|null $products_count
  * @property-read \App\Models\User $requested

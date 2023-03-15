@@ -42,9 +42,15 @@
                     <div class="w-full">
                         <span class="p-1 text-[0.70rem] text-primary-600 font-semibold uppercase">
                             @if($movement->type == 'input')
-                                <Link modal href="{{ $movement->type_action }}">
-                                   Ver {{ $movement->input->name }} <i class="fi fi-br-link-alt"></i>
-                                </Link>
+                                 @if($movement->input->alias == 'venta-cancelada')
+                                    <Link  href="{{ $movement->type_action }}">
+                                    Ver {{ $movement->input->name }} <i class="fi fi-br-link-alt"></i>
+                                    </Link>
+                                @else
+                                    <Link modal href="{{ $movement->type_action }}">
+                                    Ver {{ $movement->input->name }} <i class="fi fi-br-link-alt"></i>
+                                    </Link>
+                                @endif
                                 @else
                                 <Link modal href="{{ $movement->type_action }}">
                                    Ver {{ $movement->output->name }} <i class="fi fi-br-link-alt"></i>

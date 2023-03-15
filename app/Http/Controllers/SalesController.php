@@ -8,9 +8,11 @@ use App\Tables\Sales;
 use App\Models\Client;
 use App\Models\Product;
 use App\Models\SaleType;
+use App\Models\InputType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use ProtoneMedia\Splade\Facades\Toast;
+use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\Sales\NewSaleRequest;
 
 class SalesController extends Controller
@@ -53,6 +55,7 @@ class SalesController extends Controller
             DB::beginTransaction();
             $store = Store::find($request->store_id);
             $sale = Sale::create([
+                'number' => Sale::generarNumeroConsecutivo(),
                 'client_id'=> $data['client_id'],
                 'store_id'=> $data['store_id'],
                 'user_id'=> auth()->user()->id,
@@ -97,6 +100,60 @@ class SalesController extends Controller
             dd($e->getMessage().$e->getLine());
         }
         //dd($request->all());
+    }
+
+    public function cancelSale(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'justification' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)
+                        ->withInput();
+        }
+
+        $jus = $request->justification;
+        $sale = Sale::find($request->sale_id);
+        $store = Store::find($sale->store_id);
+        $input = InputType::whereAlias('venta-cancelada')->first();
+
+        DB::beginTransaction();
+
+        $movementStore = $store->movements()->create([
+            'type' => 'input',
+            'input_type_id' => $input->id,
+            'type_action' => route('ve.show', [$sale]),
+            'store_id' => $store->id,
+            'date' => now()
+        ]);
+
+        foreach($sale->products as $product) {
+            $productStock = $store->products()->where('id', $product->product_id)->first();
+            $total = $productStock->pivot->quantity + $product->quantity_total;
+            $store->products()->updateExistingPivot($product->product_id, ['quantity' => $total]);
+
+            $movementStore->details()->create([
+                'store_id' => $store->id,
+                'product_id' => $product->id,
+                'quantity' => $product->quantity_total,
+            ]);
+        }
+
+        $sale->status = 'canceled';
+        $sale->save();
+
+        DB::commit();
+
+
+        Toast::title('Exito!')
+        ->center('La venta se ha cancelado con éxito')
+        ->success()
+        ->backdrop()
+        ->autoDismiss(15);
+
+        return redirect()->route('ve.show', [$sale]);
+
     }
 
     public function show(Sale $sale)

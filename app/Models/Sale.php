@@ -11,6 +11,7 @@ class Sale extends Model
     use HasFactory, HasUuids;
 
     protected $fillable = [
+        'number',
         'client_id',
         'store_id',
         'user_id',
@@ -45,6 +46,32 @@ class Sale extends Model
     public function getTotalFormatedAttribute()
     {
         return "S/ ".number_format($this->total, 2,".", ",");
+    }
+
+    public static function generarNumeroConsecutivo()
+    {
+        $ultimoRegistro = self::latest('created_at')->first();
+        $anioActual = date('Y');
+        if ($ultimoRegistro) {
+            $ultimoNumeroConsecutivo = $ultimoRegistro->number;
+            // Verificar si el número consecutivo pertenece al año actual
+            if (substr($ultimoNumeroConsecutivo, 0, 4) == $anioActual) {
+                $ultimoNumero = (int)substr($ultimoNumeroConsecutivo, -5);
+                $numeroConsecutivo = $ultimoNumero + 1;
+            } else {
+                $numeroConsecutivo = 1;
+            }
+        } else {
+            $numeroConsecutivo = 1;
+        }
+
+        // Formatear el número consecutivo con el año actual
+        return $anioActual . str_pad($numeroConsecutivo, 5, '0', STR_PAD_LEFT);
+    }
+
+    public function justifications()
+    {
+        return $this->morphMany(Justification::class, 'justifiable');
     }
 
 }
