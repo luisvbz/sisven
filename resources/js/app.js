@@ -7,6 +7,7 @@ import InputMask from './components/InputMask.vue';
 import ToastPlugin from 'vue-toast-notification';
 import 'vue-toast-notification/dist/theme-sugar.css'
 import NuevaVenta from './components/NuevaVenta.vue';
+import NewBill from './components/NewBill.vue';
 
 import { createApp } from "vue/dist/vue.esm-bundler.js";
 import { renderSpladeApp, SpladePlugin } from "@protonemedia/laravel-splade";
@@ -14,8 +15,8 @@ import { renderSpladeApp, SpladePlugin } from "@protonemedia/laravel-splade";
 const el = document.getElementById("app");
 
 createApp({
-    render: renderSpladeApp({ el })
-})
+        render: renderSpladeApp({ el })
+    })
     .use(SpladePlugin, {
         "max_keep_alive": 10,
         "transform_anchors": false,
@@ -23,7 +24,8 @@ createApp({
         "components": {
             CurrencyInput,
             InputMask,
-            NuevaVenta
+            NuevaVenta,
+            NewBill,
         }
     })
     .use(ToastPlugin)

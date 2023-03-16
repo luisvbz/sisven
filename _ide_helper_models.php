@@ -43,6 +43,51 @@ namespace App\Models{
 
 namespace App\Models{
 /**
+ * App\Models\Bill
+ *
+ * @property string $id
+ * @property string $sale_id
+ * @property int $client_id
+ * @property string $type
+ * @property string $serie
+ * @property string $number
+ * @property string $currency
+ * @property string $igv_percent
+ * @property string $total_grabada
+ * @property string $total_inafecta
+ * @property string $total_exonerada
+ * @property string $total_igv
+ * @property string $total
+ * @property string $observations
+ * @property string $emition_date
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|Bill newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Bill newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Bill query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Bill whereClientId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Bill whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Bill whereCurrency($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Bill whereEmitionDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Bill whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Bill whereIgvPercent($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Bill whereNumber($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Bill whereObservations($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Bill whereSaleId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Bill whereSerie($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Bill whereTotal($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Bill whereTotalExonerada($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Bill whereTotalGrabada($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Bill whereTotalIgv($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Bill whereTotalInafecta($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Bill whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Bill whereUpdatedAt($value)
+ */
+	class Bill extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\Client
  *
  * @property int $id
@@ -488,22 +533,10 @@ namespace App\Models{
 /**
  * App\Models\SaleJustification
  *
- * @property int $id
- * @property string $sale_id
- * @property int $user_id
- * @property string $justification
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\User $user
  * @method static \Illuminate\Database\Eloquent\Builder|SaleJustification newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|SaleJustification newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|SaleJustification query()
- * @method static \Illuminate\Database\Eloquent\Builder|SaleJustification whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|SaleJustification whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|SaleJustification whereJustification($value)
- * @method static \Illuminate\Database\Eloquent\Builder|SaleJustification whereSaleId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|SaleJustification whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|SaleJustification whereUserId($value)
  */
 	class SaleJustification extends \Eloquent {}
 }

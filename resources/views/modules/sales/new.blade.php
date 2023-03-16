@@ -1,7 +1,7 @@
 @extends('modules.sales.base')
 
 @section('header')
-     Generar nueva ventas
+     Generar nueva venta
 @endsection
 
 @section('content')

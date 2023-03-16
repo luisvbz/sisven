@@ -67,6 +67,9 @@ class RolesAndPermissionSeeder extends Seeder
             //Ventas
             ['name' => 've:access', 'guard_name' => 'web', 'display_name' => 'Acceder al modulo de ventas', 'module_id' => 'VE'],
             ['name' => 've:create', 'guard_name' => 'web', 'display_name' => 'Generar una nueva venta', 'module_id' => 'VE'],
+            //Bills
+            ['name' => 'de:access', 'guard_name' => 'web', 'display_name' => 'Acceder al modulo de documentos electrónicos', 'module_id' => 'DE'],
+            ['name' => 'de:create', 'guard_name' => 'web', 'display_name' => 'Generar un nuevo documentos electrónico', 'module_id' => 'DE'],
 
          ];
 

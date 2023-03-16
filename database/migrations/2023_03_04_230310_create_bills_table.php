@@ -1,8 +1,12 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
+use App\Models\Bill;
+use App\Models\Sale;
+use App\Models\Client;
+use App\Models\Product;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 return new class extends Migration
 {
@@ -14,20 +18,33 @@ return new class extends Migration
     public function up()
     {
         Schema::create('bills', function (Blueprint $table) {
-            $table->uuid('id');
+            $table->uuid('id')->primary();
             $table->foreignIdFor(Sale::class)->constrained();
+            $table->foreignIdFor(Client::class)->constrained();
             $table->enum('type', ['FACT','BOL','NDD','NDC']);
             $table->string('serie');
             $table->string('number');
             $table->enum('currency',['S','D']);
             $table->decimal('igv_percent',4,2);
-            $table->decimal('total_grabada',9,2);
-            $table->decimal('total_inafecta',9,2);
-            $table->decimal('total_exonerada',9,2);
-            $table->decimal('total_igv',9,2);
-            $table->decimal('total',9,2);
+            $table->decimal('total_grabada',9,6);
+            $table->decimal('total_inafecta',9,6);
+            $table->decimal('total_exonerada',9,6);
+            $table->decimal('total_igv',9,6);
+            $table->decimal('total',9,6);
             $table->string('observations');
+            $table->date('emition_date');
             $table->timestamps();
+        });
+
+        Schema::create('bills_items', function (Blueprint $table) {
+            $table->uuid('id');
+            $table->foreignIdFor(Bill::class)->constrained();
+            $table->foreignIdFor(Product::class)->constrained();
+            $table->integer('quantity');
+            $table->string('measure');
+            $table->decimal('unit_price', 9,6);
+            $table->decimal('discount', 9,6);
+            $table->decimal('total',9,2);
         });
     }
 
@@ -39,5 +56,6 @@ return new class extends Migration
     public function down()
     {
         Schema::dropIfExists('bills');
+        Schema::dropIfExists('bills_items');
     }
 };

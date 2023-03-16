@@ -92,7 +92,7 @@ class ModulesSeeder extends Seeder
                 'id' => 'DE',
                 'name' => 'Documentos',
                 'description' => 'Facturas / Boletas / Notas',
-                'route' => '/clientes',
+                'route' => '/documentos-electronicos',
                 'permission_to_access' => 'de:access'
             ],
         ];
