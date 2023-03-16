@@ -11,9 +11,16 @@ class BillsController extends Controller
 {
     public function new()
     {
+        $docs = [
+            'FACT' => 'Factura',
+            'BOL' => 'Boleta',
+            'NDC' => 'Nota de Crédito',
+            'NDD' => 'Nota de D¿ebito',
+        ];
 
         return view('modules.bills.new', [
             'types' => SaleType::all(),
+            'docs' => $docs
         ]);
     }
 
@@ -45,7 +52,6 @@ class BillsController extends Controller
                 $item['full_name'] = "($product->code) - {$product->type->name} {$product->description} ";
                 $item['measure'] = $product->measure->name;
                 $item['price'] = $product->price;
-                $item['stock'] = 0;
                 return $item;
             });
 
