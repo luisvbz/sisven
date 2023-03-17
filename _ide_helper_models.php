@@ -43,6 +43,34 @@ namespace App\Models{
 
 namespace App\Models{
 /**
+ * App\Models\BiilItem
+ *
+ * @property int $id
+ * @property string $bill_id
+ * @property int $product_id
+ * @property int $quantity
+ * @property string $measure
+ * @property string $unit_price
+ * @property string $discount
+ * @property string $total
+ * @property-read \App\Models\Product $product
+ * @method static \Illuminate\Database\Eloquent\Builder|BiilItem newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|BiilItem newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|BiilItem query()
+ * @method static \Illuminate\Database\Eloquent\Builder|BiilItem whereBillId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BiilItem whereDiscount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BiilItem whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BiilItem whereMeasure($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BiilItem whereProductId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BiilItem whereQuantity($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BiilItem whereTotal($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BiilItem whereUnitPrice($value)
+ */
+	class BiilItem extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\Bill
  *
  * @property string $id
@@ -62,6 +90,9 @@ namespace App\Models{
  * @property string $emition_date
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Client $client
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\BillItem> $items
+ * @property-read int|null $items_count
  * @method static \Illuminate\Database\Eloquent\Builder|Bill newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Bill newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Bill query()
@@ -84,6 +115,17 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Bill whereUpdatedAt($value)
  */
 	class Bill extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\BillItem
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder|BillItem newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|BillItem newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|BillItem query()
+ */
+	class BillItem extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -533,10 +575,22 @@ namespace App\Models{
 /**
  * App\Models\SaleJustification
  *
+ * @property int $id
+ * @property string $sale_id
+ * @property int $user_id
+ * @property string $justification
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\User $user
  * @method static \Illuminate\Database\Eloquent\Builder|SaleJustification newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|SaleJustification newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|SaleJustification query()
+ * @method static \Illuminate\Database\Eloquent\Builder|SaleJustification whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|SaleJustification whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|SaleJustification whereJustification($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|SaleJustification whereSaleId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|SaleJustification whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|SaleJustification whereUserId($value)
  */
 	class SaleJustification extends \Eloquent {}
 }

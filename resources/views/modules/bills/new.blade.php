@@ -23,6 +23,7 @@
                     ]">
                     <new-bill :form="form">
                         <template v-slot:extend>
+                            <x-splade-input icon="calendar" name="emited_date" label="Fecha de Emisión" date />
                             <div class="py-2">
                                 <x-splade-file class="w-full" label="Adjuntar documento Electrónico" name="file">
                                     <i class="fi fi-br-file"></i> Seleccionar archivo

@@ -69,7 +69,7 @@
                     </div>
 
                     <div>
-                        <button v-if="!form.processing" @click="realizarVenta" type="button" class="w-full px-5 py-2 mb-2 mr-2 text-sm font-medium text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">FINALIZAR VENTA</button>
+                        <button v-if="!form.processing" @click="realizarVenta" type="button" class="w-full px-5 py-2 mb-2 mr-2 text-sm font-medium text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">FINALIZAR</button>
                         <div v-else class="w-full px-5 py-2 mb-2 mr-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg opacity-40 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">PROCENSANDO</div>
                     </div>
                 </div>
@@ -151,6 +151,11 @@
                         </div>
                     </div>
                 </div>
+                <x-splade-errors>
+                <div v-for="(errors, key) in errors.all">
+                    <pre>{{ error}}</pre>
+                </div>
+            </x-splade-errors>
                 <!-- /lista de productos -->
             </div>
         </div>
@@ -218,10 +223,6 @@ export default {
             this.products.loading = false
         }
     },
-    'form.store_id' ()
-    {
-        this.form.products = [];
-    }
   },
   methods: {
     getProductsByStore(storeId)
