@@ -8,19 +8,17 @@
     <div class="py-0">
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
         <x-splade-form
-            action="{{ route('ve.store')}}"
-            confirm="Registra Venta"
-            confirm-text="Estas seguro de registrar esta venta, esta acción no se puede eliminar?"
+            action="{{ route('de.store')}}"
+            confirm="Guardar Documento electrónico"
+            confirm-text="Estas seguro de registrar este documento electronico?"
             confirm-button="Si, Vender!"
             cancel-button="Cancelar!"
              :default="[
                     'client_id' => null,
-                    'types' => $types,
                     'products' => [],
-                    'has_discount' => false,
-                    'discount_percent' => 0,
-                    'subtotal' => 0,
                     'total' => 0,
+                    'total_igv' => 0,
+                    'total_gravada' => 0,
                     'document_type' => 'FACT'
                     ]">
                     <new-bill :form="form">
@@ -40,26 +38,14 @@
                                 </div>
                             </div>
                             <CurrencyInput
-                                    label="Total Gravada"
-                                    v-model="form.total_gravada"
-                                    :icon="false"
-                                    :options="{ currency: 'PEN' }"
-                                    />
-                            <CurrencyInput
                                     label="Total Inafecta"
                                     v-model="form.total_inafecta"
                                     :icon="false"
                                     :options="{ currency: 'PEN' }"
                                     />
-                            <CurrencyInput
-                                    label="Total IGV(18%)"
-                                    v-model="form.total_igv"
-                                    :icon="false"
-                                    :options="{ currency: 'PEN' }"
-                                    />
                         </template>
                     </new-bill>
-                     {{-- <pre class="p-4 mt-4 bg-white border border-gray-300 rounded" v-text="form.$all"/> --}}
+                     <pre class="p-4 mt-4 bg-white border border-gray-300 rounded" v-text="form.$all"/>
             </x-splade-form>
         </div>
     </div>

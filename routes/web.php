@@ -137,6 +137,7 @@ Route::middleware('splade')->group(function () {
         Route::group(['prefix' => 'documentos-electronicos'], function(){
             Route::get('/', [BillsController::class, 'index'])->name('de.index')->middleware('permission:ve:access');
             Route::get('/generar',[BillsController::class, 'new'])->name('de.add')->middleware('permission:ve:access');
+            Route::post('/generar',[BillsController::class, 'store'])->name('de.store')->middleware('permission:ve:access');
         });
 
         Route::group(['prefix' => 'clientes'], function(){

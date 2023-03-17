@@ -55,12 +55,19 @@
                         </div>
                     </div>
                     <slot name="extend"></slot>
-                     <CurrencyInput
-                            label="Total"
-                            v-model="form.total"
-                            :icon="false"
-                            :options="{ currency: 'PEN' }"
-                            />
+                    <div>
+                        <label class="block mb-1 text-sm font-medium text-gray-900">Total Gravada.</label>
+                        <input type="text" readonly :value="form.total_gravada" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    </div>
+                    <div>
+                        <label class="block mb-1 text-sm font-medium text-gray-900">Total IGV(18%).</label>
+                        <input type="text" readonly :value="form.total_igv" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    </div>
+                    <div>
+                        <label class="block mb-1 text-sm font-medium text-gray-900">Total</label>
+                        <input type="text" readonly :value="form.total" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    </div>
+
                     <div>
                         <button v-if="!form.processing" @click="realizarVenta" type="button" class="w-full px-5 py-2 mb-2 mr-2 text-sm font-medium text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">FINALIZAR VENTA</button>
                         <div v-else class="w-full px-5 py-2 mb-2 mr-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg opacity-40 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">PROCENSANDO</div>
@@ -102,7 +109,7 @@
                 <!-- lista de productos -->
                 <div class="flex flex-col p-4 space-y-2 bg-white border border-gray-300 divide-y-2 rounded-md shadow-md">
                     <div v-if="form.products.length == 0" class="flex items-center justify-center p-12">
-                        <p class="font-medium text-gray-400 uppercase">NO SE HAN AGREGADO PRODUCTOS EN LA COMPRA</p>
+                        <p class="font-medium text-gray-400 uppercase">NO SE HAN AGREGADO PRODUCTOS A ESTE DOCUMENTO</p>
                     </div>
                     <div v-for="(product, index) in form.products" :key="'p'+product.id">
                         <div
@@ -110,27 +117,28 @@
                         >
                              <div class="w-20">
                                 <label class="block mb-1 text-sm font-medium text-gray-900">Cant.</label>
-                                <input type="number" v-model="product.quantity_type" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                <input type="number" v-model="product.cant" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             </div>
                             <div>
                                 <label class="block mb-1 text-sm font-medium text-gray-900">Tipo</label>
-                                <select v-model="product.type_sale" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                    <option v-for="type in form.types" :key="Math.random()" :value="type.id">{{ type.alias }}</option>
+                                <select v-model="product.measure" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    <option value="DOC">DOCENA</option>
+                                    <option value="UNID">UNIDAD</option>
                                 </select>
                             </div>
-                            <div class="w-[50%]">
+                            <div class="w-[35%]">
                                 <label class="block mb-1 text-sm font-medium text-gray-900">Producto.</label>
                                 <input type="text" readonly :value="product.full_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             </div>
-                            <div class="w-20">
+                            <div class="w-[15%]">
                                 <CurrencyInput
                                     label="P. Unit"
                                     v-model="product.unit_price"
                                     :icon="false"
-                                    :options="{ currency: 'PEN' }"
+                                    :options="{ currency: 'PEN', precision: 6 }"
                                     />
                             </div>
-                            <div class="w-[10%]">
+                            <div class="w-[15%]">
                                 <label class="block mb-1 text-sm font-medium text-gray-900">Total.</label>
                                 <input type="text" readonly :value="price(totalByProduct(product, index))" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 text-right">
                             </div>
@@ -223,7 +231,7 @@ export default {
         axios.get(`/api/bills/products?query=${this.queryProduct}`).then(rs => {
              this.products.data = rs.data.products
         }).catch(e => {
-            console.log(e)
+            //console.log(e)
         }).finally(() => {
              this.products.loading = false
         })
@@ -245,17 +253,15 @@ export default {
     addProduct(product)
     {
         let exists = _.find(this.form.products, (o) => o.product_id == product.id);
-        console.log(exists)
+        //console.log(exists)
         if(exists == undefined) {
             let item = {
                 product_id: product.id,
                 full_name: product.full_name,
-                type_sale: 1,
-                quantity_type: 0,
-                quantity_total: 0,
+                measure: 'UNID',
+                cant: 0,
                 unit_price: product.price,
                 total_price: 0,
-                omit: false
             }
 
             this.form.products.push(item)
@@ -293,7 +299,7 @@ export default {
         axios.get(`/api/bills/clients?query=${this.queryClient}`).then(rs => {
             this.clients.data = rs.data.clients
         }).catch(e => {
-            console.log(e)
+            //console.log(e)
         }).finally(() => {
             this.clients.loading = false;
         })
@@ -301,27 +307,14 @@ export default {
     totalByProduct(product, index)
     {
         let total = 0;
-        let quantity = 0;
-        product.omit = false;
-        if(product.quantity_type < 0) {
-            this.form.products[index].quantity_type = 0;
-        }
-        if(product.type_sale == 1) {
-            total = product.unit_price*(product.quantity_type*12);
-            quantity = product.quantity_type*12
-        }else if(product.type_sale == 2){
-            total = product.unit_price*(product.quantity_type*6);
-            quantity = product.quantity_type*6
-        }else if(product.type_sale == 3){
-            total = product.unit_price*(product.quantity_type*3);
-            quantity = product.quantity_type*3
-        }else {
-            total = product.unit_price*product.quantity_type;
-            quantity = product.quantity_type
+
+         if(product.cant < 0) {
+            this.form.products[index].cant = 0;
         }
 
+        total = product.cant * product.unit_price;
         this.form.products[index].total_price = total;
-        this.form.products[index].quantity_total = quantity;
+
 
         this.totalSale()
         return total;
@@ -350,13 +343,12 @@ export default {
                 total = total + element.total_price;
             });
 
-            let total_monto = total - (total * 0.18)
             let total_igv = (total * 0.18)
+            let total_monto = total + total_igv
 
-            console.log(total_monto);
-            console.log(total_igv);
-            this.form.total = total_monto;
-            this.form.total_igv = total_igv;
+            this.form.total_gravada = total.toFixed(2);
+            this.form.total = total_monto.toFixed(2);
+            this.form.total_igv = total_igv.toFixed(2);
 
         }else {
             this.form.total = 0;

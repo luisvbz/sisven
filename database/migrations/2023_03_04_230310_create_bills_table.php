@@ -19,7 +19,7 @@ return new class extends Migration
     {
         Schema::create('bills', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignIdFor(Sale::class)->constrained();
+            //$table->foreignIdFor(Sale::class)->constrained();
             $table->foreignIdFor(Client::class)->constrained();
             $table->enum('type', ['FACT','BOL','NDD','NDC']);
             $table->string('serie');

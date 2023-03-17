@@ -29,6 +29,12 @@ class BillsController extends Controller
         return view('modules.bills.index');
     }
 
+    public function store(Request $request)
+    {
+        dd($request->all());
+    }
+
+
 
     public function getClients(Request $request)
     {
