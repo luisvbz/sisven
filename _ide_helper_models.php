@@ -47,6 +47,7 @@ namespace App\Models{
  *
  * @property int $id
  * @property int $client_id
+ * @property string $status
  * @property string $type
  * @property string $serie
  * @property string $number
@@ -62,6 +63,10 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\Client $client
+ * @property-read mixed $file
+ * @property-read mixed $total_formated
+ * @property-read mixed $total_gravada_formated
+ * @property-read mixed $total_igv_formated
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\BillItem> $items
  * @property-read int|null $items_count
  * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, \Spatie\MediaLibrary\MediaCollections\Models\Media> $media
@@ -78,6 +83,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Bill whereNumber($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Bill whereObservations($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Bill whereSerie($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Bill whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Bill whereTotal($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Bill whereTotalExonerada($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Bill whereTotalGrabada($value)
@@ -94,7 +100,7 @@ namespace App\Models{
  * App\Models\BillItem
  *
  * @property int $id
- * @property string $bill_id
+ * @property int $bill_id
  * @property int $product_id
  * @property int $quantity
  * @property string $measure

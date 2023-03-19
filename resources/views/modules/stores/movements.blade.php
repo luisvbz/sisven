@@ -51,11 +51,11 @@
                                     Ver {{ $movement->input->name }} <i class="fi fi-br-link-alt"></i>
                                     </Link>
                                 @endif
-                                @else
-                                <Link modal href="{{ $movement->type_action }}">
-                                   Ver {{ $movement->output->name }} <i class="fi fi-br-link-alt"></i>
-                                </Link>
-                                @endif
+                            @else
+                            <Link @if($movement->output->alias != 'venta') modal @endif href="{{ $movement->type_action }}">
+                                Ver {{ $movement->output->name }} <i class="fi fi-br-link-alt"></i>
+                            </Link>
+                            @endif
                         </span>
                     </div>
                 </x-splade-cell>

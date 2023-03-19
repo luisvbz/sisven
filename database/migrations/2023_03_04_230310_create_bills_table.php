@@ -21,6 +21,7 @@ return new class extends Migration
             $table->id();
             //$table->foreignIdFor(Sale::class)->constrained();
             $table->foreignIdFor(Client::class)->constrained();
+            $table->enum('status', ['proccesed','canceled']);
             $table->enum('type', ['FACT','BOL','NDD','NDC']);
             $table->string('serie');
             $table->string('number');

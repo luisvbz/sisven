@@ -112,8 +112,9 @@
                 </table>
             </div>
             <div class="flex justify-end mt-4">
-                <button type="button"
-                class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2  focus:outline-none">Imprimir</button>
+                <a target="_blank"
+                href="{{ route('ve.pdf', [$sale->id ])}}"
+                class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2  focus:outline-none">Imprimir</a>
                 @if($sale->status == 'proccesed')
                 <Link href="#cancelar-compra" type="button"
                 class="text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2  focus:outline-none">Cancelar Venta</Link>

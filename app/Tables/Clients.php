@@ -2,12 +2,12 @@
 
 namespace App\Tables;
 
-use App\Models\Sale;
+use App\Models\Client;
 use Illuminate\Http\Request;
 use ProtoneMedia\Splade\AbstractTable;
 use ProtoneMedia\Splade\SpladeTable;
 
-class Sales extends AbstractTable
+class Clients extends AbstractTable
 {
     /**
      * Create a new instance.
@@ -36,8 +36,7 @@ class Sales extends AbstractTable
      */
     public function for()
     {
-        $sales = Sale::query();
-        return $sales->withCount('products')->orderBy('created_at', 'DESC');
+        return Client::query();
     }
 
     /**
@@ -49,26 +48,13 @@ class Sales extends AbstractTable
     public function configure(SpladeTable $table)
     {
         $table
-            ->withGlobalSearch(columns: ['client.name', 'user.name', 'created_at'])
-            ->defaultSortDesc('created_at')
-            ->column('Estado')
-            ->column('Fecha')
-            ->column(key: 'client.name', label:'Cliente')
-            ->column(key: 'user.name', label:'Vendedor')
-            ->column(key: 'store.name', label:'Tienda', highlight:true)
-            ->column('total',  highlight:true)
-            ->column('acciones')
-            ->selectFilter(
-                key:'status',
-                noFilterOptionLabel: 'Todos',
-                label: 'Estado',
-                options: [
-                    'proccesed' => 'Procesada',
-                    'canceled' => 'Cancelada',
-                ]
-            )
+            ->withGlobalSearch(columns: ['document_number', 'name'])
+            ->column(label: 'Documento', key: 'document_number')
+            ->column(label: 'Razon Social', key: 'name',sortable: true)
+            ->column(label: 'Teléfono Fijo', key: 'phone_office')
+            ->column(label: 'Teléfono Celular', key: 'phone_celular')
+            ->column(label: 'Direccion', key: 'address')
             ->paginate(30);
-
 
             // ->searchInput()
             // ->selectFilter()

@@ -56,16 +56,6 @@ class Users extends AbstractTable
     {
         $table
             ->defaultSort('-created_at')
-            ->export(
-                label: 'Descargar Excel',
-                filename: 'users.xlsx',
-                type: Excel::XLSX
-            )
-            ->export(
-                label: 'Descargar Pdf',
-                filename: 'users.pdf',
-                type: Excel::DOMPDF
-            )
             ->withGlobalSearch('Buscar por toda la data...', ['name', 'email', 'username', 'dni'])
             ->column('Estado')
             ->column('Usuario')

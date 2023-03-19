@@ -53,7 +53,6 @@
                             </x-splade-errors>
                         </template>
                     </new-bill>
-                     <pre class="p-4 mt-4 bg-white border border-gray-300 rounded" v-text="form.$all"/>
             </x-splade-form>
         </div>
     </div>

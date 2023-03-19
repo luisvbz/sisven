@@ -36,7 +36,9 @@ class Bills extends AbstractTable
      */
     public function for()
     {
-        return Bill::query();
+        $bill = Bill::query();
+        $bill->withCount('items')->orderBy('created_at', 'DESC');
+        return $bill;
     }
 
     /**
@@ -49,20 +51,26 @@ class Bills extends AbstractTable
     {
         $table
             ->withGlobalSearch(columns: ['number','client.name'])
-            ->column(key:'serie', label: 'Serie', highlight: true)
-            ->column(key:'number', label: 'Número', highlight: true)
+            ->column(label: 'estado')
+            ->column(label: 'tipo', highlight: true)
+            ->column(label: 'numero', highlight: true)
             ->column(key:'emition_date', label: 'Fecha')
             ->column(key:'client.name', label: 'Cliente')
-            ->column(key:'total_grabada', label: 'T. Gravada')
-            ->column(key:'total_igv', label: 'IGV')
-            ->column(key:'total', label: 'Total')
-            ;
-
-            // ->searchInput()
-            // ->selectFilter()
-            // ->withGlobalSearch()
-
-            // ->bulkAction()
-            // ->export()
+            ->column(key:'items_count', label: 'Items', highlight: true)
+            ->column(label: 'gravada')
+            ->column('igv')
+            ->column('archivo')
+            ->column(label: 'total',highlight: true)
+            ->column(label: 'acciones')
+            ->selectFilter(
+                key:'status',
+                noFilterOptionLabel: 'Todos',
+                label: 'Estado',
+                options: [
+                    'proccesed' => 'Procesados',
+                    'canceled' => 'Anulados',
+                ]
+            )
+            ->paginate(30);
     }
 }

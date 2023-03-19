@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use PDF;
 use App\Models\Sale;
 use App\Models\Store;
 use App\Tables\Sales;
@@ -9,6 +10,7 @@ use App\Models\Client;
 use App\Models\Product;
 use App\Models\SaleType;
 use App\Models\InputType;
+use App\Models\OutputType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use ProtoneMedia\Splade\Facades\Toast;
@@ -66,6 +68,16 @@ class SalesController extends Controller
                 'total' => $data['total']
             ]);
 
+            $input = OutputType::whereAlias('venta')->first();
+
+            $movement = $store->movements()->create([
+                'type' => 'ouput',
+                'output_type_id' => $input->id,
+                'type_action' => route('ve.show', [$sale]),
+                'store_id' => $store->id,
+                'date' => date('Y-m-d')
+            ]);
+
             foreach($data['products'] as $product) {
                 if(!$product['omit']) {
                     $typeSale = SaleType::find($product['type_sale']);
@@ -77,6 +89,13 @@ class SalesController extends Controller
                         'quantity_total' => $totalProduct,
                         'unit_price' => $product['unit_price'],
                         'total' => $product['total_price']
+                    ]);
+
+                    //saving movements
+                    $movement->details()->create([
+                        'store_id' => $store->id,
+                        'product_id' => $product['product_id'],
+                        'quantity' => $product['quantity_type'],
                     ]);
 
                     //update stock
@@ -207,5 +226,17 @@ class SalesController extends Controller
                             ->get();
 
         return response()->json(['clients' => $clients]);
+    }
+
+    public function pdf($id)
+    {
+        $sale = Sale::find($id);
+
+        $data = [
+            'sale' => $sale
+        ];
+
+        $pdf = PDF::loadView('modules.sales.pdf', $data);
+        return $pdf->download("{$sale->number}.pdf");
     }
 }

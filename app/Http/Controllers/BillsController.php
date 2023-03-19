@@ -8,6 +8,7 @@ use App\Models\Client;
 use App\Models\Product;
 use App\Models\SaleType;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\DB;
 use ProtoneMedia\Splade\Facades\Toast;
 use App\Http\Requests\StoreBillRequest;
@@ -44,6 +45,7 @@ class BillsController extends Controller
             DB::beginTransaction();
             $bill = Bill::create([
                 'client_id' => $request->client_id,
+                'status' => 'proccesed',
                 'type' => $request->document_type,
                 'serie' => strtoupper($request->serie),
                 'number' => $request->number,
@@ -102,6 +104,22 @@ class BillsController extends Controller
         }
     }
 
+
+    public function calcelBill(Request $request)
+    {
+        $item = Bill::find($request->bill_id);
+        $item->status = 'canceled';
+        $item->save();
+
+        Toast::title('Exito!')
+            ->message("El documento se ha cancelado con éxito")
+            ->success()
+            ->center()
+            ->backdrop()
+            ->autoDismiss(15);
+
+        return redirect()->back();
+    }
 
 
     public function getClients(Request $request)

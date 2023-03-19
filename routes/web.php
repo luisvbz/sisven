@@ -10,6 +10,7 @@ use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\StoresController;
 use App\Http\Controllers\ClientsController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReportesCotroller;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\SuplliersController;
 use App\Http\Controllers\TransfersController;
@@ -128,6 +129,7 @@ Route::middleware('splade')->group(function () {
 
         Route::group(['prefix' => 'ventas'], function(){
             Route::get('/', [SalesController::class, 'index'])->name('ve.index')->middleware('permission:ve:access');
+            Route::get('/pdf/{id}',[SalesController::class, 'pdf'])->name('ve.pdf')->middleware('permission:ve:access');
             Route::get('/{sale}/detalle', [SalesController::class, 'show'])->name('ve.show')->middleware('permission:ve:access');
             Route::get('/generar',[SalesController::class, 'new'])->name('ve.add')->middleware('permission:ve:access');
             Route::post('/generar',[SalesController::class, 'store'])->name('ve.store')->middleware('permission:ve:access');
@@ -138,11 +140,17 @@ Route::middleware('splade')->group(function () {
             Route::get('/', [BillsController::class, 'index'])->name('de.index')->middleware('permission:ve:access');
             Route::get('/generar',[BillsController::class, 'new'])->name('de.add')->middleware('permission:ve:access');
             Route::post('/generar',[BillsController::class, 'store'])->name('de.store')->middleware('permission:ve:access');
+            Route::post('/cancelar',[BillsController::class, 'calcelBill'])->name('de.cancel')->middleware('permission:ve:access');
         });
 
         Route::group(['prefix' => 'clientes'], function(){
+            Route::get('/',[ClientsController::class, 'index'])->name('cl.index')->middleware('permission:ve:access');
             Route::get('/nuevo',[ClientsController::class, 'new'])->name('cl.add')->middleware('permission:ve:access');
             Route::post('/nuevo',[ClientsController::class, 'store'])->name('cl.store')->middleware('permission:ve:access');
+        });
+
+        Route::group(['prefix' => 'reportes'], function(){
+            Route::get('/',[ReportesCotroller::class, 'index'])->name('rp.index');
         });
 
         Route::get('/traslado/{transfer}', [CommonController::class, 'transferDetail'])->name('transfer.details');

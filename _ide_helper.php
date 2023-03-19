@@ -4,7 +4,7 @@
 
 /**
  * A helper file for Laravel, to provide autocomplete information to your IDE
- * Generated for Laravel 9.49.0.
+ * Generated for Laravel 9.52.4.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -2538,7 +2538,7 @@
          * Check the result of a condition.
          *
          * @param string $name
-         * @param array $parameters
+         * @param mixed $parameters
          * @return bool 
          * @static 
          */ 
@@ -3303,7 +3303,7 @@
                     /**
          * Assert if a job was pushed a number of times.
          *
-         * @param string $command
+         * @param string|\Closure $command
          * @param int $times
          * @return void 
          * @static 
@@ -3353,7 +3353,7 @@
                     /**
          * Assert if a job was pushed synchronously a number of times.
          *
-         * @param string $command
+         * @param string|\Closure $command
          * @param int $times
          * @return void 
          * @static 
@@ -3392,7 +3392,7 @@
                     /**
          * Assert if a job was pushed after the response was sent a number of times.
          *
-         * @param string $command
+         * @param string|\Closure $command
          * @param int $times
          * @return void 
          * @static 
@@ -4192,6 +4192,33 @@
                         return $instance->macroCall($method, $parameters);
         }
                     /**
+         * Get a lock instance.
+         *
+         * @param string $name
+         * @param int $seconds
+         * @param string|null $owner
+         * @return \Illuminate\Contracts\Cache\Lock 
+         * @static 
+         */ 
+        public static function lock($name, $seconds = 0, $owner = null)
+        {
+                        /** @var \Illuminate\Cache\FileStore $instance */
+                        return $instance->lock($name, $seconds, $owner);
+        }
+                    /**
+         * Restore a lock instance using the owner identifier.
+         *
+         * @param string $name
+         * @param string $owner
+         * @return \Illuminate\Contracts\Cache\Lock 
+         * @static 
+         */ 
+        public static function restoreLock($name, $owner)
+        {
+                        /** @var \Illuminate\Cache\FileStore $instance */
+                        return $instance->restoreLock($name, $owner);
+        }
+                    /**
          * Remove all items from the cache.
          *
          * @return bool 
@@ -4234,33 +4261,6 @@
         {
                         /** @var \Illuminate\Cache\FileStore $instance */
                         return $instance->getPrefix();
-        }
-                    /**
-         * Get a lock instance.
-         *
-         * @param string $name
-         * @param int $seconds
-         * @param string|null $owner
-         * @return \Illuminate\Contracts\Cache\Lock 
-         * @static 
-         */ 
-        public static function lock($name, $seconds = 0, $owner = null)
-        {
-                        /** @var \Illuminate\Cache\FileStore $instance */
-                        return $instance->lock($name, $seconds, $owner);
-        }
-                    /**
-         * Restore a lock instance using the owner identifier.
-         *
-         * @param string $name
-         * @param string $owner
-         * @return \Illuminate\Contracts\Cache\Lock 
-         * @static 
-         */ 
-        public static function restoreLock($name, $owner)
-        {
-                        /** @var \Illuminate\Cache\FileStore $instance */
-                        return $instance->restoreLock($name, $owner);
         }
          
     }
@@ -6575,13 +6575,14 @@
          *
          * @param string $path
          * @param string $content
+         * @param int|null $mode
          * @return void 
          * @static 
          */ 
-        public static function replace($path, $content)
+        public static function replace($path, $content, $mode = null)
         {
                         /** @var \Illuminate\Filesystem\Filesystem $instance */
-                        $instance->replace($path, $content);
+                        $instance->replace($path, $content, $mode);
         }
                     /**
          * Replace a given string within a given file.
@@ -7036,7 +7037,7 @@
          *
          * @template TWhenParameter
          * @template TWhenReturnType
-         * @param \Illuminate\Filesystem\(\Closure($this):  TWhenParameter)|TWhenParameter|null $value
+         * @param \Illuminate\Filesystem\(\Closure($this):  TWhenParameter)|TWhenParameter|null  $value
          * @param \Illuminate\Filesystem\(callable($this,  TWhenParameter): TWhenReturnType)|null  $callback
          * @param \Illuminate\Filesystem\(callable($this,  TWhenParameter): TWhenReturnType)|null  $default
          * @return $this|\Illuminate\Filesystem\TWhenReturnType 
@@ -7636,6 +7637,7 @@
      * @method static \Illuminate\Http\Client\PendingRequest withDigestAuth(string $username, string $password)
      * @method static \Illuminate\Http\Client\PendingRequest withToken(string $token, string $type = 'Bearer')
      * @method static \Illuminate\Http\Client\PendingRequest withUserAgent(string $userAgent)
+     * @method static \Illuminate\Http\Client\PendingRequest withUrlParameters(array $parameters = [])
      * @method static \Illuminate\Http\Client\PendingRequest withCookies(array $cookies, string $domain)
      * @method static \Illuminate\Http\Client\PendingRequest maxRedirects(int $max)
      * @method static \Illuminate\Http\Client\PendingRequest withoutRedirecting()
@@ -8176,6 +8178,19 @@
         {
                         /** @var \Illuminate\Translation\Translator $instance */
                         $instance->setLoaded($loaded);
+        }
+                    /**
+         * Add a handler to be executed in order to format a given class to a string during translation replacements.
+         *
+         * @param callable|string $class
+         * @param callable|null $handler
+         * @return void 
+         * @static 
+         */ 
+        public static function stringable($class, $handler = null)
+        {
+                        /** @var \Illuminate\Translation\Translator $instance */
+                        $instance->stringable($class, $handler);
         }
                     /**
          * Set the parsed value of a key.
@@ -10696,12 +10711,12 @@
          * Clones a request and overrides some of its parameters.
          *
          * @return static 
-         * @param array $query The GET parameters
-         * @param array $request The POST parameters
-         * @param array $attributes The request attributes (parameters parsed from the PATH_INFO, ...)
-         * @param array $cookies The COOKIE parameters
-         * @param array $files The FILES parameters
-         * @param array $server The SERVER parameters
+         * @param array|null $query The GET parameters
+         * @param array|null $request The POST parameters
+         * @param array|null $attributes The request attributes (parameters parsed from the PATH_INFO, ...)
+         * @param array|null $cookies The COOKIE parameters
+         * @param array|null $files The FILES parameters
+         * @param array|null $server The SERVER parameters
          * @static 
          */ 
         public static function duplicate($query = null, $request = null, $attributes = null, $cookies = null, $files = null, $server = null)
@@ -15564,6 +15579,21 @@
                         return $instance->temporaryUrl($path, $expiration, $options);
         }
                     /**
+         * Get a temporary upload URL for the file at the given path.
+         *
+         * @param string $path
+         * @param \DateTimeInterface $expiration
+         * @param array $options
+         * @return array 
+         * @throws \RuntimeException
+         * @static 
+         */ 
+        public static function temporaryUploadUrl($path, $expiration, $options = [])
+        {
+                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
+                        return $instance->temporaryUploadUrl($path, $expiration, $options);
+        }
+                    /**
          * Get an array of all files in a directory.
          *
          * @param string|null $directory
@@ -15687,7 +15717,7 @@
          *
          * @template TWhenParameter
          * @template TWhenReturnType
-         * @param \Illuminate\Filesystem\(\Closure($this):  TWhenParameter)|TWhenParameter|null $value
+         * @param \Illuminate\Filesystem\(\Closure($this):  TWhenParameter)|TWhenParameter|null  $value
          * @param \Illuminate\Filesystem\(callable($this,  TWhenParameter): TWhenReturnType)|null  $callback
          * @param \Illuminate\Filesystem\(callable($this,  TWhenParameter): TWhenReturnType)|null  $default
          * @return $this|\Illuminate\Filesystem\TWhenReturnType 
@@ -17779,7 +17809,121 @@
      
 }
 
-        namespace Barryvdh\Debugbar\Facades { 
+        namespace Mccarlosen\LaravelMpdf\Facades { 
+            /**
+     * Class LaravelMpdf
+     *
+     * @package Mccarlosen\LaravelMpdf\Facades
+     */ 
+        class LaravelMpdf {
+                    /**
+         * 
+         *
+         * @param array $config optional, default []
+         * @return \Mccarlosen\LaravelMpdf\LaravelMpdf 
+         * @static 
+         */ 
+        public static function getPdf($config = [])
+        {
+                        /** @var \Mccarlosen\LaravelMpdf\LaravelMpdfWrapper $instance */
+                        return $instance->getPdf($config);
+        }
+                    /**
+         * Load a HTML string
+         *
+         * @param string $html
+         * @param array $config optional, default []
+         * @return \Pdf 
+         * @throws \Mpdf\MpdfException
+         * @static 
+         */ 
+        public static function loadHTML($html, $config = [])
+        {
+                        /** @var \Mccarlosen\LaravelMpdf\LaravelMpdfWrapper $instance */
+                        return $instance->loadHTML($html, $config);
+        }
+                    /**
+         * Chunk a HTML with given word and load string
+         *
+         * @param string $separator
+         * @param string $html
+         * @param array $config optional, default []
+         * @return \Pdf 
+         * @throws \Mpdf\MpdfException
+         * @static 
+         */ 
+        public static function chunkLoadHTML($separator, $html, $config = [])
+        {
+                        /** @var \Mccarlosen\LaravelMpdf\LaravelMpdfWrapper $instance */
+                        return $instance->chunkLoadHTML($separator, $html, $config);
+        }
+                    /**
+         * Load a HTML file
+         *
+         * @param string $file
+         * @param array $config optional, default []
+         * @return \Pdf 
+         * @throws \Mpdf\MpdfException
+         * @static 
+         */ 
+        public static function loadFile($file, $config = [])
+        {
+                        /** @var \Mccarlosen\LaravelMpdf\LaravelMpdfWrapper $instance */
+                        return $instance->loadFile($file, $config);
+        }
+                    /**
+         * Chunk a HTML file with given word and load HTML
+         *
+         * @param string $separator
+         * @param string $file
+         * @param array $config optional, default []
+         * @return \Pdf 
+         * @static 
+         */ 
+        public static function chunkLoadFile($separator, $file, $config = [])
+        {
+                        /** @var \Mccarlosen\LaravelMpdf\LaravelMpdfWrapper $instance */
+                        return $instance->chunkLoadFile($separator, $file, $config);
+        }
+                    /**
+         * Load a View and convert to HTML
+         *
+         * @param string $view
+         * @param array $data
+         * @param array $mergeData
+         * @param array $config optional, default []
+         * @return \Pdf 
+         * @throws \Mpdf\MpdfException
+         * @static 
+         */ 
+        public static function loadView($view, $data = [], $mergeData = [], $config = [])
+        {
+                        /** @var \Mccarlosen\LaravelMpdf\LaravelMpdfWrapper $instance */
+                        return $instance->loadView($view, $data, $mergeData, $config);
+        }
+                    /**
+         * Chunk a View with given word and load HTML
+         *
+         * @param string $separator
+         * @param string $view
+         * @param array $data
+         * @param array $mergeData
+         * @param array $config optional, default []
+         * @return \Pdf 
+         * @throws \Mpdf\MpdfException
+         * @static 
+         */ 
+        public static function chunkLoadView($separator, $view, $data = [], $mergeData = [], $config = [])
+        {
+                        /** @var \Mccarlosen\LaravelMpdf\LaravelMpdfWrapper $instance */
+                        return $instance->chunkLoadView($separator, $view, $data, $mergeData, $config);
+        }
+         
+    }
+     
+}
+
+    namespace Barryvdh\Debugbar\Facades { 
             /**
      * 
      *
@@ -18422,6 +18566,16 @@
          *
          * @static 
          */ 
+        public static function resolveMissingComponent($resolver)
+        {
+                        /** @var \Livewire\LivewireManager $instance */
+                        return $instance->resolveMissingComponent($resolver);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
         public static function getClass($alias)
         {
                         /** @var \Livewire\LivewireManager $instance */
@@ -18997,8 +19151,6 @@
                     /**
          * Find the file with the given identifier or file name.
          *
-         * @param string|null $fileIdentifier
-         * @return \Opcodes\LogViewer\LogFile|null 
          * @static 
          */ 
         public static function getFile($fileIdentifier)
@@ -19089,7 +19241,6 @@
                     /**
          * Get the maximum number of bytes of the log that we should display.
          *
-         * @return int 
          * @static 
          */ 
         public static function maxLogSize()
@@ -22105,7 +22256,7 @@ namespace  {
              *
              * @template TWhenParameter
              * @template TWhenReturnType
-             * @param \Illuminate\Database\Eloquent\(\Closure($this):  TWhenParameter)|TWhenParameter|null $value
+             * @param \Illuminate\Database\Eloquent\(\Closure($this):  TWhenParameter)|TWhenParameter|null  $value
              * @param \Illuminate\Database\Eloquent\(callable($this,  TWhenParameter): TWhenReturnType)|null  $callback
              * @param \Illuminate\Database\Eloquent\(callable($this,  TWhenParameter): TWhenReturnType)|null  $default
              * @return $this|\Illuminate\Database\Eloquent\TWhenReturnType 
@@ -22868,6 +23019,45 @@ namespace  {
             {
                                 /** @var \Illuminate\Database\Query\Builder $instance */
                                 return $instance->from($table, $as);
+            }
+             
+                /**
+             * Add an index hint to suggest a query index.
+             *
+             * @param string $index
+             * @return \Illuminate\Database\Query\Builder 
+             * @static 
+             */ 
+            public static function useIndex($index)
+            {
+                                /** @var \Illuminate\Database\Query\Builder $instance */
+                                return $instance->useIndex($index);
+            }
+             
+                /**
+             * Add an index hint to force a query index.
+             *
+             * @param string $index
+             * @return \Illuminate\Database\Query\Builder 
+             * @static 
+             */ 
+            public static function forceIndex($index)
+            {
+                                /** @var \Illuminate\Database\Query\Builder $instance */
+                                return $instance->forceIndex($index);
+            }
+             
+                /**
+             * Add an index hint to ignore a query index.
+             *
+             * @param string $index
+             * @return \Illuminate\Database\Query\Builder 
+             * @static 
+             */ 
+            public static function ignoreIndex($index)
+            {
+                                /** @var \Illuminate\Database\Query\Builder $instance */
+                                return $instance->ignoreIndex($index);
             }
              
                 /**
@@ -24974,6 +25164,7 @@ namespace  {
             class Validator extends \Illuminate\Support\Facades\Validator {}
             class View extends \Illuminate\Support\Facades\View {}
             class Vite extends \Illuminate\Support\Facades\Vite {}
+            class PDF extends \Mccarlosen\LaravelMpdf\Facades\LaravelMpdf {}
             class Debugbar extends \Barryvdh\Debugbar\Facades\Debugbar {}
             class Image extends \Intervention\Image\Facades\Image {}
             class Livewire extends \Livewire\Livewire {}

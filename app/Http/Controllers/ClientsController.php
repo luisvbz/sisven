@@ -3,12 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\Client;
+use App\Tables\Clients;
 use Illuminate\Http\Request;
 use ProtoneMedia\Splade\Facades\Toast;
 use App\Http\Requests\Clients\StoreRequest;
 
 class ClientsController extends Controller
 {
+    public function index(Request $request)
+    {
+        return view('modules.clients.index', ['clients' => Clients::class]);
+    }
     public function new(Request $request)
     {
         $types = [
