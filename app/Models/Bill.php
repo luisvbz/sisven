@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use Spatie\MediaLibrary\HasMedia;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Spatie\MediaLibrary\InteractsWithMedia;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Bill extends Model
+class Bill extends Model implements HasMedia
 {
-    use HasFactory, HasUuids;
+    use HasFactory, InteractsWithMedia;
 
     protected $fillable = [
         'client_id',

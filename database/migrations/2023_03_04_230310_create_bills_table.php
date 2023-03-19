@@ -18,7 +18,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('bills', function (Blueprint $table) {
-            $table->uuid('id')->primary();
+            $table->id();
             //$table->foreignIdFor(Sale::class)->constrained();
             $table->foreignIdFor(Client::class)->constrained();
             $table->enum('type', ['FACT','BOL','NDD','NDC']);
@@ -37,8 +37,8 @@ return new class extends Migration
         });
 
         Schema::create('bills_items', function (Blueprint $table) {
-            $table->uuid('id');
-            $table->foreignIdFor(Bill::class)->constrained();
+            $table->id();
+            $table->foreignIdFor(Bill::class)->onDelete('cascade');
             $table->foreignIdFor(Product::class)->constrained();
             $table->integer('quantity');
             $table->string('measure');

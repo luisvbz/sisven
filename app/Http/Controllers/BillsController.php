@@ -3,11 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bill;
+use App\Tables\Bills;
 use App\Models\Client;
 use App\Models\Product;
 use App\Models\SaleType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use ProtoneMedia\Splade\Facades\Toast;
 use App\Http\Requests\StoreBillRequest;
+use Illuminate\Support\Facades\Storage;
 
 class BillsController extends Controller
 {
@@ -28,42 +32,74 @@ class BillsController extends Controller
 
     public function index()
     {
-        return view('modules.bills.index');
+        $bills = Bills::class;
+        return view('modules.bills.index', ['bills' => $bills]);
     }
 
     public function store(StoreBillRequest $request)
     {
-        $bill = Bill::create([
-            'client_id' => $request->client_id,
-            'type' => $request->type,
-            'serie' => $request->serie,
-            'number' => $request->number,
-            'currency' => 'S',
-            'igv_percent' => $request->igv_percent,
-            'total_grabada' => $request->total_grabada,
-            'total_inafecta' => $request->total_inafecta,
-            'total_exonerada' => $request->total_exonerada,
-            'total_igv' => $request->total_igv,
-            'total' => $request->total,
-            'observations' => $request->observations,
-            'emition_date' => $request->emition_date,
-        ]);
 
+        try{
 
-        foreach($request->products as $producto)
-        {
-            $bill->item()->create([
-                'product_id' => $producto['product_id'],
-                'quantity' => $producto['cant'],
-                'measure' => $producto['measure'],
-                'unit_price' => $producto['unit_price'],
-                'discount' => 0,
-                'total' => $producto['total'],
+            DB::beginTransaction();
+            $bill = Bill::create([
+                'client_id' => $request->client_id,
+                'type' => $request->document_type,
+                'serie' => strtoupper($request->serie),
+                'number' => $request->number,
+                'currency' => 'S',
+                'igv_percent' => 18.00,
+                'total_grabada' => $request->total_gravada,
+                'total_inafecta' => $request->total_inafecta,
+                'total_exonerada' => 0,
+                'total_igv' => $request->total_igv,
+                'total' => $request->total,
+                'observations' => $request->observations ?? '',
+                'emition_date' => $request->emition_date,
             ]);
+
+
+            foreach($request->products as $producto)
+            {
+                $bill->items()->create([
+                    'product_id' => $producto['product_id'],
+                    'quantity' => $producto['cant'],
+                    'measure' => $producto['measure'],
+                    'unit_price' => $producto['unit_price'],
+                    'discount' => 0,
+                    'total' => $producto['total_price'],
+                ]);
+            }
+
+            if($request->has('file'))
+            {
+                $file = $request->file('file');
+                $name = "{$bill->serie}-{$bill->number}".".".$file->getClientOriginalExtension();
+                $file->storeAs("public/bills/", $name);
+
+                if(Storage::exists("public/bills/".$name))
+                {
+                    $bill->addMedia(storage_path("app/public/bills/".$name))->toMediaCollection('bills');
+                }
+            }
+
+            DB::commit();
+
+            Toast::title('Exito!')
+            ->center('El documento se ha registrado con éxito')
+            ->success()
+            ->backdrop()
+            ->autoDismiss(15);
+
+            return redirect()->route('de.index');
+
+        } catch (QueryException $e) {
+            DB::rollback();
+            dd($e->getMessage());
+        } catch (\Exception $e) {
+            DB::rollback();
+            dd($e->getMessage().$e->getLine());
         }
-
-
-        dd('here');
     }
 
 

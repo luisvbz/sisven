@@ -43,38 +43,9 @@ namespace App\Models{
 
 namespace App\Models{
 /**
- * App\Models\BiilItem
- *
- * @property int $id
- * @property string $bill_id
- * @property int $product_id
- * @property int $quantity
- * @property string $measure
- * @property string $unit_price
- * @property string $discount
- * @property string $total
- * @property-read \App\Models\Product $product
- * @method static \Illuminate\Database\Eloquent\Builder|BiilItem newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|BiilItem newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|BiilItem query()
- * @method static \Illuminate\Database\Eloquent\Builder|BiilItem whereBillId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|BiilItem whereDiscount($value)
- * @method static \Illuminate\Database\Eloquent\Builder|BiilItem whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|BiilItem whereMeasure($value)
- * @method static \Illuminate\Database\Eloquent\Builder|BiilItem whereProductId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|BiilItem whereQuantity($value)
- * @method static \Illuminate\Database\Eloquent\Builder|BiilItem whereTotal($value)
- * @method static \Illuminate\Database\Eloquent\Builder|BiilItem whereUnitPrice($value)
- */
-	class BiilItem extends \Eloquent {}
-}
-
-namespace App\Models{
-/**
  * App\Models\Bill
  *
- * @property string $id
- * @property string $sale_id
+ * @property int $id
  * @property int $client_id
  * @property string $type
  * @property string $serie
@@ -93,6 +64,8 @@ namespace App\Models{
  * @property-read \App\Models\Client $client
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\BillItem> $items
  * @property-read int|null $items_count
+ * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, \Spatie\MediaLibrary\MediaCollections\Models\Media> $media
+ * @property-read int|null $media_count
  * @method static \Illuminate\Database\Eloquent\Builder|Bill newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Bill newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Bill query()
@@ -104,7 +77,6 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Bill whereIgvPercent($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Bill whereNumber($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Bill whereObservations($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Bill whereSaleId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Bill whereSerie($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Bill whereTotal($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Bill whereTotalExonerada($value)
@@ -114,16 +86,33 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Bill whereType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Bill whereUpdatedAt($value)
  */
-	class Bill extends \Eloquent {}
+	class Bill extends \Eloquent implements \Spatie\MediaLibrary\HasMedia {}
 }
 
 namespace App\Models{
 /**
  * App\Models\BillItem
  *
+ * @property int $id
+ * @property string $bill_id
+ * @property int $product_id
+ * @property int $quantity
+ * @property string $measure
+ * @property string $unit_price
+ * @property string $discount
+ * @property string $total
+ * @property-read \App\Models\Product $product
  * @method static \Illuminate\Database\Eloquent\Builder|BillItem newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|BillItem newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|BillItem query()
+ * @method static \Illuminate\Database\Eloquent\Builder|BillItem whereBillId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BillItem whereDiscount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BillItem whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BillItem whereMeasure($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BillItem whereProductId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BillItem whereQuantity($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BillItem whereTotal($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BillItem whereUnitPrice($value)
  */
 	class BillItem extends \Eloquent {}
 }

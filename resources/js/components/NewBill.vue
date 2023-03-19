@@ -151,11 +151,7 @@
                         </div>
                     </div>
                 </div>
-                <x-splade-errors>
-                <div v-for="(errors, key) in errors.all">
-                    <pre>{{ error}}</pre>
-                </div>
-            </x-splade-errors>
+                <slot name="errors"></slot>
                 <!-- /lista de productos -->
             </div>
         </div>
