@@ -92,7 +92,7 @@ class OrdersController extends Controller
                 'action' =>  route('co.details', [$order]),
             ]);
 
-            Notification::send(User::role('admin')->get(), new OrderCreated($order, auth()->user()));
+           // Notification::send(User::role('admin')->get(), new OrderCreated($order, auth()->user()));
 
         DB::commit();
 
