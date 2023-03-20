@@ -48,7 +48,7 @@ class UsersController extends Controller
 
             DB::commit();
 
-            $user->notify(new UserCreated($user, $request->password));
+            //$user->notify(new UserCreated($user, $request->password));
 
             Toast::title('Exito!')
             ->center('El usuario se ha creado satisfactoriamente')
