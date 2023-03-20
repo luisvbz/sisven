@@ -57,7 +57,7 @@
                 </x-splade-cell>
                  <x-splade-cell acciones as="$bill">
                     <div class="flex justify-around">
-                      <Link rel="tooltip" title="Ver detalles" href="#"><i class="mr-1 text-xl text-blue-400 hover:text-blue-600 fi fi-br-search"></i></Link>
+                      <Link modal rel="tooltip" title="Ver detalles" href="{{ route('de.items', [$bill])}}"><i class="mr-1 text-xl text-blue-400 hover:text-blue-600 fi fi-br-search"></i></Link>
                       @if($bill->status == 'proccesed')
                        <x-splade-link
                             rel="tooltip" title="Marcar como anulado"

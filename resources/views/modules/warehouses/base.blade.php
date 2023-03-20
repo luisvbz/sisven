@@ -39,6 +39,9 @@
               <span class="ml-3">Trasladar Mercancia</span>
             </x-nav-link-sidebar>
           </li>
+           <div class="p-4 m-3 mt-4 text-sm font-semibold border rounded-md shadow bg-amber-100 border-amber-300">
+             Módulo para gestionar almacenes, aqui se puede ver el stock y movimientos del mismo
+           </div>
     </x-slot>
 
     @yield('content')

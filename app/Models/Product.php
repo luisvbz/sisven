@@ -72,4 +72,9 @@ class Product extends Model
     {
         return number_format($this->full_stock, 0,"", ",");
     }
+
+    public function saleItems()
+    {
+        return $this->hasMany(SaleProduct::class);
+    }
 }

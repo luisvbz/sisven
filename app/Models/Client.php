@@ -26,4 +26,9 @@ class Client extends Model
             get: fn ($value) => strtoupper($value),
         );
     }
+
+    public function sales()
+    {
+        return $this->hasMany(Sale::class)->where('status', 'proccesed');
+    }
 }

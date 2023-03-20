@@ -121,6 +121,11 @@ class BillsController extends Controller
         return redirect()->back();
     }
 
+    public function items(Bill $bill)
+    {
+        return view('modules.bills.details', ['products' => $bill->items]);
+    }
+
 
     public function getClients(Request $request)
     {

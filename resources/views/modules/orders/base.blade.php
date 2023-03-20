@@ -25,6 +25,9 @@
             </x-nav-link-sidebar>
           </li>
           @endcan
+          <div class="p-4 m-3 mt-4 text-sm font-semibold border rounded-md shadow bg-amber-100 border-amber-300">
+            Modulo para agregar compras a proveedores, esto afecta el stock de los productos
+          </div>
     </x-slot>
 
     @yield('content')

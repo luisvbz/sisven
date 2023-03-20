@@ -25,10 +25,10 @@
                             placeholder="Seleccion el rol del usuario"
                             :options="$roles"
                              option-label="display_name" option-value="name" />
-                              <x-splade-select name="stores[]" label="¿Qué tiendas puede ver?"
+                              <x-splade-select name="stores" label="¿Qué tiendas puede ver?"
                              v-if="form.rol == 'vendedor'"
                             placeholder="Seleccion las tiendas"
-                            :options="$stores" choices multiple
+                            :options="$stores" choices
                              option-label="name" option-value="id" />
                         </div>
                          <div class="px-2 py-2 mb-2 border-b-2 border-gray-300"></div>

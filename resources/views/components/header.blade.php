@@ -8,14 +8,14 @@
                 </div>
                 <!-- Settings Dropdown -->
                 <div class="hidden sm:flex sm:items-center sm:ml-6 space-x-4">
-                    <x-splade-link slideover href="{{ route('unread.notifications') }}" class="text-xl mt-2">
+                   {{--  <x-splade-link slideover href="{{ route('unread.notifications') }}" class="text-xl mt-2">
                         <span class="relative inline-block">
                             <svg class="w-6 h-6 text-gray-700 fill-current" viewBox="0 0 20 20"><path d="M18 5v8a2 2 0 01-2 2h-5l-5 4v-4H4a2 2 0 01-2-2V5a2 2 0 012-2h12a2 2 0 012 2zM7 8H5v2h2V8zm2 0h2v2H9V8zm6 0h-2v2h2V8z" clip-rule="evenodd" fill-rule="evenodd"></path></svg>
                             <span class="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full">
                                 {{ auth()->user()->unreadNotifications->count() }}
                             </span>
                         </span>
-                    </x-splade-link>
+                    </x-splade-link> --}}
                     <x-dropdown placement="bottom-end">
                         <x-slot name="trigger">
                             <button class="flex items-center text-sm font-medium text-gray-500 transition duration-150 ease-in-out bg-white hover:text-gray-700 focus:outline-none">
@@ -30,9 +30,9 @@
                         </x-slot>
 
                         <x-slot name="content">
-                            <x-dropdown-link :href="route('profile.edit')">
+                          {{--   <x-dropdown-link :href="route('profile.edit')">
                                 <i class="fi fi-br-user"></i> Perfil
-                            </x-dropdown-link>
+                            </x-dropdown-link> --}}
 
                             <!-- Authentication -->
                             <form method="POST" action="{{ route('logout') }}">

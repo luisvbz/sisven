@@ -137,6 +137,8 @@ namespace App\Models{
  * @property string|null $email
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Sale> $sales
+ * @property-read int|null $sales_count
  * @method static \Illuminate\Database\Eloquent\Builder|Client newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Client newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Client query()
@@ -391,6 +393,8 @@ namespace App\Models{
  * @property-read mixed $full_stock_formated
  * @property-read mixed $price_formated
  * @property-read \App\Models\ProductMeasure $measure
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\SaleProduct> $saleItems
+ * @property-read int|null $sale_items_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Store> $stores
  * @property-read int|null $stores_count
  * @property-read \App\Models\ProductType $type
@@ -603,6 +607,7 @@ namespace App\Models{
  * @property string $unit_price
  * @property string $total
  * @property-read \App\Models\Product $product
+ * @property-read \App\Models\Sale $sale
  * @property-read \App\Models\SaleType $type
  * @method static \Illuminate\Database\Eloquent\Builder|SaleProduct newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|SaleProduct newQuery()

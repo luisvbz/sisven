@@ -43,7 +43,7 @@ class UsersController extends Controller
             $user->givePermissionTo($request->only(['permissions']));
 
             if($request->rol == 'vendedor') {
-                $user->stores()->sync($request->stores);
+                $user->stores()->sync([$request->stores]);
             }
 
             DB::commit();
