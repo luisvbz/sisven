@@ -62,7 +62,8 @@
                  <div class="bg-primary-100 p-2 mb-2 rounde border border-primary-300 rounded-md" v-for="(product,index) in form.products">
                     <div class="bg-primary-400 px-2 rounded py-1 mb-2 text-white flex justify-between">
                         <div class="text-sm font-semibold" v-text="product.name"></div>
-                        <div>
+                        <div class="flex space-x-2">
+                            <a class="text-white text-1xl cursor-pointer" @click="form.products.push(product)"><i class="fi fi-br-copy"></i></a>
                             <a class="text-white text-1xl cursor-pointer" @click="form.products.splice(index,1)"><i class="fi fi-br-trash"></i></a>
                         </div>
                     </div>

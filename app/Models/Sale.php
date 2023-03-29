@@ -74,4 +74,9 @@ class Sale extends Model
         return $this->hasOne(SaleJustification::class, 'sale_id');
     }
 
+    public function methods()
+    {
+        return $this->belongsToMany(PaymentMenthod::class);
+    }
+
 }

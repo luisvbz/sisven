@@ -9,6 +9,7 @@ use App\Models\Supplier;
 use App\Models\InputType;
 use App\Models\Warehouse;
 use App\Models\OutputType;
+use App\Models\PaymentType;
 use App\Models\ProductType;
 use App\Models\ProductMeasure;
 use App\Models\ProductPackage;
@@ -160,6 +161,21 @@ class ProductStoreSeeder extends Seeder
                 'name' => 'Unidad',
                 'alias' => 'Unidad',
                 'quantity' => 1
+            ],
+        ]);
+
+        PaymentType::insert([
+            [
+                'name' => 'Efectivo',
+                'alias' => 'efectivo',
+            ],
+            [
+                'name' => 'Yape',
+                'alias' => 'yape',
+            ],
+            [
+                'name' => 'Transferencia',
+                'alias' => 'transferencia',
             ],
         ]);
 
