@@ -11,6 +11,7 @@ use App\Models\Product;
 use App\Models\SaleType;
 use App\Models\InputType;
 use App\Models\OutputType;
+use App\Models\PaymentType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use ProtoneMedia\Splade\Facades\Toast;
@@ -25,6 +26,7 @@ class SalesController extends Controller
         return view('modules.sales.new', [
             'types' => SaleType::all(),
             'stores' => $stores,
+            'payments' => PaymentType::all(),
             'store' => auth()->user()->hasRole('vendedor') ?  $stores : null
         ]);
     }

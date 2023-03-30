@@ -136,9 +136,74 @@
                         <div class="font-medium">Total</div>
                         <div>S/. {{ price(totalSale) }}</div>
                     </div>
+                    <slot name="extend"></slot>
+                    <a @click="showModal = true;" class="cursor-pointer">
+                        <div class="flex justify-center items-center px-2 py-1 bg-primary-100 border border-primary-300 rounded-md hover:bg-primary-200 uppercase text-sm font-medium">
+                            <span>Agregar metodo de pago</span> <i class="fi fi-br-credit-card mt-2 ml-2"></i>
+                        </div>
+                    </a>
                     <div>
                         <button v-if="!form.processing" @click="realizarVenta" type="button" class="w-full px-5 py-2 mb-2 mr-2 text-sm font-medium text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">FINALIZAR VENTA</button>
                         <div v-else class="w-full px-5 py-2 mb-2 mr-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg opacity-40 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">PROCENSANDO</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div  tabindex="-1"  :class="['bg-black/50  backdrop-blur-sm fixed top-0 left-0 right-0 z-50 flex justify-center flex-col items-center w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] md:h-full', {'hidden': !showModal}]">
+            <div class="relative w-full h-full max-w-md md:h-auto">
+                <!-- Modal content -->
+                <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                    <!-- Modal header -->
+                    <div class="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600">
+                        <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                            Agregar pago
+                        </h3>
+                        <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="staticModal">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                        </button>
+                    </div>
+                    <!-- Modal body -->
+                    <div class="p-6 space-y-2">
+                        <div class="mb-1">
+                            <label for="type" class="block mb-1 text-sm font-medium text-gray-900 dark:text-white">Selecione el tipo</label>
+                                <select v-model="data.type_id" id="type" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 ">
+                                <option selected value="">Sleeccione el tipo</option>
+                                <option v-for="type in types" :key="type.alias" :value="type.id" v-text="type.name"></option>
+                            </select>
+                        </div>
+                        <template v-if="data.type_id != 1 && data.type_id != ''">
+                            <div class="mb-1">
+                                <label for="titular" class="block mb-1 text-sm font-medium text-gray-900 dark:text-white">Nombre o Titular</label>
+                                <input type="text" v-model="data.titular" id="titular" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5">
+                            </div>
+                            <div class="mb-1" v-if="data.type_id == '3'">
+                                <label for="operation" class="block mb-1 text-sm font-medium text-gray-900 dark:text-white">Número de operación</label>
+                                <input type="text" v-model="data.operation" id="operation" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5">
+                            </div>
+                            <div class="mb-1" v-if="data.type_id == '3'">
+                                <label for="back" class="block mb-1 text-sm font-medium text-gray-900 dark:text-white">Banco</label>
+                                <input type="text" v-model="data.back" id="back" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5">
+                            </div>
+                            <div class="mb-1">
+                                <label for="operation_date" class="block mb-1 text-sm font-medium text-gray-900 dark:text-white">Fecha de Operación</label>
+                                <input type="date" v-model="data.operation_date" id="operoperation_dateation" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5">
+                            </div>
+                        </template>
+                        <div>
+                            <CurrencyInput
+                                        label="Monto pagado"
+                                        v-model="data.amount"
+                                        :icon="false"
+                                        :options="{ currency: 'PEN' }"
+                                        />
+                        </div>
+
+                    </div>
+                    <!-- Modal footer -->
+                    <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
+                        <button type="button" @click="agregarPago" class="text-white w-full bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2">Agreagar Pago</button>
+
                     </div>
                 </div>
             </div>
@@ -155,6 +220,10 @@ export default {
         type: Object,
         required: true
     },
+    types: {
+        type: Object,
+        required: true
+    }
   },
   components: {
     CurrencyInput
@@ -183,6 +252,15 @@ export default {
         error: {
             show: false,
             message: ''
+        },
+        showModal: false,
+        data: {
+            type_id : '',
+            titular: '',
+            operation: '',
+            operation_date: '',
+            bank: '',
+            amount: 0
         }
 
     }
@@ -229,6 +307,24 @@ export default {
     addClient()
     {
         console.log(this.$splade.visit)
+    },
+    closeModal()
+    {
+        this.data = {
+            type_id : '',
+            titular: '',
+            operation: '',
+            operation_date: '',
+            bank: '',
+            amount: 0
+        };
+
+        this.showModal = false;
+    },
+    agregarPago ()
+    {
+        this.form.payment_methods.push(this.data);
+        this.closeModal();
     },
     getProductsByStore(storeId)
     {   this.products.show = true;

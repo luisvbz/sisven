@@ -29,6 +29,7 @@ return new class extends Migration
             $table->string('operation')->nullable();
             $table->string('bank')->nullable();
             $table->date('operation_date');
+            $table->decimal('amount', 9,2);
             $table->timestamps();
         });
     }

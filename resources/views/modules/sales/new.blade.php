@@ -21,7 +21,8 @@
                     'has_discount' => false,
                     'discount_percent' => 0,
                     'subtotal' => 0,
-                    'total' => 0
+                    'total' => 0,
+                    'payment_methods' => []
                     ]">
             @role('vendedor')
                 <div class="flex space-x-2">
@@ -43,8 +44,10 @@
                 <div class="py-2 mb-4 border-b border-gray-600 border-dotted"></div>
             @endrole
 
-                <nueva-venta :form="form"/>
-                {{-- <pre class="bg-white p-4 rounded border border-gray-300 mt-4" v-text="form.$all"/> --}}
+                <nueva-venta :form="form" :types="{{$payments}}">
+                </nueva-venta>
+
+                <pre class="bg-white p-4 rounded border border-gray-300 mt-4" v-text="form.$all"/>
             </x-splade-form>
         </div>
     </div>
