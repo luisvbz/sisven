@@ -170,6 +170,11 @@
                             <span>Agregar metodo de pago</span> <i class="mt-2 ml-2 fi fi-br-credit-card"></i>
                         </div>
                     </a>
+                    <a @click="showAuthorization = true" class="cursor-pointer">
+                        <div class="flex items-center justify-center px-2 py-1 text-sm font-medium uppercase border rounded-md bg-success-100 border-success-300 hover:bg-success-300">
+                            <span>Autorizar </span> <i class="mt-2 ml-2 fi fi-br-lock"></i>
+                        </div>
+                    </a>
                     <div>
                         <button v-if="!form.processing" @click="realizarVenta" type="button" class="w-full px-5 py-2 mb-2 mr-2 text-sm font-medium text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">FINALIZAR VENTA</button>
                         <div v-else class="w-full px-5 py-2 mb-2 mr-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg opacity-40 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">PROCENSANDO</div>
@@ -236,6 +241,39 @@
                 </div>
             </div>
         </div>
+        <div  tabindex="-1"  :class="['bg-black/50  backdrop-blur-sm fixed top-0 left-0 right-0 z-50 flex justify-center flex-col items-center w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] md:h-full', {'hidden': !showAuthorization}]">
+            <div class="relative w-full h-full max-w-md md:h-auto">
+                <!-- Modal content -->
+                <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                    <!-- Modal header -->
+                    <div class="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600">
+                        <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                            Autorizar cambios de precio en la venta
+                        </h3>
+                        <button type="button" @click="closeAuthorizacion" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="staticModal">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                        </button>
+                    </div>
+                    <!-- Modal body -->
+                    <div class="p-6 space-y-2">
+                        <div class="mb-1">
+                            <label for="titular" class="block mb-1 text-sm font-medium text-gray-900 dark:text-white">Usuario</label>
+                            <input type="text" v-model="autorizacion.usuario" id="titular" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5">
+                        </div>
+                        <div class="mb-1">
+                            <label for="operation" class="block mb-1 text-sm font-medium text-gray-900 dark:text-white">Clave</label>
+                            <input type="password" v-model="autorizacion.password" id="operation" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5">
+                        </div>
+
+                    </div>
+                    <!-- Modal footer -->
+                    <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
+                        <button type="button" @click="autorizar" class="text-white w-full bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2">Agreagar Pago</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 <script>
@@ -282,6 +320,7 @@ export default {
             message: ''
         },
         showModal: false,
+        showAuthorization: false,
         data: {
             type_id : '',
             titular: '',
@@ -289,6 +328,10 @@ export default {
             operation_date: '',
             bank: '',
             amount: 0
+        },
+        autorizacion: {
+            usuario: '',
+            password: ''
         }
 
     }
@@ -335,6 +378,40 @@ export default {
     addClient()
     {
         console.log(this.$splade.visit)
+    },
+    closeAuthorizacion()
+    {
+        this.autorizacion.usuario = '';
+        this.autorizacion.password = '';
+        this.showAuthorization = false;
+    },
+    autorizar()
+    {
+         if(this.autorizacion.usuario == '') {
+             this.$toast.warning("Debe escribir el usuario", {
+                    position: 'top',
+                    duration: 3000
+                })
+
+                return;
+        }
+
+        if(this.autorizacion.password == '') {
+             this.$toast.warning("Debe escribir la contraseña", {
+                    position: 'top',
+                    duration: 3000
+                })
+
+                return;
+        }
+
+         axios.post(`/api/sales/autorizar`, this.autorizacion).then(rs => {
+
+        }).catch(e => {
+            console.log(e)
+        }).finally(() => {
+
+        })
     },
     openModal()
     {

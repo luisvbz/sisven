@@ -183,6 +183,7 @@ Route::middleware('auth')->group(function () {
     //Sales
     Route::get('/api/sales/store/{storeId}/products', [SalesController::class, 'getProductosByStore'])->name('ve.get-products');
     Route::get('/api/sales/clients', [SalesController::class, 'getClients'])->name('ve.get-clients');
+    Route::post('/api/sales/autorizar',[SalesController::class, 'autorizar'])->name('ve.autorizar')->middleware('permission:ve:access');
      //De
      Route::get('/api/bills/products', [BillsController::class, 'getProducts'])->name('de.get-products');
      Route::get('/api/bills/clients', [BillsController::class, 'getClients'])->name('de.get-clients');

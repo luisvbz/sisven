@@ -54,11 +54,15 @@ class RolesAndPermissionSeeder extends Seeder
             ['name' => 'pr:create', 'guard_name' => 'web', 'display_name' => 'Agregar un nuevo producto', 'module_id' => 'PR'],
             ['name' => 'pr:edit', 'guard_name' => 'web', 'display_name' => 'Editar producto', 'module_id' => 'PR'],
             ['name' => 'pr:delete', 'guard_name' => 'web', 'display_name' => 'Eliminar producto', 'module_id' => 'PR'],
-            //Mdoulo de productos
+            //Mdoulo de Proveedores
             ['name' => 'pv:access', 'guard_name' => 'web', 'display_name' => 'Acceder al modulo de proveedores', 'module_id' => 'PV'],
             ['name' => 'pv:create', 'guard_name' => 'web', 'display_name' => 'Agregar un nuevo proveedores', 'module_id' => 'PV'],
             ['name' => 'pv:edit', 'guard_name' => 'web', 'display_name' => 'Editar proveedores', 'module_id' => 'PV'],
             ['name' => 'pv:delete', 'guard_name' => 'web', 'display_name' => 'Eliminar proveedores', 'module_id' => 'PV'],
+            //Mdoulo de Proveedores
+            ['name' => 'cl:access', 'guard_name' => 'web', 'display_name' => 'Acceder al modulo de clientes', 'module_id' => 'CL'],
+            ['name' => 'cl:create', 'guard_name' => 'web', 'display_name' => 'Agregar un nuevo clientes', 'module_id' => 'CL'],
+            ['name' => 'cl:edit', 'guard_name' => 'web', 'display_name' => 'Editar clientes', 'module_id' => 'CL'],
             //Compras
             ['name' => 'co:access', 'guard_name' => 'web', 'display_name' => 'Acceder al modulo de compras', 'module_id' => 'CO'],
             ['name' => 'co:create', 'guard_name' => 'web', 'display_name' => 'Agregar un nuevo compras', 'module_id' => 'CO'],
@@ -67,10 +71,15 @@ class RolesAndPermissionSeeder extends Seeder
             //Ventas
             ['name' => 've:access', 'guard_name' => 'web', 'display_name' => 'Acceder al modulo de ventas', 'module_id' => 'VE'],
             ['name' => 've:create', 'guard_name' => 'web', 'display_name' => 'Generar una nueva venta', 'module_id' => 'VE'],
+            ['name' => 've:cancel', 'guard_name' => 'web', 'display_name' => 'Cancelar una venta', 'module_id' => 'VE'],
             //Bills
             ['name' => 'de:access', 'guard_name' => 'web', 'display_name' => 'Acceder al modulo de documentos electrónicos', 'module_id' => 'DE'],
             ['name' => 'de:create', 'guard_name' => 'web', 'display_name' => 'Generar un nuevo documentos electrónico', 'module_id' => 'DE'],
-
+            ['name' => 'de:add-file-to-document', 'guard_name' => 'web', 'display_name' => 'Cargar archivo pdf en un documento electrónico', 'module_id' => 'DE'],
+            ['name' => 'de:cancel', 'guard_name' => 'web', 'display_name' => 'Anular documento electrónico', 'module_id' => 'DE'],
+            //Reportes
+            ['name' => 'rp:access', 'guard_name' => 'web', 'display_name' => 'Acceder al modulo de reportes', 'module_id' => 'RP'],
+            ['name' => 'rp:download', 'guard_name' => 'web', 'display_name' => 'Descargar archivos de reportes', 'module_id' => 'RP'],
          ];
 
          Permission::insert($permissions);

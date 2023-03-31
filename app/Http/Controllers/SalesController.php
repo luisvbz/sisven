@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use PDF;
 use App\Models\Sale;
+use App\Models\User;
 use App\Models\Store;
 use App\Tables\Sales;
 use App\Models\Client;
@@ -15,6 +16,7 @@ use App\Models\PaymentType;
 use Illuminate\Http\Request;
 use App\Models\PaymentMenthod;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use ProtoneMedia\Splade\Facades\Toast;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\Sales\NewSaleRequest;
@@ -244,6 +246,22 @@ class SalesController extends Controller
                             ->get();
 
         return response()->json(['clients' => $clients]);
+    }
+
+    public function autorizar(Request $request)
+    {
+        $user = User::where('username', $request->usuario)->first();
+
+        if($user->hasRole('super-admin') || $user->hasRole('admin')) {
+            // Verificar si la contraseña es correcta
+            if ($user && Hash::check($request->usuario, $user->password)) {
+                return response()->json(['autorizar' => 'true']);
+            } else {
+                return response()->json(['autorizar' => 'false', 'msj' => 'Clave Incorrecta'], 422);
+            }
+        }else {
+            return response()->json(['autorizar' => 'false', 'msj' => 'No puede autorizar'], 422);
+        }
     }
 
     public function pdf($id)
