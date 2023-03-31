@@ -66,6 +66,7 @@
                             </div>
                             <div class="w-20">
                                 <CurrencyInput
+                                    :disabled="form.blocked"
                                     label="P. Unit"
                                     v-model="product.unit_price"
                                     :icon="false"
@@ -87,8 +88,8 @@
                 </div>
                 <!-- /lista de productos -->
             </div>
-            <div class="w-2/6">
-                <div class="flex flex-col p-4 space-y-2 bg-white border border-gray-300 rounded-md shadow-md ">
+            <div class="w-2/6 ">
+                <div class="sticky flex flex-col p-4 space-y-2 bg-white border border-gray-300 rounded-md shadow-md top-8 ">
                     <div>
                         <div class="flex justify-between">
                             <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-onl">Cliente</label>
@@ -137,9 +138,36 @@
                         <div>S/. {{ price(totalSale) }}</div>
                     </div>
                     <slot name="extend"></slot>
-                    <a @click="showModal = true;" class="cursor-pointer">
-                        <div class="flex justify-center items-center px-2 py-1 bg-primary-100 border border-primary-300 rounded-md hover:bg-primary-200 uppercase text-sm font-medium">
-                            <span>Agregar metodo de pago</span> <i class="fi fi-br-credit-card mt-2 ml-2"></i>
+                    <div v-if="form.payment_methods.length > 0" class="space-y-1">
+                        <div class="py-1 text-sm font-medium text-center uppercase bg-gray-200 rounded-md">Pagos agregados</div>
+                        <div v-for="(pm,index) in form.payment_methods" :key="Math.random()"
+                            class="flex p-2 bg-gray-100 border border-gray-300 rounded ">
+                            <div class="flex flex-col items-center justify-center mr-2">
+                                <img v-if="pm.type_id == 1" src="/images/money.svg" class="w-6"/>
+                                <img v-else-if="pm.type_id == 2" src="/images/yape.png" class="w-6"/>
+                                <img v-else-if="pm.type_id == 3" src="/images/bank.svg" class="w-6"/>
+                            </div>
+                            <div class="flex-grow">
+                                <template v-if="pm.type_id > 1">
+                                    <div class="text-sm font-semibold">{{ pm.titular }}</div>
+                                    <div class="text-xs">{{ pm.operation_date }}</div>
+                                    <div v-if="pm.type_id == 3" class="text-xs">{{ pm.operation }}</div>
+                                </template>
+                                <template v-else>
+                                    <div class="font-semibold text-md">Efectivo</div>
+                                </template>
+                            </div>
+                            <div class="flex flex-col items-center justify-center mr-2">
+                                <div>S/ <span class="font-semibold">{{ pm.amount}}</span></div>
+                            </div>
+                            <div class="flex flex-col items-center justify-center">
+                                <i @click="form.payment_methods.splice(index,1)" class="text-lg cursor-pointer fi fi-br-trash text-danger-500 hover:text-danger-600"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <a @click="form.total == 0 ? false : openModal()" class="cursor-pointer">
+                        <div class="flex items-center justify-center px-2 py-1 text-sm font-medium uppercase border rounded-md bg-primary-100 border-primary-300 hover:bg-primary-200">
+                            <span>Agregar metodo de pago</span> <i class="mt-2 ml-2 fi fi-br-credit-card"></i>
                         </div>
                     </a>
                     <div>
@@ -159,7 +187,7 @@
                         <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
                             Agregar pago
                         </h3>
-                        <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="staticModal">
+                        <button type="button" @click="closeModal" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="staticModal">
                             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
                         </button>
                     </div>
@@ -308,6 +336,20 @@ export default {
     {
         console.log(this.$splade.visit)
     },
+    openModal()
+    {
+        let total = _.sumBy(this.form.payment_methods, function(o) {return o.amount})
+
+        if(total == this.form.total) {
+             this.$toast.warning("No puedes agregar mas pagos a esta venta", {
+                    position: 'top',
+                    duration: 3000
+                })
+
+                return;
+        }
+        this.showModal = true;
+    },
     closeModal()
     {
         this.data = {
@@ -323,6 +365,78 @@ export default {
     },
     agregarPago ()
     {
+        if(this.data.type_id == 2) {
+
+            let errors = 0;
+            if(this.data.titular == '') {
+                this.$toast.warning("Debes indicar el nombre del Yape", {
+                    position: 'top',
+                    duration: 3000
+                })
+
+                errors++;
+            }
+
+            if(this.data.operation_date == '') {
+                this.$toast.warning("Debes indicar la fecha del Yape", {
+                    position: 'top',
+                    duration: 3000
+                })
+
+                errors++;
+            }
+
+            if(errors) return;
+        }
+
+         if(this.data.type_id == 3) {
+
+            let errors = 0;
+            if(this.data.titular == '') {
+                this.$toast.warning("Debes indicar el titular de la cuenta", {
+                    position: 'top',
+                    duration: 3000
+                })
+
+                errors++;
+            }
+
+            if(this.data.operation == '') {
+                this.$toast.warning("Debes indicar el numero de operación", {
+                    position: 'top',
+                    duration: 3000
+                })
+
+                errors++;
+            }
+
+            if(this.data.operation_date == '') {
+                this.$toast.warning("Debes indicar la fecha del Deposito o Transferencia", {
+                    position: 'top',
+                    duration: 3000
+                })
+
+                errors++;
+            }
+
+            if(errors) return;
+        }
+
+        if(this.data.amount == 0) {
+             this.$toast.warning("Debes indicar el monto", {
+                    position: 'top',
+                    duration: 3000
+                })
+                return;
+        }
+
+        let total = _.sumBy(this.form.payment_methods, function(o) {return o.amount})
+        let totalNext = total + this.data.amount;
+
+        if(totalNext > this.form.total) {
+            this.data.amount = this.form.total - total;
+        }
+
         this.form.payment_methods.push(this.data);
         this.closeModal();
     },
@@ -472,6 +586,14 @@ export default {
             errors++;
         }
 
+        if(this.form.payment_methods.length == 0) {
+            this.$toast.error("Debe agregar los <b>PAGOS</b>", {
+                position: 'top',
+                duration: 5000
+            })
+            errors++;
+        }
+
         this.form.products.forEach(x => {
                 if(x.quantity_type == 0) {
                 this.$toast.error(`No has seleccionado la cantidad del producto <b>${x.full_name}</b>`, {
@@ -482,6 +604,18 @@ export default {
                  errors++;
             }
         })
+
+        let total = _.sumBy(this.form.payment_methods, function(o) {return o.amount})
+
+        if(total < this.form.total) {
+            this.$toast.error("El total de pagos debe ser igual al monto de la venta", {
+                position: 'top',
+                duration: 5000
+            })
+            errors++;
+        }
+
+
 
         if(errors > 0) return;
         this.form.submit()

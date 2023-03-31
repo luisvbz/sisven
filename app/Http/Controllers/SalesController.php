@@ -13,6 +13,7 @@ use App\Models\InputType;
 use App\Models\OutputType;
 use App\Models\PaymentType;
 use Illuminate\Http\Request;
+use App\Models\PaymentMenthod;
 use Illuminate\Support\Facades\DB;
 use ProtoneMedia\Splade\Facades\Toast;
 use Illuminate\Support\Facades\Validator;
@@ -55,6 +56,7 @@ class SalesController extends Controller
     {
         try {
             $data = $request->all();
+
             //saveing sale
             DB::beginTransaction();
             $store = Store::find($request->store_id);
@@ -69,6 +71,20 @@ class SalesController extends Controller
                 'sub_total'=> $data['total'],
                 'total' => $data['total']
             ]);
+
+            //ADDING PAYMENTS
+
+            foreach($data['payment_methods'] as $pm) {
+                PaymentMenthod::create([
+                    'sale_id' => $sale->id,
+                    'payment_type_id' => $pm['type_id'],
+                    'titular' => $pm['titular'],
+                    'operation' => $pm['operation'],
+                    'operation_date' => $pm['operation_date'] ?? now(),
+                    'amount' => $pm['amount'],
+                ]);
+            }
+
 
             $input = OutputType::whereAlias('venta')->first();
 
@@ -238,7 +254,9 @@ class SalesController extends Controller
             'sale' => $sale
         ];
 
-        $pdf = PDF::loadView('modules.sales.pdf', $data);
+        $pdf = PDF::loadView('modules.sales.pdf', $data, [], [
+            'format' => [80, 297],
+        ]);
         return $pdf->download("{$sale->number}.pdf");
     }
 }

@@ -45,7 +45,24 @@ namespace App\Models{
 /**
  * App\Models\Bill
  *
- * @property-read \App\Models\Client|null $client
+ * @property int $id
+ * @property int $client_id
+ * @property string $status
+ * @property string $type
+ * @property string $serie
+ * @property string $number
+ * @property string $currency
+ * @property string $igv_percent
+ * @property string $total_grabada
+ * @property string $total_inafecta
+ * @property string $total_exonerada
+ * @property string $total_igv
+ * @property string $total
+ * @property string $observations
+ * @property string $emition_date
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Client $client
  * @property-read mixed $file
  * @property-read mixed $total_formated
  * @property-read mixed $total_gravada_formated
@@ -57,6 +74,23 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Bill newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Bill newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Bill query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Bill whereClientId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Bill whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Bill whereCurrency($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Bill whereEmitionDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Bill whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Bill whereIgvPercent($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Bill whereNumber($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Bill whereObservations($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Bill whereSerie($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Bill whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Bill whereTotal($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Bill whereTotalExonerada($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Bill whereTotalGrabada($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Bill whereTotalIgv($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Bill whereTotalInafecta($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Bill whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Bill whereUpdatedAt($value)
  */
 	class Bill extends \Eloquent implements \Spatie\MediaLibrary\HasMedia {}
 }
@@ -65,10 +99,26 @@ namespace App\Models{
 /**
  * App\Models\BillItem
  *
- * @property-read \App\Models\Product|null $product
+ * @property int $id
+ * @property int $bill_id
+ * @property int $product_id
+ * @property int $quantity
+ * @property string $measure
+ * @property string $unit_price
+ * @property string $discount
+ * @property string $total
+ * @property-read \App\Models\Product $product
  * @method static \Illuminate\Database\Eloquent\Builder|BillItem newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|BillItem newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|BillItem query()
+ * @method static \Illuminate\Database\Eloquent\Builder|BillItem whereBillId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BillItem whereDiscount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BillItem whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BillItem whereMeasure($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BillItem whereProductId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BillItem whereQuantity($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BillItem whereTotal($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BillItem whereUnitPrice($value)
  */
 	class BillItem extends \Eloquent {}
 }
@@ -325,9 +375,25 @@ namespace App\Models{
 /**
  * App\Models\PaymentMenthod
  *
+ * @property int $id
+ * @property string $sale_id
+ * @property int $payment_type_id
+ * @property string|null $titular
+ * @property string|null $operation
+ * @property string|null $bank
+ * @property string $operation_date
+ * @property string $amount
  * @method static \Illuminate\Database\Eloquent\Builder|PaymentMenthod newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|PaymentMenthod newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|PaymentMenthod query()
+ * @method static \Illuminate\Database\Eloquent\Builder|PaymentMenthod whereAmount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PaymentMenthod whereBank($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PaymentMenthod whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PaymentMenthod whereOperation($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PaymentMenthod whereOperationDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PaymentMenthod wherePaymentTypeId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PaymentMenthod whereSaleId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PaymentMenthod whereTitular($value)
  */
 	class PaymentMenthod extends \Eloquent {}
 }
@@ -336,9 +402,15 @@ namespace App\Models{
 /**
  * App\Models\PaymentType
  *
+ * @property int $id
+ * @property string $name
+ * @property string $alias
  * @method static \Illuminate\Database\Eloquent\Builder|PaymentType newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|PaymentType newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|PaymentType query()
+ * @method static \Illuminate\Database\Eloquent\Builder|PaymentType whereAlias($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PaymentType whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PaymentType whereName($value)
  */
 	class PaymentType extends \Eloquent {}
 }
@@ -517,8 +589,8 @@ namespace App\Models{
  * @property-read \App\Models\Client $client
  * @property-read mixed $total_formated
  * @property-read \App\Models\SaleJustification|null $justification
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\PaymentMenthod> $methods
- * @property-read int|null $methods_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\PaymentMenthod> $payments
+ * @property-read int|null $payments_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\SaleProduct> $products
  * @property-read int|null $products_count
  * @property-read \App\Models\Store $store
@@ -548,10 +620,22 @@ namespace App\Models{
 /**
  * App\Models\SaleJustification
  *
+ * @property int $id
+ * @property string $sale_id
+ * @property int $user_id
+ * @property string $justification
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\User $user
  * @method static \Illuminate\Database\Eloquent\Builder|SaleJustification newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|SaleJustification newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|SaleJustification query()
+ * @method static \Illuminate\Database\Eloquent\Builder|SaleJustification whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|SaleJustification whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|SaleJustification whereJustification($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|SaleJustification whereSaleId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|SaleJustification whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|SaleJustification whereUserId($value)
  */
 	class SaleJustification extends \Eloquent {}
 }
@@ -560,12 +644,28 @@ namespace App\Models{
 /**
  * App\Models\SaleProduct
  *
+ * @property int $id
+ * @property string $sale_id
+ * @property int $product_id
+ * @property int $type_id
+ * @property int $quantity_type
+ * @property int $quantity_total
+ * @property string $unit_price
+ * @property string $total
  * @property-read \App\Models\Product $product
- * @property-read \App\Models\Sale|null $sale
+ * @property-read \App\Models\Sale $sale
  * @property-read \App\Models\SaleType $type
  * @method static \Illuminate\Database\Eloquent\Builder|SaleProduct newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|SaleProduct newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|SaleProduct query()
+ * @method static \Illuminate\Database\Eloquent\Builder|SaleProduct whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|SaleProduct whereProductId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|SaleProduct whereQuantityTotal($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|SaleProduct whereQuantityType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|SaleProduct whereSaleId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|SaleProduct whereTotal($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|SaleProduct whereTypeId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|SaleProduct whereUnitPrice($value)
  */
 	class SaleProduct extends \Eloquent {}
 }

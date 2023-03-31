@@ -111,6 +111,34 @@
                     </tbody>
                 </table>
             </div>
+            <x-splade-data :default="['payments' => $sale->payments]">
+                <div class="mt-4 space-y-1">
+                    <div class="py-1 mb-4 text-sm font-medium text-center uppercase rounded-md bg-primary-300">Como pagó el cliente</div>
+                    <div class="grid grid-cols-4 gap-2">
+                        <div v-for="(pm,index) in data.payments" :key="Math.random()"
+                            class="flex p-2 border rounded bg-primary-100 border-primary-300 ">
+                            <div class="flex flex-col items-center justify-center mr-2">
+                                <img v-if="pm.payment_type_id == 1" src="/images/money.svg" class="w-8"/>
+                                <img v-else-if="pm.payment_type_id == 2" src="/images/yape.png" class="w-8"/>
+                                <img v-else-if="pm.payment_type_id == 3" src="/images/bank.svg" class="w-8"/>
+                            </div>
+                            <div class="flex flex-col justify-center flex-grow">
+                                <template v-if="pm.payment_type_id > 1">
+                                    <div class="text-sm font-semibold" v-text="pm.titular"></div>
+                                    <div class="text-xs" v-text="pm.operation_date"></div>
+                                    <div v-if="pm.payment_type_id == 3" class="text-xs" v-text="pm.operation"></div>
+                                </template>
+                                <template v-else>
+                                    <div class="font-semibold text-md">Efectivo</div>
+                                </template>
+                            </div>
+                            <div class="flex flex-col items-center justify-center mr-2">
+                                <div>S/ <span class="font-semibold" v-text="pm.amount"></span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </x-splade-data>
             <div class="flex justify-end mt-4">
                 <a target="_blank"
                 href="{{ route('ve.pdf', [$sale->id ])}}"

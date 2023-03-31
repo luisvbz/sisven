@@ -22,6 +22,7 @@
                     'discount_percent' => 0,
                     'subtotal' => 0,
                     'total' => 0,
+                    'blocked' => !auth()->user()->hasRole(1),
                     'payment_methods' => []
                     ]">
             @role('vendedor')
@@ -47,7 +48,7 @@
                 <nueva-venta :form="form" :types="{{$payments}}">
                 </nueva-venta>
 
-                <pre class="bg-white p-4 rounded border border-gray-300 mt-4" v-text="form.$all"/>
+                <pre class="p-4 mt-4 bg-white border border-gray-300 rounded" v-text="form.$all"/>
             </x-splade-form>
         </div>
     </div>
