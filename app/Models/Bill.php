@@ -64,7 +64,7 @@ class Bill extends Model implements HasMedia
 
     public function getFileAttribute()
     {
-        return $this->getMedia('bills')[0]->getUrl() ?? null;
+        return isset($this->getMedia('bills')[0]) ? $this->getMedia('bills')[0]->getUrl() : null;
     }
 
 }

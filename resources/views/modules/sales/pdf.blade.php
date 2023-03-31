@@ -3,17 +3,12 @@
 <head>
 <title>Venta {{ $sale->number}}</title>
 <style type="text/css">
-.tg  {border-collapse:collapse;border-spacing:0;width:100%;}
-.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
-  overflow:hidden;padding:10px 5px;word-break:normal;}
-.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
-  font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
-.tg .tg-xbpl{background-color:#efefef;font-size:12px;font-weight:bold;text-align:right;vertical-align:top}
-.tg .tg-hzho{background-color:#efefef;font-size:12px;font-weight:bold;text-align:left;vertical-align:top}
-.tg .tg-baqh{text-align:center;vertical-align:top}
-.tg .tg-eq3i{background-color:#efefef;font-size:12px;font-weight:bold;text-align:center;vertical-align:top}
-.tg .tg-lqy6{text-align:right;vertical-align:top}
-.tg .tg-0lax{text-align:left;vertical-align:top}
+body {
+    font-family: "Courier New";
+    margin: 0;
+    padding: 0;
+    font-size: 10px;
+}
 .numero {
     font-size: 20px;
     text-align: right;
@@ -21,21 +16,41 @@
     border-bottom: 1px dashed #ccc;
     margin-bottom: 20px;
 }
+
+.logo {
+    text-align: center;
+    width:100%;
+    margin-bottom: 10px;
+}
 </style>
 </head>
 <body>
-    <div class="numero">Venta <strong>#{{ $sale->number}}</strong></div>
-    <p><strong>Estado: </strong>
-        @if($sale->status == 'proccesed')
-            <span style="color: green;"><strong>PROCESADA</strong></span>
-        @else
-            <span style="color: red;"><strong>CANCELADA</strong></span>
-        @endif
-    </p>
-    <p><strong>Cliente: </strong>{{ $sale->client->name }}</p>
-    <p><strong>Fecha: </strong>{{ $sale->created_at->format('d/m/Y') }}</p>
-    <p><strong>Tienda: </strong>{{ $sale->store->name }}</p>
-    <p><strong>Vendedor: </strong>{{ $sale->user->name }}</p>
+    <div class="logo">
+        <img width="180" src="{{ asset('images/logo.png')}}"/>
+    </div>
+    <div style="margin-bottom: 10px; border-bottom: 1px dashed #000000; padding-bottom:10px;">
+        <div style="text-align: center;"><strong>Comercializadora Marleny's</strong></div>
+        <div style="text-align: center;">RUC: <strong>000000000000</strong></div>
+        <div style="text-align: center;">Av. Francisco Bolognesi - Chiclayo</div>
+        <div style="text-align: center;">Telf: <strong>01-1234567</strong></div>
+        <div style="text-align: center;">Nro Pedido: <strong>{{ $sale->number }}</strong></div>
+    </div>
+    <div style="margin-bottom: 10px; border-bottom: 1px dashed #000000; padding-bottom:10px;">
+        <div style="text-align: left;">
+            @if($sale->status == 'proccesed')
+                Estado: <span style="color: green;"><strong>PROCESADA</strong></span>
+            @else
+                Estado:  <span style="color: red;"><strong>CANCELADA</strong></span>
+            @endif
+        </div>
+        <div style="text-align: left;"><strong>Cliente: </strong>{{ $sale->client->name }}</div>
+        <div style="text-align: left;"><strong>Fecha: </strong>{{ $sale->created_at->format('d/m/Y') }}</div>
+        <div style="text-align: left;"><strong>Tienda: </strong>{{ $sale->store->name }}</div>
+        <div style="text-align: left;"><strong>Vendedor: </strong>{{ $sale->user->name }}</div>
+    </div>
+    <div style="margin-bottom: 10px; border-bottom: 1px dashed #000000; padding-bottom:10px;">
+        <div style="text-align: center;letter-spacing: 2px;"><strong>DETALLE DE LA VENTA</strong></div>
+    </div>
     <div style="width: 100%;">
         <table class="tg">
         <thead>
@@ -44,28 +59,29 @@
                 <th class="tg-eq3i">UM</th>
                 <th class="tg-eq3i">TU</th>
                 <th class="tg-hzho">PRODUCTO</th>
-                <th class="tg-xbpl">PRECIO</th>
-                <th class="tg-xbpl">TOTAL</th>
+                <th style="text-align: right;">PRECIO</th>
+                <th style="text-align: right;">TOTAL</th>
             </tr>
         </thead>
         <tbody>
+
         @foreach ($sale->products as $item)
             <tr>
-                <td style="width: 10%;" class="tg-baqh">{{ $item->quantity_type }}</td>
-                <td style="width: 10%;"class="tg-baqh">
+                <td style="width: 10%; text-align: center;">{{ $item->quantity_type }}</td>
+                <td style="width: 10%; text-align: center;">
                     {{ $item->type->alias }}
                 </td>
-                <td style="width: 10%;" class="tg-baqh">
+                <td style="width: 10%;text-align: center;">
                 {{ $item->quantity_type*$item->type->quantity }}
                 </td>
                 <td  class="tg-0lax">
                  {{ $item->product->full_name }}
                 </td>
-                <td class="tg-lqy6">
-                {{ "S/ ".number_format($item->unit_price, 2,".", ",") }}
+                <td style="text-align: right;">
+                {{  number_format($item->unit_price, 2,".", ",") }}
                 </td>
-                <td class="tg-lqy6">
-                {{ "S/ ".number_format($item->total, 2,".", ",") }}
+                <td style="text-align: right;">
+                {{  number_format($item->total, 2,".", ",") }}
                 </td>
             </tr>
         @endforeach

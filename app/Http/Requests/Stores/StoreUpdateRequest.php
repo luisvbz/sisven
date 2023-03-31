@@ -26,9 +26,7 @@ class StoreUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'code' => ['required',Rule::unique(Store::class)->ignore($this->store->id)],
             'name' => 'required',
-            'type' => 'required',
             'departament_id' => 'required',
             'province_id' => 'required',
             'district_id' => 'required',
@@ -40,10 +38,8 @@ class StoreUpdateRequest extends FormRequest
     public function messages()
     {
         return [
-            'code.required' => 'Debe escribir el código',
             'code.unique' => 'El codigo esta siendo usado',
             'name.required' => 'Debe ingresar el nombre',
-            'type.required' => 'Debe seleccionar el tipo',
             'departament_id.required' => 'Seleccione el departamento',
             'province_id.required' => 'Seleccione la provincia',
             'district_id.required' => 'Seleccione el distrito',

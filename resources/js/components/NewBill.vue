@@ -14,7 +14,7 @@
                     <div>
                         <div class="flex justify-between">
                             <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-onl">Cliente</label>
-                            <Link class="text-sm font-medium text-blue-500 uppercase hover:text-blue-700" href="/clientes/nuevo" slideover>Agragar Nuevo</Link>
+                            <Link class="text-sm font-medium text-blue-500 uppercase hover:text-blue-700" href="/clientes/nuevo" slideover>Agregar Nuevo</Link>
                         </div>
                         <div class="relative">
                             <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -35,7 +35,7 @@
                                     </li>
                                 </ul>
                                 <div v-if="clients.data.length == 0 && queryClient != ''" class="flex flex-col items-center justify-center p-4 text-primary-500">
-                                    <p class="mb-2">No se ha conseguido el cliente..</p> <Link class="text-sm font-medium text-blue-500 uppercase hover:text-blue-700" href="/clientes/nuevo" slideover>Agragar Nuevo</Link>
+                                    <p class="mb-2">No se ha conseguido el cliente..</p> <Link class="text-sm font-medium text-blue-500 uppercase hover:text-blue-700" href="/clientes/nuevo" slideover>Agregar Nuevo</Link>
                                 </div>
                             </div>
                         </div>
@@ -59,7 +59,11 @@
                         <label class="block mb-1 text-sm font-medium text-gray-900">Total Gravada.</label>
                         <input type="text" readonly :value="form.total_gravada" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     </div>
-                    <div>
+                    <div class="flex items-center mb-4">
+                        <input v-model="form.igv" id="default-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500">
+                        <label for="default-checkbox" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Tiene IGV</label>
+                    </div>
+                    <div v-if="form.igv">
                         <label class="block mb-1 text-sm font-medium text-gray-900">Total IGV(18%).</label>
                         <input type="text" readonly :value="form.total_igv" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     </div>
@@ -340,7 +344,7 @@ export default {
                 total = total + element.total_price;
             });
 
-            let total_igv = (total * 0.18)
+            let total_igv = this.form.igv ? (total * 0.18) : 0;
             let total_monto = total + total_igv
 
             this.form.total_gravada = total.toFixed(2);

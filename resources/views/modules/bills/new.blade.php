@@ -17,6 +17,7 @@
                     'client_id' => null,
                     'products' => [],
                     'total' => 0,
+                    'igv' => true,
                     'total_igv' => 0,
                     'total_gravada' => 0,
                     'document_type' => 'FACT'

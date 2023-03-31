@@ -51,9 +51,18 @@
                    </span>
                 </x-splade-cell>
                 <x-splade-cell archivo as="$bill">
-                   <div class="text-xl">
-                    <a download href="{{ $bill->file }}" class="text-red-400"><i class="fi fi-br-file-pdf"></i></a>
-                   </div>
+                    @if($bill->file != null)
+                    <div class="text-xl">
+                        <a download href="{{ $bill->file }}" class="text-red-400"><i class="fi fi-br-file-pdf"></i></a>
+                    </div>
+                    @else
+                    <Link class="!text-md text-blue-600 hover:text-blue-500" modal href="{{ route('de.show-upload', [$bill]) }}">
+                        Subir pdf
+                        <Link>
+                    {{--<x-splade-form :default="['bill_id' => $bill->id]" submit-on-change="file" action="{{ route('de.upload') }}">
+                        <x-splade-file name="file"/>
+                    </x-splade-form>--}}
+                    @endif
                 </x-splade-cell>
                  <x-splade-cell acciones as="$bill">
                     <div class="flex justify-around">

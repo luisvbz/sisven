@@ -3,7 +3,6 @@
         <p class="font-medium text-center">Complete los datos para actualizar la tienda</p>
         <div class="px-2 py-1 mb-2 mb-5 border-b-2 border-gray-300"></div>
         <x-splade-form action="{{ route('ti.update', [$store]) }}" method="PATCH" :default="$store">
-             <x-splade-input name="code" label="Código" icon="ad" class="mb-2"/>
             <x-splade-input name="name" label="Nombre" icon="city" class="mb-2"/>
             <x-splade-select name="departament_id" label="Departamento"
                             placeholder="Seleccione el departamento"

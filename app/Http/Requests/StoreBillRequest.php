@@ -32,7 +32,7 @@ class StoreBillRequest extends FormRequest
             'products.*.cant' => 'required|integer|min:1',
             'products.*.unit_price' => 'required|numeric|min:0',
             'products.*.total_price' => 'required|numeric|min:0',
-            'file' => 'required|mimes:pdf'
+            'file' => 'nullable|mimes:pdf'
         ];
     }
 
@@ -57,7 +57,7 @@ class StoreBillRequest extends FormRequest
             'total.min' => 'El campo total debe ser mayor a cero.',
             'emition_date.required' => 'El campo fecha de emisión es obligatorio.',
             'emition_date.date' => 'El campo fecha de emisión debe ser una fecha válida.',
-            'file' => 'Deeb seleccionar el archivo'
+            'file.mimes' => 'El archivo debe ser un pdf'
         ];
     }
 }

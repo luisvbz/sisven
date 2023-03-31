@@ -249,14 +249,24 @@ class SalesController extends Controller
     public function pdf($id)
     {
         $sale = Sale::find($id);
-
         $data = [
             'sale' => $sale
         ];
-
         $pdf = PDF::loadView('modules.sales.pdf', $data, [], [
             'format' => [80, 297],
+            'margin_left' => 3,
+            'margin_right' => 3,
+            'margin_top'  => 3,
+            'margin_bottom'=> 3,
+            'custom_font_dir' => base_path('fonts/'),
+            'custom_font_data' => [
+                'titillium' => [
+                    'R'  => 'courier-new.ttf',
+                    'B'  => 'courier-new.ttf',
+                ]
+                // ...add as many as you want.
+            ]
         ]);
-        return $pdf->download("{$sale->number}.pdf");
+        return $pdf->stream("{$sale->number}.pdf");
     }
 }

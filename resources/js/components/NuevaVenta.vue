@@ -93,7 +93,7 @@
                     <div>
                         <div class="flex justify-between">
                             <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-onl">Cliente</label>
-                            <Link class="text-sm font-medium text-blue-500 uppercase hover:text-blue-700" href="/clientes/nuevo" slideover>Agragar Nuevo</Link>
+                            <Link class="text-sm font-medium text-blue-500 uppercase hover:text-blue-700" href="/clientes/nuevo" slideover>Agregar Nuevo</Link>
                         </div>
                         <div class="relative">
                             <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -114,7 +114,7 @@
                                     </li>
                                 </ul>
                                 <div v-if="clients.data.length == 0 && queryClient != ''" class="flex flex-col items-center justify-center p-4 text-primary-500">
-                                    <p class="mb-2">No se ha conseguido el cliente..</p> <Link class="text-sm font-medium text-blue-500 uppercase hover:text-blue-700" href="/clientes/nuevo" slideover>Agragar Nuevo</Link>
+                                    <p class="mb-2">No se ha conseguido el cliente..</p> <Link class="text-sm font-medium text-blue-500 uppercase hover:text-blue-700" href="/clientes/nuevo" slideover>Agregar Nuevo</Link>
                                 </div>
                             </div>
                         </div>

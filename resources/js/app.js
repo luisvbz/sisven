@@ -3,6 +3,7 @@ import "../css/app.css";
 import "../css/uicons/css/uicons-bold-rounded.css"
 import "@protonemedia/laravel-splade/dist/style.css";
 import CurrencyInput from './components/CurrencyInput.vue';
+import ButtonPrint from './components/ButtonPrint.vue';
 import InputMask from './components/InputMask.vue';
 import ToastPlugin from 'vue-toast-notification';
 import 'vue-toast-notification/dist/theme-sugar.css'
@@ -26,6 +27,7 @@ createApp({
             InputMask,
             NuevaVenta,
             NewBill,
+            ButtonPrint
         }
     })
     .use(ToastPlugin)

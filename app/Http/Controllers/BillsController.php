@@ -41,7 +41,7 @@ class BillsController extends Controller
     {
 
         try{
-
+           // dd($request->all());
             DB::beginTransaction();
             $bill = Bill::create([
                 'client_id' => $request->client_id,
@@ -73,7 +73,7 @@ class BillsController extends Controller
                 ]);
             }
 
-            if($request->has('file'))
+            if($request->has('file') && $request->file != null)
             {
                 $file = $request->file('file');
                 $name = "{$bill->serie}-{$bill->number}".".".$file->getClientOriginalExtension();
@@ -102,6 +102,37 @@ class BillsController extends Controller
             DB::rollback();
             dd($e->getMessage().$e->getLine());
         }
+    }
+
+    public function uploadBill(Request $request)
+    {
+
+        $bill = Bill::find($request->bill_id);
+
+        if($request->has('file'))
+        {
+            $file = $request->file('file');
+            $name = "{$bill->serie}-{$bill->number}".".".$file->getClientOriginalExtension();
+            $file->storeAs("public/bills/", $name);
+
+            if(Storage::exists("public/bills/".$name))
+            {
+                $bill->addMedia(storage_path("app/public/bills/".$name))->toMediaCollection('bills');
+            }
+
+            Toast::title('Exito!')
+            ->center('El archivo se ha agreagdo con éxito')
+            ->success()
+            ->backdrop()
+            ->autoDismiss(15);
+        }
+
+        return redirect()->route('de.index');
+    }
+
+    public function showUpload(Bill $bill)
+    {
+        return view('modules.bills.upload-file', ['bill' => $bill]);
     }
 
 
