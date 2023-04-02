@@ -1,6 +1,9 @@
 <template>
     <button @click="print" :class="class" :style="loading ? 'opacity: 0.5;cursor: not-allowed;' : 'opacity: 1;cursor: pointer;'" :disabled="loading">
-        <span v-if="!loading">{{ label }}</span>
+        <div v-if="!loading" class="flex">
+        <span class="mr-2">{{ label }}</span>
+        <i class="fi fi-br-print"></i>
+        </div>
         <img v-else src="/images/oval.svg" class="w-4"/>
     </button>
 </template>

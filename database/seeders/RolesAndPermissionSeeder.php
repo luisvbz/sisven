@@ -23,7 +23,6 @@ class RolesAndPermissionSeeder extends Seeder
 
         $superAdmin = Role::create(['name' => 'super-admin', 'display_name' => 'Super Admin']);
         $admin = Role::create(['name' => 'admin', 'display_name' => 'Administrador del Sistema']);
-        $operator = Role::create(['name' => 'operator', 'display_name' => 'Operador']);
         $vendedor = Role::create(['name' => 'vendedor', 'display_name' => 'Vendedor']);
 
          //Here to create permissions
@@ -49,6 +48,7 @@ class RolesAndPermissionSeeder extends Seeder
             ['name' => 'wr:create', 'guard_name' => 'web', 'display_name' => 'Crear un nuevo almacen', 'module_id' => 'WR'],
             ['name' => 'wr:edit', 'guard_name' => 'web', 'display_name' => 'Editar un almacen', 'module_id' => 'WR'],
             ['name' => 'wr:delete', 'guard_name' => 'web', 'display_name' => 'Eliminar un almacen', 'module_id' => 'WR'],
+            ['name' => 'wr:transfer', 'guard_name' => 'web', 'display_name' => 'Tranferir mercancia', 'module_id' => 'WR'],
             //Mdoulo de productos
             ['name' => 'pr:access', 'guard_name' => 'web', 'display_name' => 'Acceder al modulo de productos', 'module_id' => 'PR'],
             ['name' => 'pr:create', 'guard_name' => 'web', 'display_name' => 'Agregar un nuevo producto', 'module_id' => 'PR'],
@@ -92,7 +92,7 @@ class RolesAndPermissionSeeder extends Seeder
             'username' => 'superadmin',
             'name' => 'Super Administrador',
             'email' => 'superadmin@local.com',
-            'password' => 'laravel'
+            'password' => 's1sv3n'
         ]);
 
         $super_admin->assignRole('super-admin');
@@ -105,7 +105,7 @@ class RolesAndPermissionSeeder extends Seeder
             'username' => 'admin',
             'name' => 'Administrador',
             'email' => 'admin@local.com',
-            'password' =>'laravel'
+            'password' =>'s1sv3n'
         ]);
 
         $admin->assignRole('admin');
@@ -113,14 +113,17 @@ class RolesAndPermissionSeeder extends Seeder
        $admin->givePermissionTo(Permission::where('module_id', 'US')->get()->pluck('name'));
 
 
-        $operator = User::create([
+        $vendedor = User::create([
             'dni' => '19098517',
-            'username' => 'operador',
-            'name' => 'Operador',
-            'email' => 'operator@local.com',
-            'password' => 'laravel'
+            'username' => 'vendedor',
+            'name' => 'Vendedor',
+            'email' => 'vendedor@local.com',
+            'password' => 's1sv3n'
         ]);
 
-        $operator->assignRole('operator');
+        $vendedor->assignRole('vendedor');
+        $vendedor->stores()->sync([1]);
+
+        $vendedor->givePermissionTo(Permission::where('module_id', 'VE')->get()->pluck('name'));
     }
 }

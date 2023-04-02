@@ -56,28 +56,29 @@
                         <a download href="{{ $bill->file }}" class="text-red-400"><i class="fi fi-br-file-pdf"></i></a>
                     </div>
                     @else
-                    <Link class="!text-md text-blue-600 hover:text-blue-500" modal href="{{ route('de.show-upload', [$bill]) }}">
-                        Subir pdf
-                        <Link>
-                    {{--<x-splade-form :default="['bill_id' => $bill->id]" submit-on-change="file" action="{{ route('de.upload') }}">
-                        <x-splade-file name="file"/>
-                    </x-splade-form>--}}
+                        @can('de:add-file-to-document')
+                            <Link class="!text-md text-blue-600 hover:text-blue-500" modal href="{{ route('de.show-upload', [$bill]) }}">
+                                Subir pdf
+                            </Link>
+                        @endcan
                     @endif
                 </x-splade-cell>
                  <x-splade-cell acciones as="$bill">
                     <div class="flex justify-around">
                       <Link modal rel="tooltip" title="Ver detalles" href="{{ route('de.items', [$bill])}}"><i class="mr-1 text-xl text-blue-400 hover:text-blue-600 fi fi-br-search"></i></Link>
                       @if($bill->status == 'proccesed')
-                       <x-splade-link
-                            rel="tooltip" title="Marcar como anulado"
-                            confirm-danger="Marcar {{ $bill->serie }}-{{ $bill->number }} como anulado"
-                            confirm-text="Estas seguro?"
-                            confirm-button="Si, Anular!"
-                            cancel-button="No, Cancelar!"
-                            preserve-scroll
-                            href="{{ route('de.cancel')}}" method="POST" :data="['bill_id' => $bill->id]">
-                            <i class="mr-1 text-xl text-red-400 hover:text-red-600 fi fi-br-rectangle-xmark"></i>
-                        </x-splade-link>
+                        @can('de:cancel')
+                            <x-splade-link
+                                    rel="tooltip" title="Marcar como anulado"
+                                    confirm-danger="Marcar {{ $bill->serie }}-{{ $bill->number }} como anulado"
+                                    confirm-text="Estas seguro?"
+                                    confirm-button="Si, Anular!"
+                                    cancel-button="No, Cancelar!"
+                                    preserve-scroll
+                                    href="{{ route('de.cancel')}}" method="POST" :data="['bill_id' => $bill->id]">
+                                    <i class="mr-1 text-xl text-red-400 hover:text-red-600 fi fi-br-rectangle-xmark"></i>
+                                </x-splade-link>
+                            @endcan
                       @endif
                     </div>
                 </x-splade-cell>

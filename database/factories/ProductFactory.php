@@ -32,8 +32,8 @@ class ProductFactory extends Factory
             'description' => ['ORO','ORO ROSA','NEGRO', 'AZUL','PLATEADO', 'ROSA','MORADO'][random_int(0,6)],
             'minimun_stock' => random_int(500,3000),
             'measure_id' => 1,
-            'price' => random_int(15,50),
-            'cost' => random_int(5,30),
+            'price' => random_int(30,50),
+            'cost' => random_int(5,15),
         ];
     }
 }

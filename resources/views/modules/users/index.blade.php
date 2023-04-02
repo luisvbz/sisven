@@ -16,13 +16,6 @@
                         <div class="text-xl text-center text-red-600"><i class="fi fi-br-ban"></i></div>
                         @endif
                     @endcell
-                    @cell('Usuario', $user)
-                        <Link
-                        class="text-primary-500 hover:text-primary-700"
-                        href="{{ route('us.details', [$user])}}">
-                        {{ $user->username}}
-                    </Link>
-                    @endcell
                     @cell('Rol', $user)
                         <span class="bg-primary-200 text-primary-800 text-xs font-medium mr-2 px-2.5 py-2 rounded  border border-primary-400">{{ $user->role_name }}</span>
                     @endcell

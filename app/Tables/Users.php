@@ -58,7 +58,7 @@ class Users extends AbstractTable
             ->defaultSort('-created_at')
             ->withGlobalSearch('Buscar por toda la data...', ['name', 'email', 'username', 'dni'])
             ->column('Estado')
-            ->column('Usuario')
+            ->column(key:'username', label: 'Usuarios', highlight: true)
             ->column(
                 key: 'name',
                 label: 'Nombre',

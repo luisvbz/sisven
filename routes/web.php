@@ -75,8 +75,8 @@ Route::middleware('splade')->group(function () {
             Route::get('/',[WarehouseController::class, 'index'])->name('wr.index')->middleware('permission:wr:access');
             Route::get('/agregar',[WarehouseController::class, 'create'])->name('wr.add')->middleware('permission:wr:create');
             Route::post('/agregar',[WarehouseController::class, 'store'])->name('wr.store')->middleware('permission:wr:create');
-            Route::get('/trasladar-mercancia',[WarehouseController::class, 'formTrasfer'])->name('wr.trasnfer')->middleware('permission:wr:create');
-            Route::post('/trasladar-mercancia',[WarehouseController::class, 'storeTransfer'])->name('wr.trasnfer-store')->middleware('permission:wr:create');
+            Route::get('/trasladar-mercancia',[WarehouseController::class, 'formTrasfer'])->name('wr.trasnfer')->middleware('permission:wr:transfer');
+            Route::post('/trasladar-mercancia',[WarehouseController::class, 'storeTransfer'])->name('wr.trasnfer-store')->middleware('permission:wr:transfer');
             Route::get('/{warehouse}/edit',[WarehouseController::class, 'edit'])->name('wr.edit')->middleware('permission:wr:edit');
             Route::patch('/{warehouse}/edit',[WarehouseController::class, 'update'])->name('wr.update')->middleware('permission:wr:edit');
             Route::get('/{warehouse}/movimientos',[WarehouseController::class, 'movements'])->name('wr.movements')->middleware('permission:wr:access');
@@ -131,19 +131,19 @@ Route::middleware('splade')->group(function () {
             Route::get('/', [SalesController::class, 'index'])->name('ve.index')->middleware('permission:ve:access');
             Route::get('/pdf/{id}',[SalesController::class, 'pdf'])->name('ve.pdf')->middleware('permission:ve:access');
             Route::get('/{sale}/detalle', [SalesController::class, 'show'])->name('ve.show')->middleware('permission:ve:access');
-            Route::get('/generar',[SalesController::class, 'new'])->name('ve.add')->middleware('permission:ve:access');
-            Route::post('/generar',[SalesController::class, 'store'])->name('ve.store')->middleware('permission:ve:access');
-            Route::post('/cancelar-venta',[SalesController::class, 'cancelSale'])->name('ve.cancel')->middleware('permission:ve:access');
+            Route::get('/generar',[SalesController::class, 'new'])->name('ve.add')->middleware('permission:ve:create');
+            Route::post('/generar',[SalesController::class, 'store'])->name('ve.store')->middleware('permission:ve:create');
+            Route::post('/cancelar-venta',[SalesController::class, 'cancelSale'])->name('ve.cancel')->middleware('permission:ve:cancel');
         });
 
         Route::group(['prefix' => 'documentos-electronicos'], function(){
-            Route::get('/', [BillsController::class, 'index'])->name('de.index')->middleware('permission:ve:access');
-            Route::get('/{bill}/detalles', [BillsController::class, 'items'])->name('de.items')->middleware('permission:ve:access');
-            Route::get('/{bill}/subir-documento', [BillsController::class, 'showUpload'])->name('de.show-upload')->middleware('permission:ve:access');
-            Route::get('/generar',[BillsController::class, 'new'])->name('de.add')->middleware('permission:ve:access');
-            Route::post('/generar',[BillsController::class, 'store'])->name('de.store')->middleware('permission:ve:access');
-            Route::post('/cancelar',[BillsController::class, 'calcelBill'])->name('de.cancel')->middleware('permission:ve:access');
-            Route::post('/subir-documento',[BillsController::class, 'uploadBill'])->name('de.upload')->middleware('permission:ve:access');
+            Route::get('/', [BillsController::class, 'index'])->name('de.index')->middleware('permission:de:access');
+            Route::get('/{bill}/detalles', [BillsController::class, 'items'])->name('de.items')->middleware('permission:de:access');
+            Route::get('/{bill}/subir-documento', [BillsController::class, 'showUpload'])->name('de.show-upload')->middleware('permission:de:add-file-to-document');
+            Route::get('/generar',[BillsController::class, 'new'])->name('de.add')->middleware('permission:de:create');
+            Route::post('/generar',[BillsController::class, 'store'])->name('de.store')->middleware('permission:de:create');
+            Route::post('/cancelar',[BillsController::class, 'calcelBill'])->name('de.cancel')->middleware('permission:de:cancel');
+            Route::post('/subir-documento',[BillsController::class, 'uploadBill'])->name('de.upload')->middleware('permission:de:add-file-to-document');
         });
 
         Route::group(['prefix' => 'clientes'], function(){
@@ -153,8 +153,8 @@ Route::middleware('splade')->group(function () {
         });
 
         Route::group(['prefix' => 'reportes'], function(){
-            Route::get('/',[ReportesCotroller::class, 'index'])->name('rp.index');
-            Route::get('/inventario',[ReportesCotroller::class, 'export'])->name('rp.inventory');
+            Route::get('/',[ReportesCotroller::class, 'index'])->name('rp.index')->middleware('permission:rp:access');;
+            Route::get('/inventario',[ReportesCotroller::class, 'export'])->name('rp.inventory')->middleware('permission:rp:access');
         });
 
         Route::get('/traslado/{transfer}', [CommonController::class, 'transferDetail'])->name('transfer.details');
@@ -185,6 +185,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/api/sales/clients', [SalesController::class, 'getClients'])->name('ve.get-clients');
     Route::post('/api/sales/autorizar',[SalesController::class, 'autorizar'])->name('ve.autorizar')->middleware('permission:ve:access');
      //De
-     Route::get('/api/bills/products', [BillsController::class, 'getProducts'])->name('de.get-products');
-     Route::get('/api/bills/clients', [BillsController::class, 'getClients'])->name('de.get-clients');
+    Route::get('/api/bills/products', [BillsController::class, 'getProducts'])->name('de.get-products');
+    Route::get('/api/bills/clients', [BillsController::class, 'getClients'])->name('de.get-clients');
 });

@@ -102,6 +102,7 @@
                             <input type="search"
                             v-model="queryClient"
                             id="default-search"
+                            autocomplete="off"
                             class="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-primary-300 dark:focus:border-primary-300" placeholder="Buscar por DNI, RUC, nombre...">
                             <div class="bg-white absolute top-10 left-0 w-full rounded-md border border-gray-300 max-h-[250px] overflow-y-auto" v-if="clients.show">
                                 <div v-if="clients.loading" class="flex items-center justify-center p-4 text-primary-500">
@@ -170,7 +171,7 @@
                             <span>Agregar metodo de pago</span> <i class="mt-2 ml-2 fi fi-br-credit-card"></i>
                         </div>
                     </a>
-                    <a @click="showAuthorization = true" class="cursor-pointer">
+                    <a  @click="showAuthorization = true" class="cursor-pointer">
                         <div class="flex items-center justify-center px-2 py-1 text-sm font-medium uppercase border rounded-md bg-success-100 border-success-300 hover:bg-success-300">
                             <span>Autorizar </span> <i class="mt-2 ml-2 fi fi-br-lock"></i>
                         </div>
@@ -405,12 +406,21 @@ export default {
                 return;
         }
 
-         axios.post(`/api/sales/autorizar`, this.autorizacion).then(rs => {
+        axios.post(`/api/sales/autorizar`, this.autorizacion).then(rs => {
 
-        }).catch(e => {
-            console.log(e)
-        }).finally(() => {
-
+            if(rs.data.autorizar) {
+                this.form.blocked = false;
+                this.closeAuthorizacion();
+                this.$toast.success("Autorización exitosa", {
+                    position: 'top',
+                    duration: 3000
+                })
+            }else {
+                this.$toast.warning(rs.data.msj, {
+                    position: 'top',
+                    duration: 3000
+                })
+            }
         })
     },
     openModal()

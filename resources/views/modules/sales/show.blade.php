@@ -148,8 +148,10 @@
                     class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2  focus:outline-none"
                     label="Imprimir Ticket"/>
                 @if($sale->status == 'proccesed')
-                <Link href="#cancelar-compra" type="button"
-                class="text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2  focus:outline-none">Cancelar Venta</Link>
+                    @can('ve:cancel')
+                        <Link href="#cancelar-compra" type="button"
+                        class="text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2  focus:outline-none">Cancelar Venta</Link>
+                    @endcan
                 @endif
             </div>
             @if($sale->justification != null)

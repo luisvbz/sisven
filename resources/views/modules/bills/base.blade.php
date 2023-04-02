@@ -17,7 +17,7 @@
               <span class="ml-3">Resumen</span>
             </x-nav-link-sidebar>
           </li>
-          @can('ve:create')
+          @can('de:create')
           <li class="my-px">
             <x-nav-link-sidebar :href="route('de.add')" :active="request()->routeIs('de.add')"
               class="flex flex-row items-center h-10 px-3 text-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700"

@@ -252,16 +252,19 @@ class SalesController extends Controller
     {
         $user = User::where('username', $request->usuario)->first();
 
-        if($user->hasRole('super-admin') || $user->hasRole('admin')) {
-            // Verificar si la contraseña es correcta
-            if ($user && Hash::check($request->usuario, $user->password)) {
-                return response()->json(['autorizar' => 'true']);
-            } else {
-                return response()->json(['autorizar' => 'false', 'msj' => 'Clave Incorrecta'], 422);
-            }
-        }else {
-            return response()->json(['autorizar' => 'false', 'msj' => 'No puede autorizar'], 422);
+        if(!$user) {
+            return response()->json(['autorizar' => false, 'msj' => 'El usuario no existe']);
         }
+
+        if($user->hasAnyRole(['super-admin', 'admin']) && Hash::check($request->password, $user->password)) {
+            return response()->json(['autorizar' => true]);
+        }
+
+        if($user->hasAnyRole(['super-admin', 'admin']) && !Hash::check($request->password, $user->password)) {
+            return response()->json(['autorizar' => false, 'msj' => 'Error de contraseña']);
+        }
+
+       return response()->json(['autorizar' => false, 'msj' => 'No se puede autorizar']);
     }
 
     public function pdf($id)
@@ -282,7 +285,6 @@ class SalesController extends Controller
                     'R'  => 'courier-new.ttf',
                     'B'  => 'courier-new.ttf',
                 ]
-                // ...add as many as you want.
             ]
         ]);
         return $pdf->stream("{$sale->number}.pdf");
