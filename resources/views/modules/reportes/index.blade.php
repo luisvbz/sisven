@@ -8,13 +8,13 @@
     <div class="py-0">
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
             <!-- Top -->
-            <div class="grid grid-cols-4 gap-2 pb-4 border-b-2 border-dashed border-gray-300">
-                <div class="bg-white rounded-md  border border-gray-300 p-4 flex justify-between">
-                    <div class="w-1/4 flex justify-center">
+            <div class="grid grid-cols-4 gap-2 pb-4 border-b-2 border-gray-300 border-dashed">
+                <div class="flex justify-between p-4 bg-white border border-gray-300 rounded-md">
+                    <div class="flex justify-center w-1/4">
                         <img class="max-w-[50px]" src="{{ asset('images/modules/VE.svg') }}"/>
                     </div>
-                    <div class="flex flex-col justify-center items-center">
-                        <div class="uppercase text-xs font-bold text-gray-500">
+                    <div class="flex flex-col items-center justify-center">
+                        <div class="text-xs font-bold text-gray-500 uppercase">
                             ventas realizadas
                         </div>
                         <div class="text-2xl">
@@ -22,12 +22,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="bg-white rounded-md  border border-gray-300 p-4 flex justify-between">
-                    <div class="w-1/4 flex justify-center">
+                <div class="flex justify-between p-4 bg-white border border-gray-300 rounded-md">
+                    <div class="flex justify-center w-1/4">
                         <img class="max-w-[50px]" src="{{ asset('images/modules/PR.svg') }}"/>
                     </div>
-                    <div class="flex flex-col justify-center items-center">
-                        <div class="uppercase text-xs font-bold text-gray-500">
+                    <div class="flex flex-col items-center justify-center">
+                        <div class="text-xs font-bold text-gray-500 uppercase">
                             productos registrados
                         </div>
                         <div class="text-2xl">
@@ -35,12 +35,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="bg-white rounded-md  border border-gray-300 p-4 flex justify-between">
-                    <div class="w-1/4 flex justify-center">
+                <div class="flex justify-between p-4 bg-white border border-gray-300 rounded-md">
+                    <div class="flex justify-center w-1/4">
                         <img class="max-w-[50px]" src="{{ asset('images/modules/CL.svg') }}"/>
                     </div>
-                    <div class="flex flex-col justify-center items-center">
-                        <div class="uppercase text-xs font-bold text-gray-500">
+                    <div class="flex flex-col items-center justify-center">
+                        <div class="text-xs font-bold text-gray-500 uppercase">
                             clientes registrados
                         </div>
                         <div class="text-2xl">
@@ -48,12 +48,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="bg-white rounded-md  border border-gray-300 p-4 flex justify-between">
-                    <div class="w-1/4 flex justify-center">
+                <div class="flex justify-between p-4 bg-white border border-gray-300 rounded-md">
+                    <div class="flex justify-center w-1/4">
                         <img class="max-w-[50px]" src="{{ asset('images/modules/PV.svg') }}"/>
                     </div>
-                    <div class="flex flex-col justify-center items-center">
-                        <div class="uppercase text-xs font-bold text-gray-500">
+                    <div class="flex flex-col items-center justify-center">
+                        <div class="text-xs font-bold text-gray-500 uppercase">
                             proveedores registrados
                         </div>
                         <div class="text-2xl">
@@ -64,15 +64,15 @@
             </div>
             <!-- /Top -->
             <!-- Total Venta -->
-            <div class="flex justify-end bg-white rounded-md  border border-gray-300 p-4 my-4">
-                <div class="uppercase text-xl font-semibold text-gray-600">
-                    Total Vendido: <span class="text-success-600 ml-2">S./ {{ number_format($total_vendido, 2,".", ",") }}</span>
+            <div class="flex justify-end p-4 my-4 bg-white border border-gray-300 rounded-md">
+                <div class="text-xl font-semibold text-gray-600 uppercase">
+                    Total Vendido: <span class="ml-2 text-success-600">S./ {{ number_format($total_vendido, 2,".", ",") }}</span>
                 </div>
             </div>
             <!-- /Total Venta -->
-            <div class="border-b-2 border-dashed mb-4 border-gray-300"></div>
+            <div class="mb-4 border-b-2 border-gray-300 border-dashed"></div>
             <!-- Total Venta -->
-            <div class="relative mt-2 overflow-x-auto rounded-md border border-gray-300 my-4">
+            <div class="relative my-4 mt-2 overflow-x-auto border border-gray-300 rounded-md">
                 <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                     <thead class="text-xs text-gray-700 uppercase bg-primary-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
@@ -88,34 +88,42 @@
                             Reporte de Inventario General
                             </th>
                             <td class="px-6 py-4 font-semibold text-right">
-                                <a href="{{ route('rp.inventory') }}" download target="_blank" class="px-4 py-2 cursor-pointer bg-success-500 hover:bg-success-600 rounded-md text-white">Descargar <i class="fi fi-br-file-excel"></i></a>
+                                <a href="{{ route('rp.inventory') }}" download target="_blank" class="px-4 py-2 text-white rounded-md cursor-pointer bg-success-500 hover:bg-success-600">Descargar <i class="fi fi-br-file-excel"></i></a>
                             </td>
                         </tr>
-                        {{-- <tr class="bg-gray-50 border-b">
+                        <tr class="bg-white border-b">
+                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowra">
+                            Reporte General
+                            </th>
+                            <td class="px-6 py-4 font-semibold text-right">
+                                <a href="{{ route('rp.general') }}" target="_blank" class="px-4 py-2 text-white rounded-md cursor-pointer bg-success-500 hover:bg-success-600">Descargar <i class="fi fi-br-file-excel"></i></a>
+                            </td>
+                        </tr>
+                        {{-- <tr class="border-b bg-gray-50">
                             <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowra">
                             Reporte de Inventario con Tiendas
                             </th>
                             <td class="px-6 py-4 font-semibold text-right">
-                                <a class="px-4 py-2 cursor-pointer bg-success-500 hover:bg-success-600 rounded-md text-white">Descargar <i class="fi fi-br-file-excel"></i></a>
+                                <a class="px-4 py-2 text-white rounded-md cursor-pointer bg-success-500 hover:bg-success-600">Descargar <i class="fi fi-br-file-excel"></i></a>
                             </td>
                         </tr>
-                        <tr class="bg-gray-50 border-b">
+                        <tr class="border-b bg-gray-50">
                             <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowra">
                             Reporte de Inventario con Almacen
                             </th>
                             <td class="px-6 py-4 font-semibold text-right">
-                                <a class="px-4 py-2 cursor-pointer bg-success-500 hover:bg-success-600 rounded-md text-white">Descargar <i class="fi fi-br-file-excel"></i></a>
+                                <a class="px-4 py-2 text-white rounded-md cursor-pointer bg-success-500 hover:bg-success-600">Descargar <i class="fi fi-br-file-excel"></i></a>
                             </td>
                         </tr> --}}
                     </tbody>
                 </table>
             <!-- Reportes de Inventario -->
             </div>
-        <div class="border-b-2 border-dashed mb-4 border-gray-300"></div>
+        <div class="mb-4 border-b-2 border-gray-300 border-dashed"></div>
         <div class="grid grid-cols-2 gap-4">
             <div>
-                <div class="font-semibold uppercase text-md text-gray-600">Top 10 Clientes</div>
-                <div class="relative mt-2 overflow-x-auto rounded-md border border-gray-300 my-4">
+                <div class="font-semibold text-gray-600 uppercase text-md">Top 10 Clientes</div>
+                <div class="relative my-4 mt-2 overflow-x-auto border border-gray-300 rounded-md">
                     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                         <thead class="text-xs text-gray-700 uppercase bg-primary-50 dark:bg-gray-700 dark:text-gray-400">
                             <tr>
@@ -148,8 +156,8 @@
                 </div>
             </div>
             <div>
-                <div class="font-semibold uppercase text-md text-gray-600">Top 10 Productos</div>
-                <div class="relative mt-2 overflow-x-auto rounded-md border border-gray-300 my-4">
+                <div class="font-semibold text-gray-600 uppercase text-md">Top 10 Productos</div>
+                <div class="relative my-4 mt-2 overflow-x-auto border border-gray-300 rounded-md">
                     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                         <thead class="text-xs text-gray-700 uppercase bg-primary-50 dark:bg-gray-700 dark:text-gray-400">
                             <tr>
@@ -168,7 +176,7 @@
                                 <td scope="row" class="px-6 py-4 font-medium text-gray-600 whitespace-nowra">
                                     {{ $product->full_name}}
                                 </td>
-                                <td scope="row" class="px-6 py-4 font-medium text-gray-600 whitespace-nowra text-right">
+                                <td scope="row" class="px-6 py-4 font-medium text-right text-gray-600 whitespace-nowra">
                                     {{ $product->ventas_count }}
                                 </td>
                                 {{-- <td class="px-6 py-4 font-semibold text-right">

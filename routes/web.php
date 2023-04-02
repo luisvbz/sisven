@@ -155,6 +155,7 @@ Route::middleware('splade')->group(function () {
         Route::group(['prefix' => 'reportes'], function(){
             Route::get('/',[ReportesCotroller::class, 'index'])->name('rp.index')->middleware('permission:rp:access');;
             Route::get('/inventario',[ReportesCotroller::class, 'export'])->name('rp.inventory')->middleware('permission:rp:access');
+            Route::get('/general',[ReportesCotroller::class, 'exportGeneral'])->name('rp.general')->middleware('permission:rp:access');
         });
 
         Route::get('/traslado/{transfer}', [CommonController::class, 'transferDetail'])->name('transfer.details');
