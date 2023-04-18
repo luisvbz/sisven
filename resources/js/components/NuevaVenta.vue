@@ -50,9 +50,18 @@
                         <div
                         class="flex space-x-4"
                         >
-                             <div class="w-20">
+                             <div class="w-10">
                                 <label class="block mb-1 text-sm font-medium text-gray-900">Cant.</label>
-                                <input type="number" v-model="product.quantity_type" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                <input  @keypress="onlyNumber"  type="text" v-model="product.quantity_type" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            </div>
+                            <div class="flex flex-col w-10 space-y-1">
+                                <label class="block mb-1 text-sm font-medium text-gray-900">&nbsp;</label>
+                                <button type="button" @click="product.quantity_type++" class="flex justify-center text-sm text-white rounded bg-primary-500 hover:bg-primary-600 p1">
+                                    <svg class="w-4 h-4 text-white"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <line x1="12" y1="5" x2="12" y2="19" />  <line x1="5" y1="12" x2="19" y2="12" /></svg>
+                                </button>
+                                <button type="button" :disabled="product.quantity_type === 0" @click="product.quantity_type--" class="flex justify-center text-sm text-white rounded bg-danger-500 hover:bg-danger-600 p1">
+                                    <svg class="w-4 h-4 text-white"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round">  <line x1="5" y1="12" x2="19" y2="12" /></svg>
+                                </button>
                             </div>
                             <div>
                                 <label class="block mb-1 text-sm font-medium text-gray-900">Tipo</label>
@@ -706,6 +715,13 @@ export default {
 
         if(errors > 0) return;
         this.form.submit()
+    },
+    onlyNumber ($event) {
+    //console.log($event.keyCode); //keyCodes value
+        let keyCode = ($event.keyCode ? $event.keyCode : $event.which);
+        if ((keyCode < 48 || keyCode > 57) && keyCode !== 46) { // 46 is dot
+            $event.preventDefault();
+        }
     }
   },
 }

@@ -12,7 +12,7 @@
     "src": "resources/css/uicons/webfonts/uicons-bold-rounded.woff"
   },
   "resources/js/app.js": {
-    "file": "assets/app.70183ea5.js",
+    "file": "assets/app.b5395a73.js",
     "src": "resources/js/app.js",
     "isEntry": true,
     "dynamicImports": [
@@ -23,12 +23,12 @@
       "node_modules/filepond-plugin-image-validate-size/dist/filepond-plugin-image-validate-size.esm.js",
       "node_modules/filepond/dist/filepond.esm.js",
       "node_modules/flatpickr/dist/esm/index.js",
-      "_choices.1f6481e8.js",
+      "_choices.76addc62.js",
       "node_modules/autosize/dist/autosize.esm.js",
-      "_nprogress.1552c174.js"
+      "_nprogress.5cc133d8.js"
     ],
     "css": [
-      "assets/app.a4403d9c.css",
+      "assets/app.bf5cf3e8.css",
       "assets/uicons-bold-rounded.7be41fbc.css"
     ]
   },
@@ -67,8 +67,8 @@
     "src": "node_modules/flatpickr/dist/esm/index.js",
     "isDynamicEntry": true
   },
-  "_choices.1f6481e8.js": {
-    "file": "assets/choices.1f6481e8.js",
+  "_choices.76addc62.js": {
+    "file": "assets/choices.76addc62.js",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.js"
@@ -79,8 +79,8 @@
     "src": "node_modules/autosize/dist/autosize.esm.js",
     "isDynamicEntry": true
   },
-  "_nprogress.1552c174.js": {
-    "file": "assets/nprogress.1552c174.js",
+  "_nprogress.5cc133d8.js": {
+    "file": "assets/nprogress.5cc133d8.js",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.js"
@@ -92,7 +92,7 @@
     "isEntry": true
   },
   "resources/js/app.css": {
-    "file": "assets/app.a4403d9c.css",
+    "file": "assets/app.bf5cf3e8.css",
     "src": "resources/js/app.css"
   }
 }
