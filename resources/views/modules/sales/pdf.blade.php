@@ -30,9 +30,9 @@ body {
     </div>
     <div style="margin-bottom: 10px; border-bottom: 1px dashed #000000; padding-bottom:10px;">
         <div style="text-align: center;"><strong>Comercializadora Marleny's</strong></div>
-        <div style="text-align: center;">RUC: <strong>000000000000</strong></div>
-        <div style="text-align: center;">Av. Francisco Bolognesi - Chiclayo</div>
-        <div style="text-align: center;">Telf: <strong>01-1234567</strong></div>
+        {{-- <div style="text-align: center;">RUC: <strong>000000000000</strong></div> --}}
+        <div style="text-align: center;">Av. Sánchez Carrión 690 - El Porvenir - Trujillo - Peru</div>
+        <div style="text-align: center;">Telf: <strong>044-760262</strong></div>
         <div style="text-align: center;">Nro Pedido: <strong>{{ $sale->number }}</strong></div>
     </div>
     <div style="margin-bottom: 10px; border-bottom: 1px dashed #000000; padding-bottom:10px;">
