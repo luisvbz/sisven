@@ -27,7 +27,7 @@ class ProductStoreSeeder extends Seeder
     {
         //Add atores
 
-        Store::insert([
+       /*  Store::insert([
             [
                 'name' => 'Tienda de Lince',
                 'departament_id' => '15',
@@ -53,9 +53,9 @@ class ProductStoreSeeder extends Seeder
                 'phone_number' => '912575368'
             ]
 
-        ]);
+        ]); */
 
-        Warehouse::insert([
+       /*  Warehouse::insert([
             [
                 'name' => 'Almacen Cercado',
                 'departament_id' => '15',
@@ -70,7 +70,7 @@ class ProductStoreSeeder extends Seeder
                 'district_id' => '150144',
                 'address' => 'Av. Jose Galvez 1479',
             ]
-          ]);
+          ]); */
 
         //Add Product Packages
         ProductPackage::insert([
@@ -79,7 +79,7 @@ class ProductStoreSeeder extends Seeder
         ]);
 
         //
-        ProductType::insert([
+       /*  ProductType::insert([
             [
               'name' => 'ADORNOS DE METAL',
               'alias' => 'adornos-de-metal',
@@ -96,7 +96,7 @@ class ProductStoreSeeder extends Seeder
                 'package_id' => 1,
             ]
 
-        ]);
+        ]); */
 
         ProductMeasure::insert([
             ['name' => 'Pares', 'alias' => 'pares'],
@@ -121,9 +121,9 @@ class ProductStoreSeeder extends Seeder
         ]);
 
 
-        Product::factory()->count(50)->create();
+       // Product::factory()->count(50)->create();
 
-        Supplier::create(
+        /* Supplier::create(
             [
               'name' => 'IMPORTADORA HOME CHINA S.A.C.',
               'ruc' => '20600473892',
@@ -138,7 +138,7 @@ class ProductStoreSeeder extends Seeder
                 'ruc' => '20600699734',
                 'phone_number' => '87654321',
                 'address' => 'Jr. Lima 1522'
-              ]);
+              ]); */
 
 
         SaleType::insert([

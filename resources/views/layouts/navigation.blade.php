@@ -42,7 +42,6 @@
                             <!-- Authentication -->
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
-
                                 <x-dropdown-link as="a" :href="route('logout')" onclick="event.preventDefault(); this.closest('form').submit();">
                                     <i class="fi fi-br-sign-out-alt"></i> Salir
                                 </x-dropdown-link>

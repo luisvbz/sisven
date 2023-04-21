@@ -88,7 +88,7 @@ class RolesAndPermissionSeeder extends Seeder
          //$admin->syncPermissions(Permission::where('name', 'like', "ti:%")->get()->pluck('name'));
 
          $super_admin = User::create([
-            'dni' => '002683688',
+            'dni' => '12345678',
             'username' => 'superadmin',
             'name' => 'Super Administrador',
             'email' => 'superadmin@local.com',
@@ -100,7 +100,7 @@ class RolesAndPermissionSeeder extends Seeder
         $super_admin->givePermissionTo(Permission::all()->pluck('name'));
 
 
-        $admin = User::create([
+        /* $admin = User::create([
             'dni' => '19098518',
             'username' => 'admin',
             'name' => 'Administrador',
@@ -124,6 +124,6 @@ class RolesAndPermissionSeeder extends Seeder
         $vendedor->assignRole('vendedor');
         $vendedor->stores()->sync([1]);
 
-        $vendedor->givePermissionTo(Permission::where('module_id', 'VE')->get()->pluck('name'));
+        $vendedor->givePermissionTo(Permission::where('module_id', 'VE')->get()->pluck('name')); */
     }
 }
