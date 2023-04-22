@@ -147,9 +147,9 @@ Route::middleware('splade')->group(function () {
         });
 
         Route::group(['prefix' => 'clientes'], function(){
-            Route::get('/',[ClientsController::class, 'index'])->name('cl.index')->middleware('permission:ve:access');
-            Route::get('/nuevo',[ClientsController::class, 'new'])->name('cl.add')->middleware('permission:ve:access');
-            Route::post('/nuevo',[ClientsController::class, 'store'])->name('cl.store')->middleware('permission:ve:access');
+            Route::get('/',[ClientsController::class, 'index'])->name('cl.index')->middleware('permission:cl:access');
+            Route::get('/nuevo',[ClientsController::class, 'new'])->name('cl.add')->middleware('permission:cl:access');
+            Route::post('/nuevo',[ClientsController::class, 'store'])->name('cl.store')->middleware('permission:cl:create');
         });
 
         Route::group(['prefix' => 'reportes'], function(){
