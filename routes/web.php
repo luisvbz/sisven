@@ -148,7 +148,7 @@ Route::middleware('splade')->group(function () {
 
         Route::group(['prefix' => 'clientes'], function(){
             Route::get('/',[ClientsController::class, 'index'])->name('cl.index')->middleware('permission:cl:access');
-            Route::get('/nuevo',[ClientsController::class, 'new'])->name('cl.add')->middleware('permission:cl:access');
+            Route::get('/nuevo',[ClientsController::class, 'new'])->name('cl.add')->middleware('permission:cl:create');
             Route::post('/nuevo',[ClientsController::class, 'store'])->name('cl.store')->middleware('permission:cl:create');
         });
 
