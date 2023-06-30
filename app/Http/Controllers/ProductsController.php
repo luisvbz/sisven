@@ -133,6 +133,20 @@ class ProductsController extends Controller
         return view('modules.products.modals.stock-tiendas', ['product' => $product, 'stock' => $stockCollection]);
     }
 
+    public function getMovements(Product $product)
+    {
+        $entradas = $product->entrances->transform(function($item) {
+            $item->created_at = $item->order->created_at->format('d/m/Y');
+            $item->order = $item->order;
+            $item->order->supplier = $item->order->supplier;
+            return $item;
+        })->sortByDesc('created_at');
+
+
+
+        return view('modules.products.movements', ['entrances' => $entradas, 'product' => $product]);
+    }
+
 
     public function getTypes()
     {

@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\OrderDetail;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Product extends Model
 {
@@ -41,6 +42,11 @@ class Product extends Model
     public function measure()
     {
         return $this->belongsTo(ProductMeasure::class, 'measure_id');
+    }
+
+    public function entrances()
+    {
+        return $this->hasMany(OrderDetail::class, 'product_id');
     }
 
     public function getFullNameAttribute()

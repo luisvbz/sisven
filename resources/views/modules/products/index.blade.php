@@ -19,6 +19,7 @@
                 <x-splade-cell acciones as="$product">
                     <div class="flex justify-around">
                         <Link modal href="{{ route('pr.stock-tiendas', [$product])}}"><i class="mr-1 text-xl text-primary-400 hover:text-primary-600 fi fi-br-boxes"></i></Link>
+                        <Link rel="tooltip" title="Detalles de entrada" href="{{ route('pr.movements', [$product])}}"><i class="mr-1 text-xl text-alternative-400 hover:text-alternative-600 fi fi-br-arrows-retweet"></i></Link>
                         @can('pr:edit')
                             <Link href="{{ route('pr.edit', [$product])}}"><i class="mr-1 text-xl text-green-400 hover:text-green-600 fi fi-br-edit"></i></Link>
                         @endcan

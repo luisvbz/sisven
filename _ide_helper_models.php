@@ -339,6 +339,7 @@ namespace App\Models{
  * @property int $total
  * @property string $cost
  * @property-read mixed $cost_formated
+ * @property-read \App\Models\Order $order
  * @property-read \App\Models\Product $product
  * @method static \Illuminate\Database\Eloquent\Builder|OrderDetail newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|OrderDetail newQuery()
@@ -430,6 +431,8 @@ namespace App\Models{
  * @property string $cost
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\OrderDetail> $entrances
+ * @property-read int|null $entrances_count
  * @property-read mixed $alert_stock
  * @property-read mixed $cost_formated
  * @property-read mixed $full_name

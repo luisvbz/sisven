@@ -112,6 +112,7 @@ Route::middleware('splade')->group(function () {
             Route::get('/{product}/stock-tiendas',[ProductsController::class, 'getStockTiendas'])->name('pr.stock-tiendas')->middleware('permission:pr:access');
             Route::get('/{product}/editar',[ProductsController::class, 'edit'])->name('pr.edit')->middleware('permission:pr:edit');
             Route::patch('/{product}/update',[ProductsController::class, 'update'])->name('pr.update')->middleware('permission:pr:edit');
+            Route::get('/{product}/entradas',[ProductsController::class, 'getMovements'])->name('pr.movements')->middleware('permission:pr:access');
             Route::get('/administrar/tipos', [ProductsController::class, 'getTypes'])->name('pr.index-types');
             Route::get('/administrar/tipos/agregar', [ProductsController::class, 'addTypes'])->name('pr.add-types');
             Route::post('/administrar/tipos/agregar', [ProductsController::class, 'storeType'])->name('pr.store-type');
