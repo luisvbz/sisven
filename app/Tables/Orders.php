@@ -54,7 +54,8 @@ class Orders extends AbstractTable
             ->column(key:'date', label: 'Fecha de Compra', sortable: true)
             ->column(key:'details_count', label: 'Productos')
             ->column(key:'cost_formated', label: 'Costo', highlight: true)
-            ->column(label: 'acciones');
+            ->column(label: 'acciones')
+            ->paginate(20);
 
             // ->searchInput()
             // ->selectFilter()

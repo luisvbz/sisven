@@ -54,7 +54,8 @@ class Warehouses extends AbstractTable
             ->column(key:'province.name', label:'Provincia', sortable: false)
             ->column(key:'district.name', label:'Distrito', sortable: false)
             ->column(key:'address', label:'Dirección', sortable: true)
-            ->column('Acciones');
+            ->column('Acciones')
+            ->paginate(20);
 
             // ->searchInput()
             // ->selectFilter()

@@ -55,7 +55,8 @@ class Suppliers extends AbstractTable
             ->column(key:'address', label: 'Dirección')
             ->column(key:'phone_number', label: 'Teléfono')
             ->column('creacion')
-            ->column('acciones');
+            ->column('acciones')
+            ->paginate(20);
 
             // ->searchInput()
             // ->selectFilter()
